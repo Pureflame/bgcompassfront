@@ -1,5 +1,6 @@
 export class Administrador{
     constructor(
+        public id : number,
         public dni_admin: string,
         public nombre_admin: string,
         public apellidos_admin: string,

@@ -6,6 +6,9 @@ import { HttpHeaders } from '@angular/common/http';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { AdministradorService } from 'src/app/Services/administrador.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
+import { Usuario } from 'src/app/Models/usuario';
+import { Administrador } from 'src/app/Models/administrador';
+import {Router} from "@angular/router"
 
 
 @Component({
@@ -18,8 +21,11 @@ export class LoginComponent {
   public solicitud: any;
   errorMessage?: string;
   public datos: any;
+  public headersAdd = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
 
-  constructor(private http:HttpClient, private currentUserService: CurrentUserService, private adminService: AdministradorService){
+  constructor(private http:HttpClient, private router: Router, private currentUserService: CurrentUserService, private adminService: AdministradorService){
     this.solicitud = {
       email: '',
       password: ''
@@ -27,7 +33,12 @@ export class LoginComponent {
   }
 
   ngOnInit(){
-    console.log(this.currentUserService.testCurrentUser());
+    //this.currentUserService.refrescarUsuarios()
+    //console.log(this.currentUserService.testCurrentUser());
+    //console.log("ESTE ES EL USUARIO ACTUAL: ");
+    //console.log(this.currentUserService.getCurrentUser());
+    
+/*
 this.adminService.getAdminList().subscribe({
   next: (result)=>{
     this.datos = result["data"];
@@ -38,44 +49,49 @@ this.adminService.getAdminList().subscribe({
   },
   error: (error)=>{console.log(error)}
 })
+*/
+
   }
 
 
   onSubmit(){
-    //alert("login enviado");  
-    //console.log(this.solicitud);
-   /* return this.http.post('http://127.0.0.1:8000/api/login', this.solicitud).subscribe(
-
-      next: data => {
-        this.solicitud.correo = data.correo;
-      },
-
-      error: error => {
-        this.errorMessage = error.message;
-        console.error('There was an error!', error);
-      }
-    );
-    */
-    let headersAdd = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.post('http://127.0.0.1:8000/api/login', this.solicitud, {headers: headersAdd}).subscribe({
+    return this.http.post('http://127.0.0.1:8000/api/login', this.solicitud, {headers: this.headersAdd}).subscribe({
       next: (result)=>{
         this.datos = result;
+        let token = this.datos["data"];
+        let tipoUsuario = this.datos["mensaje"]
 
-        
-        console.log("RESULT:");
-        console.log(result);
+        this.currentUserService.setCurrentUser(token, tipoUsuario, this.solicitud.email);
 
-        console.log("DATOS DEVUELTOS:");
-        console.log(this.datos["data"]);
 
-        console.log("DATOS DEVUELTOS CON MAP:");
-        console.log(this.datos.map);
+        console.log("LOGIN - USUARIO ACTUAL: ");
+        this.currentUserService.getActualUserData(
+          this.currentUserService.getCurrentUserEmail()!, 
+          this.currentUserService.getCurrentUserToken()!
+            ).subscribe({
+          next: (result)=>{console.log(result["data"])},
+          error: (error)=>{console.log(error)}
+        })
+
+
+        //let test:any = this.currentUserService.getCurrentUser()
+        //console.log(test);
+        this.router.navigate(['/menu'])
+/*
+        if(test["correo_usuario"] == undefined){
+          let admin: Administrador = test;
+          console.log("admin: ");
+          console.log(admin["correo_admin"]);
+        }else{
+          let usuario: Usuario = test;
+          console.log("usuario: ");
+          console.log(usuario["correo_usuario"]);
+        }
+*/
       },
       error: (error)=>{console.log(error)}
     })
+
   }
 
 /*

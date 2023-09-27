@@ -5,21 +5,39 @@ import { UsuarioService } from "./usuario.service";
 
 import { Administrador } from "../Models/administrador";
 import { Usuario } from "../Models/usuario";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
 
-
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+  })
 export class CurrentUserService {
+    public url = "http://127.0.0.1:8000/api/";
+    public headersAddWithToken = new HttpHeaders();
+    
     private currentUser: string = ""
     private typeUser: string = ""
     private emailUser: string = ""
 
-    private administradoresDB :Array<Administrador> = []
-    private usuariosBD :Array<Usuario> = []
+    private administradoresDB :Array<Administrador> =[]
+    private usuariosBD :Array<Usuario> =[]
 
     constructor(    
+        private http: HttpClient,
         private administradorService: AdministradorService,
         private usuarioService: UsuarioService
-        ){}
+        ){
+            //this.administradoresDB = []
+            //this.usuariosBD = []
+            //this.typeUser = ""
+        }
+
+    public prepararHeader(token:string){
+        return this.headersAddWithToken = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        });
+    }
 
     testCurrentUser(){
         return "funciona current user service";
@@ -28,6 +46,26 @@ export class CurrentUserService {
     public getCurrentUser():Administrador | Usuario | undefined | void {
 
         // Actualizar con posibles nuevos valores en las bases de datos
+        //this.refrescarUsuarios();
+         
+        console.log("usuario logueado actualmente: " + sessionStorage.getItem("userActivoTipo")!)
+
+        // Comprobar si es administrador
+        if (sessionStorage.getItem("userActivoTipo") === "administrador") {
+            return this.administradoresDB.find((element:any) => element.correo_admin == sessionStorage.getItem("userActivoEmail")!) as Administrador;
+        }   
+
+        // Comprobar si es usuario
+        else if(sessionStorage.getItem("userActivoTipo") === "usuario"){
+            return this.usuariosBD.find((element:any) => element.correo_usuario == sessionStorage.getItem("userActivoEmail")!) as Usuario;
+        } 
+        
+        else {
+            console.log("No hay usuario logueado actualmente")
+        }
+    }
+/*
+    public refrescarUsuarios(){
         this.administradorService.getAdminList().subscribe({
             next: (result)=>{
               this.administradoresDB = result["data"];
@@ -49,24 +87,8 @@ export class CurrentUserService {
         },
         error: (error)=>{console.log(error)}
         })
-         
-        console.log("usuario logueado actualmente: " + sessionStorage.getItem("userActivoEmail")!)
-
-        // Comprobar si es administrador
-        if (sessionStorage.getItem("userActivoTipo") === "administrador") {
-            return this.administradoresDB.find((element:any) => element.correo_admin == sessionStorage.getItem("userActivoEmail")!) as Administrador;
-        }   
-
-        // Comprobar si es usuario
-        else if(sessionStorage.getItem("userActivoTipo") === "usuario"){
-            return this.usuariosBD.find((element:any) => element.correo_usuario == sessionStorage.getItem("userActivoEmail")!) as Usuario;
-        } 
-        
-        else {
-            console.log("No hay usuario logueado actualmente")
-        }
     }
-
+*/
     public getCurrentUserToken(){
         return sessionStorage.getItem("userActivoToken")
     }
@@ -103,6 +125,12 @@ export class CurrentUserService {
         sessionStorage.removeItem("userActivoToken")
         sessionStorage.removeItem("userActivoTipo")
         sessionStorage.removeItem("userActivoEmail")
+    }
+
+    public getActualUserData(correo:string, token:string):Observable<any>{
+        this.prepararHeader(token)
+        let parametroGet = new HttpParams().set("correo", correo)
+        return this.http.get(this.url + "usuario-actual/ver", {headers: this.headersAddWithToken, params: parametroGet});
     }
 
 }
