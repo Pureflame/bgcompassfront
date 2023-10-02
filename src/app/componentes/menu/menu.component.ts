@@ -18,14 +18,32 @@ export class MenuComponent {
   public aux : any = []
   public id : number = -1
 
+  public juegosListaActiva: boolean;
+  public forosListaActiva: boolean;
+
+  public listaJuegos;
+
   constructor(private currentUserService: CurrentUserService,
     private descentService: DescentPartidaService){
+
+      this.juegosListaActiva = false;
+      this.forosListaActiva = false;
+
+      this.listaJuegos = [
+        {nombreJuegoImagen:"Descent", nombreJuegoTitulo: "Descent: Viaje a las TInieblas"},
+        {nombreJuegoImagen:"Gloomhaven", nombreJuegoTitulo: "Gloomhaven"}
+      ];
 
   }
   ngOnChanges(){
     
   }
   ngOnInit(){
+
+    this.juegosListaActiva = true;
+    console.log(this.juegosListaActiva)
+    console.log(this.forosListaActiva)
+
     //this.currentUserService.refrescarUsuarios()
     console.log("MENU DE INICIO - USUARIO ACTUAL: ");
   

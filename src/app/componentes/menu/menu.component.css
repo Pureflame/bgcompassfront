@@ -1,0 +1,29 @@
+body{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: #ffdfc7;
+}
+
+.campañasTitulo{
+    position: relative;
+
+    text-align: center;
+
+    font-size: 40px;
+
+    margin: 50px 0px;
+
+   
+}
+
+mat-grid-list {
+    background-color: #ffdfc7;
+}
+
+mat-grid-list {
+    
+    position: relative;
+    margin-right: 10px;
+}

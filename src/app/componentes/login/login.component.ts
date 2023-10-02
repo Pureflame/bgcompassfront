@@ -76,7 +76,7 @@ this.adminService.getAdminList().subscribe({
 
         //let test:any = this.currentUserService.getCurrentUser()
         //console.log(test);
-        this.router.navigate(['/menu'])
+        this.router.navigate([''])
 /*
         if(test["correo_usuario"] == undefined){
           let admin: Administrador = test;

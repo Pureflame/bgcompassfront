@@ -21,14 +21,22 @@ const appRoutes: Routes = [
     {path: 'usuario-registro/administrador', component: RegistroAdministradorComponent},
 
     // MENÚ PRINCIPAL
-    {path: 'menu', component: MenuComponent},
+    {path: '', component: MenuComponent},
     {path: 'menu/partidas', component: MenuListaJuegosComponent},
     {path: 'menu/foros', component: MenuListaForosComponent},
 
     // PERFIL
+    /*
     {path: 'usuario-perfil/usuario/ver/:id', component: PerfilComponent},
     {path: 'usuario-perfil/usuario/partidas/:id', component: PerfilComponent},
     {path: 'usuario-perfil/usuario/discusiones/:id', component: PerfilComponent},
+    */
+    {path: 'usuario-perfil/usuario/ver', component: PerfilComponent},
+    {path: 'usuario-perfil/usuario/partidas', component: PerfilComponent},
+    {path: 'usuario-perfil/usuario/discusiones', component: PerfilComponent},
+
+
+
 
     {path: 'usuario-perfil/administrador/ver/:id', component: PerfilComponent},
     {path: 'usuario-perfil/administrador/partidas/:id', component: PerfilComponent},

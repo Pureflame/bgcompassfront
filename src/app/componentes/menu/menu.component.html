@@ -1,2 +1,38 @@
-<p>menu works!</p>
-<button (click)="listar()">pulsame</button>
+<body>
+    
+
+    <!-- LISTA DE JUEGOS -->
+    <div *ngIf="juegosListaActiva" class="cont">
+        <p class="campañasTitulo">CAMPAÑAS</p>
+        <mat-grid-list  cols="2" rowHeight="3:1">
+            <mat-grid-tile *ngFor = "let juego of listaJuegos">
+                    <app-menu-juegos [juego]="juego" ></app-menu-juegos>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <!-- LISTA DE FOROS -->
+    <div *ngIf="forosListaActiva">
+        <p class="campañasTitulo">FOROS</p>
+        <mat-grid-list  cols="2" rowHeight="2:1">
+            <mat-grid-tile *ngFor = "let juego of listaJuegos">
+                <app-menu-foros [juego]="juego" ></app-menu-foros>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+    <button (click)="listar()">pulsame</button>
+-->
+</body>

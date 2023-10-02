@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -15,6 +16,12 @@ import { MenuListaForosComponent } from './componentes/menu-lista-foros/menu-lis
 import { MenuListaJuegosComponent } from './componentes/menu-lista-juegos/menu-lista-juegos.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PerfilPartidasComponent } from './componentes/perfil-partidas/perfil-partidas.component';
+import { PerfilDiscusionesComponent } from './componentes/perfil-discusiones/perfil-discusiones.component';
+import { PerfilEditarComponent } from './componentes/perfil-editar/perfil-editar.component';
+import { MenuJuegosComponent } from './componentes/menu-juegos/menu-juegos.component';
+import { MenuForosComponent } from './componentes/menu-foros/menu-foros.component';
+
 
 @NgModule({
   declarations: [
@@ -27,13 +34,19 @@ import { HttpClientModule } from '@angular/common/http';
     RegistroUsuarioComponent,
     RegistroAdministradorComponent,
     MenuListaJuegosComponent,
-    MenuListaForosComponent
+    MenuListaForosComponent,
+    PerfilPartidasComponent,
+    PerfilDiscusionesComponent,
+    PerfilEditarComponent,
+    MenuJuegosComponent,
+    MenuForosComponent
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatGridListModule,
     routing
   ],
   providers: [],

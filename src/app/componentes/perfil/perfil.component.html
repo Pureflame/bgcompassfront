@@ -1,1 +1,63 @@
-<p>perfil works!</p>
+<body>
+
+
+
+	<div class="container">
+
+        <div class="botonesLaterales">
+            <button class="botonLateral" (click)="info()">Mi información</button>
+            <button class="botonLateral" (click)="partidas()">Mis Campañas</button>
+            <button class="botonLateral" (click)="discusiones()">Mis discusiones de foros</button>
+        </div>
+
+		<button class = "buttonVolver" (click)="volver()">Volver</button>
+
+		<div class="containerForm">
+			<div class="perfilTitulo">
+				<span>MI PERFIL</span>
+			</div>
+
+			<!-- MI INFORMACION -->
+			<div *ngIf="infoActiva" class="perfilInfo">
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">Correo</label>
+					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitud.email">
+				</div>
+
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">Contraseña</label>
+					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitud.password">
+				</div>
+
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">Nombre de usuario</label>
+					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitud.nombre">
+				</div>
+
+				<button class = "buttonEditarUsuario" (click)="editar()">Editar</button>
+			</div>
+
+			<!-- MIS CAMPAÑAS -->
+			<div *ngIf="partidaActiva">
+				<div *ngFor = "let nombre of nombres" class="test">
+					<app-perfil-partidas [nombre]="nombre" ></app-perfil-partidas>
+				</div>
+			</div>
+
+			<!-- MIS DISCUSIONES -->
+			<div *ngIf="discusionesActiva">
+				<div *ngFor = "let nombre of nombres" class="test">
+					<app-perfil-discusiones [nombre]="nombre" ></app-perfil-discusiones>
+				</div>
+			</div>
+
+			<!-- EDITAR USUARIO -->
+			<div *ngIf="editarUsuarioActiva">
+				<div>
+					<app-perfil-editar (retroceso)="retrocederEdicion()" [usuario]="usuario" ></app-perfil-editar>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>

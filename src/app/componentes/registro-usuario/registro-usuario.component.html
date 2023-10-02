@@ -1,1 +1,33 @@
-<p>registro-usuario works!</p>
+<body>
+	<div class="container">
+		<button class = "buttonVolver">Volver</button>
+
+		<div class="containerForm">
+			<div class="registroTitulo">
+				<span>CREACIÓN DE USUARIO</span>
+			</div>
+			<div class="registro">
+				<form (ngSubmit)="onSubmit()" #ngForm="ngForm">
+					
+
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">Correo</label>
+					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="solicitud.email">
+				</div>
+
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">Contraseña</label>
+					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" [(ngModel)]="solicitud.password">
+				</div>
+
+                <div class="inputs">
+					<label for="chk" aria-hidden="true">Nombre de usuario</label>
+					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" [(ngModel)]="solicitud.nombre">
+				</div>
+
+					<button class = "buttonRegistro">Registro</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

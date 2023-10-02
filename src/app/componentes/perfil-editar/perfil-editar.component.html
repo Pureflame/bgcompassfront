@@ -1,0 +1,10 @@
+<div class="perfilInfo">
+                        
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">Nombre de usuario</label>
+        <input type="text" #nombre="ngModel" [(ngModel)]="usuario">
+    </div>
+
+    <button class = "buttonRetroceso" (click)="retroceder()">Volver</button>
+    <button class = "buttonEditarUsuario" (click)="editarUsuario()">Confirmar Edición</button>
+</div>
