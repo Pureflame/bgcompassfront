@@ -12,8 +12,6 @@ import { ErrorComponent } from './componentes/error/error.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { RegistroUsuarioComponent } from './componentes/registro-usuario/registro-usuario.component';
 import { RegistroAdministradorComponent } from './componentes/registro-administrador/registro-administrador.component';
-import { MenuListaForosComponent } from './componentes/menu-lista-foros/menu-lista-foros.component';
-import { MenuListaJuegosComponent } from './componentes/menu-lista-juegos/menu-lista-juegos.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PerfilPartidasComponent } from './componentes/perfil-partidas/perfil-partidas.component';
@@ -21,6 +19,10 @@ import { PerfilDiscusionesComponent } from './componentes/perfil-discusiones/per
 import { PerfilEditarComponent } from './componentes/perfil-editar/perfil-editar.component';
 import { MenuJuegosComponent } from './componentes/menu-juegos/menu-juegos.component';
 import { MenuForosComponent } from './componentes/menu-foros/menu-foros.component';
+import { DescentPartidasComponent } from './componentes/descent-partidas/descent-partidas.component';
+import { DescentPartidaDatosComponent } from './componentes/descent-partida-datos/descent-partida-datos.component';
+import { DescentForosComponent } from './componentes/descent-foros/descent-foros.component';
+import { PartidaCrearComponent } from './componentes/partida-crear/partida-crear.component';
 
 
 @NgModule({
@@ -33,13 +35,15 @@ import { MenuForosComponent } from './componentes/menu-foros/menu-foros.componen
     ErrorComponent,
     RegistroUsuarioComponent,
     RegistroAdministradorComponent,
-    MenuListaJuegosComponent,
-    MenuListaForosComponent,
     PerfilPartidasComponent,
     PerfilDiscusionesComponent,
     PerfilEditarComponent,
     MenuJuegosComponent,
-    MenuForosComponent
+    MenuForosComponent,
+    DescentPartidasComponent,
+    DescentPartidaDatosComponent,
+    DescentForosComponent,
+    PartidaCrearComponent
 
   ],
   imports: [

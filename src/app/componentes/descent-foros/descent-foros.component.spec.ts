@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MenuListaForosComponent } from './menu-lista-foros.component';
+import { DescentForosComponent } from './descent-foros.component';
 
-describe('MenuListaForosComponent', () => {
-  let component: MenuListaForosComponent;
-  let fixture: ComponentFixture<MenuListaForosComponent>;
+describe('DescentForosComponent', () => {
+  let component: DescentForosComponent;
+  let fixture: ComponentFixture<DescentForosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuListaForosComponent ]
+      declarations: [ DescentForosComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MenuListaForosComponent);
+    fixture = TestBed.createComponent(DescentForosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

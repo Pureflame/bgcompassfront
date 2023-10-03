@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-juegos',
@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class MenuJuegosComponent {
   @Input() public juego: any
+  @Output() descentPartidas = new EventEmitter();
 
-
+  irADescentPartidas(){
+    this.descentPartidas.emit();
+  }
 }

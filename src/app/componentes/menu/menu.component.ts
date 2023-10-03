@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Administrador } from 'src/app/Models/administrador';
 import { Usuario } from 'src/app/Models/usuario';
 import { AdministradorService } from 'src/app/Services/administrador.service';
@@ -24,7 +25,8 @@ export class MenuComponent {
   public listaJuegos;
 
   constructor(private currentUserService: CurrentUserService,
-    private descentService: DescentPartidaService){
+    private descentService: DescentPartidaService,
+    private router: Router){
 
       this.juegosListaActiva = false;
       this.forosListaActiva = false;
@@ -105,6 +107,12 @@ listar(){
      
 }
 
+  partidasDescent(){
+    this.router.navigate(['descent/partidas'])
+  }
+  forosDescent(){
+    this.router.navigate(['descent/foros'])
+  }
 
   ngDoCheck() {  
     

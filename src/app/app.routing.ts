@@ -10,8 +10,10 @@ import { ErrorComponent } from "./componentes/error/error.component";
 import { PerfilComponent } from "./componentes/perfil/perfil.component";
 import { RegistroUsuarioComponent } from "./componentes/registro-usuario/registro-usuario.component";
 import { RegistroAdministradorComponent } from "./componentes/registro-administrador/registro-administrador.component";
-import { MenuListaJuegosComponent } from "./componentes/menu-lista-juegos/menu-lista-juegos.component";
-import { MenuListaForosComponent } from "./componentes/menu-lista-foros/menu-lista-foros.component";
+import { DescentPartidasComponent } from "./componentes/descent-partidas/descent-partidas.component";
+import { DescentForosComponent } from "./componentes/descent-foros/descent-foros.component";
+import { PartidaCrearComponent } from "./componentes/partida-crear/partida-crear.component";
+import { DescentPartidaDatosComponent } from "./componentes/descent-partida-datos/descent-partida-datos.component";
 
 const appRoutes: Routes = [
 
@@ -22,8 +24,10 @@ const appRoutes: Routes = [
 
     // MENÚ PRINCIPAL
     {path: '', component: MenuComponent},
+    /*
     {path: 'menu/partidas', component: MenuListaJuegosComponent},
     {path: 'menu/foros', component: MenuListaForosComponent},
+    */
 
     // PERFIL
     /*
@@ -43,8 +47,12 @@ const appRoutes: Routes = [
     {path: 'usuario-perfil/administrador/discusiones/:id', component: PerfilComponent},
 
     // DESCENT-PARTIDAS
+    {path: 'descent/partidas', component: DescentPartidasComponent},
+    {path: 'descent/partidas/datos', component: DescentPartidaDatosComponent},
+    {path: 'descent/partidas/crear', component: PartidaCrearComponent},
 
     // DESCENT-FOROS
+    {path: 'descent/foros', component: DescentForosComponent},
 
     // GLOOMHAVEN-PARTIDAS
     

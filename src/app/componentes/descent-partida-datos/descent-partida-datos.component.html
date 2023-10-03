@@ -1,0 +1,148 @@
+<body>
+
+
+
+	<div class="container">
+
+
+        
+		<button class = "buttonVolver" (click)="volver()">Volver</button>
+
+		<div class="containerForm">
+			<div class="datosTitulo">
+				<span>Mis datos de la campaña de Descent</span>
+			</div>
+
+			<!-- DATOS GENERALES -->
+			<div *ngIf="datosGeneralesActiva" class="datosInfo">
+				<div class="inputs" class="inputsCortos">
+					<label for="chk" aria-hidden="true">Nombre de la Campaña</label>
+					<input type="text" name="nombre" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.nombrePartida">
+				</div>
+
+				<div class="inputs" class="inputsCortos">
+					<label for="chk" aria-hidden="true">Oro de los héroes</label>
+					<input type="text" name="oro" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.oro">
+				</div>
+
+				<div class="inputs" class="inputsCortos">
+					<label for="chk" aria-hidden="true">Misión Actual</label>
+					
+                        <!--
+                            <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
+                        -->
+                    
+                    <select name="mision" [(ngModel)]="solicitudGeneral.misionActual">
+                        <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
+                            {{mision}}
+                        </option>
+                    </select>
+
+				</div>
+
+                <div class="inputs" class="overlord">
+
+					<label for="chk" aria-hidden="true">Cartas Overlord</label>
+                    
+                        <div >
+                            <button class = "buttonAddCarta" (click)="addCarta()">Comprar</button>
+                        </div>
+                        <!--
+                        <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                        -->
+                        <div class="scrollOverlord">
+                            <select class="selectOverlord" name="cartaIndividual" [(ngModel)]="cartaAdd">
+                                <option *ngFor="let cartaIndividual of solicitudListaCartasOverlord" [ngValue]="cartaIndividual">
+                                    {{cartaIndividual}}
+                                </option>
+                            </select>
+
+                            <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral.arrayCartasOverlord">
+                                <div *ngIf=carta>
+                                    <input type="text" name="overlord" required="" value="{{carta}}" readonly="readonly" >
+                                    <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral.arrayCartasOverlord.indexOf(carta))">Borrar</button>
+                                </div>
+                            </div>
+                        </div>
+				</div>
+
+                <button class="centrarBoton1" (click)="confirmarEdicion()">Confirmar Edicion</button>
+                <button class="centrarBoton2" (click)="verHeroes()">Ver Héroes</button>
+			</div>
+
+            
+
+
+
+
+
+
+
+            <!-- DATOS DE HEROES -->
+			<div *ngIf="datosHeroeActiva" class="datosInfo">
+				<div class="inputs" class="inputsCortos">
+					<label for="chk" aria-hidden="true">gg de la Campaña</label>
+					<input type="text" name="nombre" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.nombrePartida">
+				</div>
+
+				<div class="inputs" class="inputsCortos">
+					<label for="chk" aria-hidden="true">Oro de los héroes</label>
+					<input type="text" name="oro" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.oro">
+				</div>
+
+				<div class="inputs" class="inputsCortos">
+					<label for="chk" aria-hidden="true">Misión Actual</label>
+					
+                        <!--
+                            <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
+                        -->
+                    
+                    <select name="mision" [(ngModel)]="solicitudGeneral.misionActual">
+                        <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
+                            {{mision}}
+                        </option>
+                    </select>
+
+				</div>
+
+                <div class="inputs" class="overlord">
+
+					<label for="chk" aria-hidden="true">Cartas Overlord</label>
+
+                    <div >
+                        <button class = "buttonAddCarta" (click)="addCarta()">Comprar</button>
+                    </div>
+					<!--
+                    <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                    -->
+                    <select class="selectOverlord" name="cartaIndividual" [(ngModel)]="cartaAdd">
+                        <option *ngFor="let cartaIndividual of solicitudListaCartasOverlord" [ngValue]="cartaIndividual">
+                            {{cartaIndividual}}
+                        </option>
+                    </select>
+
+                    <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral.arrayCartasOverlord">
+                        <div *ngIf=carta>
+                            <input type="text" name="overlord" required="" value="{{carta}}" readonly="readonly" >
+                            <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral.arrayCartasOverlord.indexOf(carta))">Borrar</button>
+                        </div>
+                    </div>
+				</div>
+
+                <button class="centrarBoton1">Confirmar Edicion Heroes</button>
+                <button class="centrarBoton2" (click)="volverADatosGenerales()">Volver atrás</button>
+			</div>
+
+
+
+			<!-- LISTA DE HEROES 
+			<div *ngIf="partidaActiva">
+				<div *ngFor = "let nombre of nombres" class="test">
+					<app-perfil-partidas [nombre]="nombre" ></app-perfil-partidas>
+				</div>
+			</div>
+-->
+
+		</div>
+	</div>
+</body>

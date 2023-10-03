@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu-foros',
@@ -7,4 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class MenuForosComponent {
   @Input() public juego: any
+  @Output() descentForos = new EventEmitter();
+
+  irADescentForos(){
+    this.descentForos.emit();
+  }
 }
