@@ -1,0 +1,22 @@
+<body>
+	<div class="container">
+		<button class = "buttonVolver" (click)="volver()">Volver</button>
+
+		<div class="containerForm">
+			<div class="registroTitulo">
+				<span>CREACIÓN DE DISCUSION</span>
+			</div>
+			<div class="registro">
+				<form (ngSubmit)="onSubmit()" #ngForm="ngForm">
+			
+					<div class="inputs">
+						<label for="chk" aria-hidden="true">Nombre de discusion</label>
+						<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" [(ngModel)]="solicitud.nombre">
+					</div>
+
+					<button class = "buttonCreacion">Crear Discusion</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

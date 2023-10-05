@@ -13,11 +13,11 @@
 
 
 			<!-- MIS CAMPAÑAS -->
-			<div *ngIf="listaPartidasActiva">
-				<div *ngFor = "let nombre of nombres" class="test">
-					<app-perfil-partidas [nombre]="nombre" ></app-perfil-partidas>
-				</div>
+			
+			<div *ngFor = "let nombre of nombres" class="test">
+				<app-perfil-partidas [nombre]="nombre" ></app-perfil-partidas>
 			</div>
+			
 
 		</div>
 	</div>

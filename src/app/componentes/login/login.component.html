@@ -1,6 +1,6 @@
 <body>
 	<div class="container">
-		<button class = "buttonVolver">Volver</button>
+		<button (click)="volver()" class = "buttonVolver">Volver</button>
 
 		<div class="containerForm">
 			<div class="loginTitulo">
@@ -12,7 +12,7 @@
 
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">Correo</label>
-					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="solicitud.email">
+					<input  type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="solicitud.email">
 				</div>
 
 				<div class="inputs">

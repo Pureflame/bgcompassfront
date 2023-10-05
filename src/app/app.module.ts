@@ -23,6 +23,9 @@ import { DescentPartidasComponent } from './componentes/descent-partidas/descent
 import { DescentPartidaDatosComponent } from './componentes/descent-partida-datos/descent-partida-datos.component';
 import { DescentForosComponent } from './componentes/descent-foros/descent-foros.component';
 import { PartidaCrearComponent } from './componentes/partida-crear/partida-crear.component';
+import { ForoDiscusionComponent } from './componentes/foro-discusion/foro-discusion.component';
+import { ForoMensajeCrearComponent } from './componentes/foro-mensaje-crear/foro-mensaje-crear.component';
+import { ForoDiscusionCrearComponent } from './componentes/foro-discusion-crear/foro-discusion-crear.component';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { PartidaCrearComponent } from './componentes/partida-crear/partida-crear
     DescentPartidasComponent,
     DescentPartidaDatosComponent,
     DescentForosComponent,
-    PartidaCrearComponent
+    PartidaCrearComponent,
+    ForoDiscusionComponent,
+    ForoMensajeCrearComponent,
+    ForoDiscusionCrearComponent
 
   ],
   imports: [

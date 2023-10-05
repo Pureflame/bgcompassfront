@@ -47,7 +47,7 @@
 			<!-- MIS DISCUSIONES -->
 			<div *ngIf="discusionesActiva">
 				<div *ngFor = "let nombre of nombres" class="test">
-					<app-perfil-discusiones [nombre]="nombre" ></app-perfil-discusiones>
+					<app-perfil-discusiones [discusion]="nombre" ></app-perfil-discusiones>
 				</div>
 			</div>
 

@@ -10,9 +10,9 @@ import { CurrentUserService } from 'src/app/Services/current-user.service';
 })
 export class DescentPartidasComponent {
 
-  public listaPartidasActiva: boolean;
+  
 
-  public nombres;
+  public nombres : any;
 
   public solicitud: any;
   errorMessage?: string;
@@ -25,7 +25,7 @@ export class DescentPartidasComponent {
       password: ''
     }
 
-    this.listaPartidasActiva = false;
+    
     
     this.nombres = [
       {nombreCampanha:"nombrecampaña1", nombreJuego: "NombreJuego1"},
@@ -35,7 +35,7 @@ export class DescentPartidasComponent {
   }
 
   ngOnInit(){
-    this.listaPartidasActiva = true;
+    
   }
 
   crear(){

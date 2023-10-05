@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavegacionService } from 'src/app/Services/navegacion.service';
 
 @Component({
   selector: 'app-navegacion',
@@ -6,5 +7,42 @@ import { Component } from '@angular/core';
   styleUrls: ['./navegacion.component.css']
 })
 export class NavegacionComponent {
+
+  public sinSesion : boolean
+  public conSesionUsuario : boolean
+  public admin : boolean
+
+  constructor(private navegacionService: NavegacionService){
+    this.sinSesion = this.navegacionService.sinSesion;
+    this.conSesionUsuario = this.navegacionService.conSesionUsuario;
+    this.admin = this.navegacionService.admin;
+  }
+
+  ngInit(){
+  }
+
+  irPartida(){
+    this.navegacionService.botonPartidaNavegador()
+    document.documentElement.style.setProperty('--colorPartida', 'red' )
+    document.documentElement.style.setProperty('--colorForo', 'none' )
+  }
+
+  irForo(){
+    this.navegacionService.botonForoNavegador()
+    document.documentElement.style.setProperty('--colorPartida', 'none' )
+    document.documentElement.style.setProperty('--colorForo', 'red' )
+  }
+
+  borrarColores(){
+    this.navegacionService.botonForoNavegador()
+    document.documentElement.style.setProperty('--colorPartida', 'none' )
+    document.documentElement.style.setProperty('--colorForo', 'none' )
+  }
+
+  ngDoCheck() { 
+    this.sinSesion = this.navegacionService.sinSesion;
+    this.conSesionUsuario = this.navegacionService.conSesionUsuario;
+    this.admin = this.navegacionService.admin;
+  }
 
 }

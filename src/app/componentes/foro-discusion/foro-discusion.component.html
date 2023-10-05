@@ -1,0 +1,14 @@
+
+<button (click)="crearMensaje()">Crear mensaje</button>
+
+<div class="lista" *ngFor = "let mensaje of mensajes">
+    <div class="discusionNombreTexto">
+        <label for="chk" aria-hidden="true">dddddd</label>
+    </div>
+
+    <div class="discusionNombreJuegoTexto">
+        <label for="chk" aria-hidden="true">{{mensaje.textoMensaje}}</label>
+    </div>
+</div>     
+    
+

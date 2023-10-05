@@ -14,7 +14,7 @@
     <!-- LISTA DE FOROS -->
     <div *ngIf="forosListaActiva">
         <p class="campañasTitulo">FOROS</p>
-        <mat-grid-list  cols="2" rowHeight="2:1">
+        <mat-grid-list  cols="2" rowHeight="3:1">
             <mat-grid-tile *ngFor = "let juego of listaJuegos">
                 <app-menu-foros (descentForos)="forosDescent()" [juego]="juego" ></app-menu-foros>
             </mat-grid-tile>

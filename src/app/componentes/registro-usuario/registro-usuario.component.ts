@@ -50,5 +50,9 @@ export class RegistroUsuarioComponent {
 
   }
 
+  volver(){
+    this.router.navigate([''])
+  }
+
 
 }

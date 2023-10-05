@@ -1,8 +1,8 @@
 body{
 	position: absolute;
 	width: 100%;
-	height: 100%;
-	background-color: #ffdfc7;
+	height: 300%;
+	background-color: #008fd0;
 
 }
 
@@ -36,9 +36,34 @@ body{
 	/*background-color: yellow;*/
 }
 
+.containerHeroe {
+	position: relative;
+	
+	top: 45%;
+	left: 50%;
+
+	width: 100%;
+	height: 100%;
+	transform: translate(-50%,-50%);
+
+	
+
+	/*background-color: yellow;*/
+}
+
+.heroeContainer{
+	position: relative;
+	background-color: #f4fbff;
+
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
 	.buttonVolver {
 		position: relative;
-		left: 10%;
+		top: 215px;
+		left: 20%;
 		padding: 10px 20px;
 		
 		transform: translate(-50%,0%);
@@ -77,20 +102,32 @@ body{
 			box-sizing: border-box;
 		}
 
-		.datosInfo{
-			/*background-color: gray;*/
-			
+		.datosInfoGeneral{
 			width: 1200px;
 			height: 80%;
 			margin-left: 50%;
 			transform: translate(-50%,0%);
 
-			background-color: #f4fbff;
 
+		}
+
+		.backgroundInfoGeneral{
+			background-color: #f4fbff;
 			border: 1px solid black;
 			border-radius: 4px;
 			box-sizing: border-box;
 		}
+
+		.datosInfoHeroes{
+			width: 1200px;
+			height: 80%;
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+
+
+		}
+
+
 
 			.inputsCortos{
 				/*background-color: gray;*/
@@ -114,8 +151,28 @@ body{
                 
 			}
 
+			.heroelist{
+				/*background-color: gray;*/
+                display: inline-block;
+                width: 45%;
+                height: 300px;
+                
+                margin-top: 60px;
+                margin-left: 20px;
+
+				padding-bottom: 10px;
+
+				font-size: 30px;
+			}
+
             .scrollOverlord{
                 width: 600px;
+                height: 300px;
+                overflow-y: scroll;
+            }
+
+			.scrollHeroe{
+                width: 300px;
                 height: 300px;
                 overflow-y: scroll;
             }
@@ -123,12 +180,14 @@ body{
             label{
                 margin-left: 20px;
             }
-			.buttonAddCarta{
+
+			.buttonAdd{
                 margin-top: 10px;
                 margin-left: 20px;
 				padding: 5px 10px;
 
 			}
+
 			input, select{
 				
 				width: 80%;
@@ -174,6 +233,43 @@ body{
                 margin-left: 5px;
 			}
 
+            .selectHeroe{
+				width: 60%;
+
+                margin-left: 20px;
+                margin-top: 10px;
+
+				padding: 10px;
+                
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+                
+            }
+
+            .heroeListado input{
+                width: 50%;
+            }
+
+			.buttonHeroe{
+				position: relative;
+                margin-top: auto;
+                margin-left: auto;
+				
+
+				transform: translate(0%,0%);
+
+				padding: 5px 10px;
+                margin-left: 5px;
+			}
+
+			.buttonDeleteHeroe{
+				display: block;
+				
+				padding: 5px 10px;
+				margin-top: 20px;
+                margin-left: 50px;
+			}
 
 
 
@@ -201,6 +297,19 @@ body{
                 -ms-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
             }
+
+			.centrarBoton3 {
+				text-align:center;
+            }
+
+			.buttonHeroeTop {
+                margin: 10px 20px;
+
+
+                padding: 10px 20px;
+
+            }
+
 
 		.datosCampaña{
 			

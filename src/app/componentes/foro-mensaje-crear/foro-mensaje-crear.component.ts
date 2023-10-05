@@ -5,12 +5,11 @@ import { AdministradorService } from 'src/app/Services/administrador.service';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 
 @Component({
-  selector: 'app-partida-crear',
-  templateUrl: './partida-crear.component.html',
-  styleUrls: ['./partida-crear.component.css']
+  selector: 'app-foro-mensaje-crear',
+  templateUrl: './foro-mensaje-crear.component.html',
+  styleUrls: ['./foro-mensaje-crear.component.css']
 })
-export class PartidaCrearComponent {
-
+export class ForoMensajeCrearComponent {
   public solicitud: any;
 
   /*
@@ -37,5 +36,4 @@ export class PartidaCrearComponent {
   volver(){
     this.router.navigate([''])
   }
-
 }

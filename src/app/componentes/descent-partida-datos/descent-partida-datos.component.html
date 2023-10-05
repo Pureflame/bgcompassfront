@@ -2,11 +2,11 @@
 
 
 
-	<div class="container">
+	<div class="containerHeroe">
 
 
         
-		<button class = "buttonVolver" (click)="volver()">Volver</button>
+		<button class = "buttonVolver" (click)="volver()">Volver al listado</button>
 
 		<div class="containerForm">
 			<div class="datosTitulo">
@@ -14,60 +14,69 @@
 			</div>
 
 			<!-- DATOS GENERALES -->
-			<div *ngIf="datosGeneralesActiva" class="datosInfo">
-				<div class="inputs" class="inputsCortos">
-					<label for="chk" aria-hidden="true">Nombre de la Campaña</label>
-					<input type="text" name="nombre" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.nombrePartida">
-				</div>
+			<div *ngIf="datosGeneralesActiva" class="datosInfoGeneral">
 
-				<div class="inputs" class="inputsCortos">
-					<label for="chk" aria-hidden="true">Oro de los héroes</label>
-					<input type="text" name="oro" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.oro">
-				</div>
+                <div class="centrarBoton3">
 
-				<div class="inputs" class="inputsCortos">
-					<label for="chk" aria-hidden="true">Misión Actual</label>
-					
-                        <!--
-                            <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
-                        -->
-                    
-                    <select name="mision" [(ngModel)]="solicitudGeneral.misionActual">
-                        <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
-                            {{mision}}
-                        </option>
-                    </select>
+                    <button class="buttonHeroeTop" (click)="confirmarEdicion()">Confirmar Edicion</button>
+                    <button class="buttonHeroeTop" (click)="verHeroes()">Ver Héroes</button>
+                </div>
 
-				</div>
+                <div class="backgroundInfoGeneral">
 
-                <div class="inputs" class="overlord">
+                
+                    <div class="inputs" class="inputsCortos">
+                        <label for="chk" aria-hidden="true">Nombre de la Campaña</label>
+                        <input type="text" name="nombre" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.nombrePartida">
+                    </div>
 
-					<label for="chk" aria-hidden="true">Cartas Overlord</label>
-                    
-                        <div >
-                            <button class = "buttonAddCarta" (click)="addCarta()">Comprar</button>
-                        </div>
-                        <!--
-                        <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
-                        -->
-                        <div class="scrollOverlord">
-                            <select class="selectOverlord" name="cartaIndividual" [(ngModel)]="cartaAdd">
-                                <option *ngFor="let cartaIndividual of solicitudListaCartasOverlord" [ngValue]="cartaIndividual">
-                                    {{cartaIndividual}}
-                                </option>
-                            </select>
+                    <div class="inputs" class="inputsCortos">
+                        <label for="chk" aria-hidden="true">Oro de los héroes</label>
+                        <input type="text" name="oro" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.oro">
+                    </div>
 
-                            <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral.arrayCartasOverlord">
-                                <div *ngIf=carta>
-                                    <input type="text" name="overlord" required="" value="{{carta}}" readonly="readonly" >
-                                    <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral.arrayCartasOverlord.indexOf(carta))">Borrar</button>
+                    <div class="inputs" class="inputsCortos">
+                        <label for="chk" aria-hidden="true">Misión Actual</label>
+                        
+                            <!--
+                                <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
+                            -->
+                        
+                        <select name="mision" [(ngModel)]="solicitudGeneral.misionActual">
+                            <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
+                                {{mision}}
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="inputs" class="overlord">
+
+                        <label for="chk" aria-hidden="true">Cartas Overlord</label>
+                        
+                            <div >
+                                <button class = "buttonAdd" (click)="addCarta()">Comprar</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollOverlord">
+                                <select class="selectOverlord" name="cartaIndividual" [(ngModel)]="cartaAdd">
+                                    <option *ngFor="let cartaIndividual of solicitudListaCartasOverlord" [ngValue]="cartaIndividual">
+                                        {{cartaIndividual}}
+                                    </option>
+                                </select>
+
+                                <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral.arrayCartasOverlord">
+                                    <div *ngIf=carta>
+                                        <input type="text" name="overlord" required="" value="{{carta}}" readonly="readonly" >
+                                        <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral.arrayCartasOverlord.indexOf(carta))">Borrar</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-				</div>
+                    </div>
+                </div>
 
-                <button class="centrarBoton1" (click)="confirmarEdicion()">Confirmar Edicion</button>
-                <button class="centrarBoton2" (click)="verHeroes()">Ver Héroes</button>
 			</div>
 
             
@@ -79,58 +88,102 @@
 
 
             <!-- DATOS DE HEROES -->
-			<div *ngIf="datosHeroeActiva" class="datosInfo">
-				<div class="inputs" class="inputsCortos">
-					<label for="chk" aria-hidden="true">gg de la Campaña</label>
-					<input type="text" name="nombre" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.nombrePartida">
-				</div>
+			<div *ngIf="datosHeroeActiva"  class="datosInfoHeroes">
 
-				<div class="inputs" class="inputsCortos">
-					<label for="chk" aria-hidden="true">Oro de los héroes</label>
-					<input type="text" name="oro" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.oro">
-				</div>
+                <div class="centrarBoton3">
+                    <button class="buttonHeroeTop" (click)="crearHeroe()">Crear Heroe</button>
+                    <button class="buttonHeroeTop" (click)="confirmarEditHeroes()">Confirmar Edicion Heroes</button>
+                    <button class="buttonHeroeTop" (click)="volverADatosGenerales()">Volver atrás</button>
+                </div>
 
-				<div class="inputs" class="inputsCortos">
-					<label for="chk" aria-hidden="true">Misión Actual</label>
-					
-                        <!--
-                            <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
-                        -->
-                    
-                    <select name="mision" [(ngModel)]="solicitudGeneral.misionActual">
-                        <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
-                            {{mision}}
-                        </option>
-                    </select>
 
-				</div>
+                <div *ngFor="let heroe of solicitudHeroes; let i = index">
+                    <div class="heroeContainer" *ngIf="heroe">
 
-                <div class="inputs" class="overlord">
+                        <button class="buttonDeleteHeroe" (click)="borrarHeroe(i)">Borrar Heroe</button>
 
-					<label for="chk" aria-hidden="true">Cartas Overlord</label>
-
-                    <div >
-                        <button class = "buttonAddCarta" (click)="addCarta()">Comprar</button>
-                    </div>
-					<!--
-                    <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
-                    -->
-                    <select class="selectOverlord" name="cartaIndividual" [(ngModel)]="cartaAdd">
-                        <option *ngFor="let cartaIndividual of solicitudListaCartasOverlord" [ngValue]="cartaIndividual">
-                            {{cartaIndividual}}
-                        </option>
-                    </select>
-
-                    <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral.arrayCartasOverlord">
-                        <div *ngIf=carta>
-                            <input type="text" name="overlord" required="" value="{{carta}}" readonly="readonly" >
-                            <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral.arrayCartasOverlord.indexOf(carta))">Borrar</button>
+                        <div  class="inputsCortos">
+                            <label for="chk" aria-hidden="true">Héroe</label>
+                            <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i].nombreHeroe">
+                                <option *ngFor="let heroeIndividual of solicitudListaHeroes" [ngValue]="heroeIndividual">
+                                    {{heroeIndividual}}
+                                </option>
+                            </select>
+                        </div>
+        
+                        <div  class="inputsCortos">
+                            <label for="chk" aria-hidden="true">Clase</label>
+                            <select class="selectHeroe" name="claseIndividual" [(ngModel)]="solicitudHeroes[i].claseHeroe">
+                                <option *ngFor="let claseIndividual of solicitudListaClases" [ngValue]="claseIndividual">
+                                    {{claseIndividual}}
+                                </option>
+                            </select>
+                        </div>
+    
+    
+    
+    
+                        <!--ITEMS-->
+                        <div class="heroelist">
+    
+                            <label for="chk" aria-hidden="true">Equipamiento</label>
+        
+                            <div >
+                                <button class = "buttonAdd" (click)="addItem(i)">Comprar</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollHeroe">
+                                <select class="selectHeroe" name="equipoIndividual" [(ngModel)]="itemAdd">
+                                    <option *ngFor="let equipoIndividual of solicitudListaEquipamiento" [ngValue]="equipoIndividual">
+                                        {{equipoIndividual}}
+                                    </option>
+                                </select>
+            
+                                <div class="heroeListado" *ngFor="let item of solicitudHeroes[i].equipamientoHeroe">
+                                    <div *ngIf=item>
+                                        <input type="text" name="itemHeroe" required="" value="{{item}}" readonly="readonly" >
+                                        <button class="buttonHeroe" (click)="quitarItem(solicitudHeroes[i].equipamientoHeroe.indexOf(item), i)">Borrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+    
+                        <!--HABILIDADES-->
+                        <div class="heroelist">
+    
+                            <label for="chk" aria-hidden="true">Habilidades</label>
+        
+                            <div >
+                                <button class = "buttonAdd" (click)="addHabilidad(i)">Comprar</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollHeroe">
+                                <select class="selectHeroe" name="habilidadIndividual" [(ngModel)]="habilidadAdd">
+                                    <option *ngFor="let habilidadIndividual of solicitudListaHabilidades" [ngValue]="habilidadIndividual">
+                                        {{habilidadIndividual}}
+                                    </option>
+                                </select>
+            
+                                <div class="heroeListado" *ngFor="let habilidad of solicitudHeroes[i].habilidadesHeroe">
+                                    <div *ngIf=habilidad>
+                                        <input type="text" name="habilidadHeroe" required="" value="{{habilidad}}" readonly="readonly" >
+                                        <button class="buttonHeroe" (click)="quitarHabilidad(solicitudHeroes[i].habilidadesHeroe.indexOf(habilidad), i)">Borrar</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-				</div>
+                    
+                    
+                </div>
+     
 
-                <button class="centrarBoton1">Confirmar Edicion Heroes</button>
-                <button class="centrarBoton2" (click)="volverADatosGenerales()">Volver atrás</button>
+
 			</div>
 
 

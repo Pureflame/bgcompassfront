@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-discusiones',
@@ -6,9 +7,25 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./perfil-discusiones.component.css']
 })
 export class PerfilDiscusionesComponent {
-  @Input() public nombre: any
+  @Input() public discusion: any
+  @Input() public rutaNombreJuego: any
+  @Output() discusionChat = new EventEmitter();
 
-
-  constructor(){
+  constructor(private router: Router){
   }
+
+  ngOnInit(){
+    this.rutaNombreJuego = "descent";
+  }
+
+  /*
+  verDatos(){
+    this.router.navigate(['foros/discusion'])
+  }
+  */
+  discusionIrChat(discusion:string){
+    this.discusionChat.emit(discusion)
+  }
+
+
 }

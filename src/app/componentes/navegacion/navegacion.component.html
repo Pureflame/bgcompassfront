@@ -1,13 +1,31 @@
-<ul>
-    <li><a routerLink="/menuhome" routerLinkActive="active" href="#campaña">Campaña</a></li>
-    <li><a routerLink="/menuforo" routerLinkActive="active" href="#foros">Foros</a></li>
+<ul *ngIf="sinSesion">
+    <li><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Campaña</a></li>
+    <li><a class="foroActiva"(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
     <li><a routerLink="/about" routerLinkActive="active" href="#sobreNosotros">Sobre Nosotros</a></li>
     
-    <li><img src="../../../assets/imagenes/LogoMenu.png"/></li><li><a class="derecha" href="#iniciarSesion">Iniciar Sesión</a></li>
+    <li><img src="../../../assets/imagenes/LogoMenu.png"/></li>
 
-    <li><a href="#iniciarSesion">Iniciar Sesión</a></li>
-    <li><a class="crearUsuario" href="#crearUsuario">Crear Usuario</a></li>
-    <li><a href="#idioma">Idioma</a></li>
+    
+        <li class="pegarDerecha"><a (click)="borrarColores()" routerLink="login">Iniciar Sesión</a></li>
+        <li ><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/usuario">Crear Usuario</a></li>
+        <li><a href="#idioma">Idioma</a></li>
+    
+
+</ul>
+
+<ul *ngIf="conSesionUsuario">
+    <li><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Camdfdfdfdfpaña</a></li>
+    <li><a class="foroActiva"(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
+    <li><a routerLink="/about" routerLinkActive="active" href="#sobreNosotros">Sobre Nosotros</a></li>
+    
+    <li><img src="../../../assets/imagenes/LogoMenu.png"/></li>
+
+    
+        <li class="pegarDerecha"><a (click)="borrarColores()" routerLink="login">Iniciar Sesión</a></li>
+        <li ><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/usuario">Crear Usuario</a></li>
+        <li><a href="#idioma">Idioma</a></li>
+    
+
 </ul>
 
 <!--

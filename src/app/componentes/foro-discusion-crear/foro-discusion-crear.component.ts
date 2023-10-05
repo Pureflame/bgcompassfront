@@ -5,20 +5,12 @@ import { AdministradorService } from 'src/app/Services/administrador.service';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 
 @Component({
-  selector: 'app-partida-crear',
-  templateUrl: './partida-crear.component.html',
-  styleUrls: ['./partida-crear.component.css']
+  selector: 'app-foro-discusion-crear',
+  templateUrl: './foro-discusion-crear.component.html',
+  styleUrls: ['./foro-discusion-crear.component.css']
 })
-export class PartidaCrearComponent {
-
+export class ForoDiscusionCrearComponent {
   public solicitud: any;
-
-  /*
-  El boton de volver y crear debe variar segun el juego
-
-    this.router.navigate(['{{nombre del juego en minusculas}}/partidas'])
-
-  */
 
   public headersAdd = new HttpHeaders({
     'Content-Type': 'application/json'

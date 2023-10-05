@@ -1,1 +1,32 @@
-<p>descent-foros works!</p>
+<body>
+
+    <div class="partidasTitulo">
+        <span>Foro de Descent</span>
+    </div>
+
+	<div class="container">
+
+		<button class = "buttonVolver" (click)="volver()">Volver al menu</button>
+        <button class = "buttonVolver" (click)="crearDiscusion()">Crear nueva discusión</button>
+
+		<div class="containerForm">
+
+
+        <!--  -->
+        <div *ngIf="listaDiscusionesActiva">
+            <div *ngFor = "let discusion of discusiones">
+                <app-perfil-discusiones (discusionChat)="entrarDiscusion($event)" [discusion]="discusiones" ></app-perfil-discusiones>
+            </div>
+        </div>
+
+
+        <div *ngIf="chatDiscusionActiva">
+                <app-foro-discusion [mensajes]="mensajes" ></app-foro-discusion>
+        </div>
+
+
+			
+
+		</div>
+	</div>
+</body>

@@ -37,6 +37,20 @@ ul {
     background-color: #111;
   }
 
-  .active {
-    background-color: #04AA6D;
+  .partidaActiva {
+    /*background-color: red;*/
+    background-color: var(--colorPartida);
+  }
+
+  .foroActiva {
+    /*background-color: #04AA6D;*/
+    background-color: var(--colorForo);
+  }
+
+  li img {
+    margin-left: 50%;
+  }
+
+  .pegarDerecha {
+    margin-left: 12.5%;
   }

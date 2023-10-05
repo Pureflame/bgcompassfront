@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Administrador } from 'src/app/Models/administrador';
 import { Usuario } from 'src/app/Models/usuario';
 import { AdministradorService } from 'src/app/Services/administrador.service';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { DescentPartidaService } from 'src/app/Services/descentPartida.service';
+import { NavegacionService } from 'src/app/Services/navegacion.service';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 
 @Component({
@@ -22,14 +23,22 @@ export class MenuComponent {
   public juegosListaActiva: boolean;
   public forosListaActiva: boolean;
 
+  public juegosListaActivaRuta: boolean;
+  public forosListaActivaRuta: boolean;
+
   public listaJuegos;
 
   constructor(private currentUserService: CurrentUserService,
     private descentService: DescentPartidaService,
-    private router: Router){
+    private navegacionService: NavegacionService,
+    private router: Router,
+    private _routeParams: ActivatedRoute){
 
-      this.juegosListaActiva = false;
-      this.forosListaActiva = false;
+      this.juegosListaActiva = this.navegacionService.partida;
+      this.forosListaActiva = this.navegacionService.foro;
+
+      this.juegosListaActivaRuta = _routeParams.snapshot.params['partida'];
+      this.forosListaActivaRuta = _routeParams.snapshot.params['foro'];
 
       this.listaJuegos = [
         {nombreJuegoImagen:"Descent", nombreJuegoTitulo: "Descent: Viaje a las TInieblas"},
@@ -42,7 +51,10 @@ export class MenuComponent {
   }
   ngOnInit(){
 
-    this.juegosListaActiva = true;
+
+    
+ /*   this.comprobarNavegacion();
+    console.log("funciono2")
     console.log(this.juegosListaActiva)
     console.log(this.forosListaActiva)
 
@@ -83,6 +95,7 @@ export class MenuComponent {
 
       error: (error)=>{console.log(error)}
     })
+    */
 }
 
 listar(){
@@ -114,8 +127,24 @@ listar(){
     this.router.navigate(['descent/foros'])
   }
 
-  ngDoCheck() {  
+  comprobarNavegacion(){
+    console.log("funciono")
+
+    console.log(this.navegacionService.partida)
+    console.log(this.navegacionService.foro)
+
+    if(this.navegacionService.partida == true && this.navegacionService.foro == false){
+      this.juegosListaActiva = true;
+      this.forosListaActiva = false;
+    } else {
+      this.juegosListaActiva = false;
+      this.forosListaActiva = true;
+    }
     
+  }
+
+  ngDoCheck() {  
+    this.comprobarNavegacion();
 
 /*
     let test:any = this.currentUserService.getCurrentUser()

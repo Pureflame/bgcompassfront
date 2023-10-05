@@ -118,7 +118,9 @@ this.adminService.getAdminList().subscribe({
   console.log("Después de la suscripción");
 
 */
-
+volver(){
+  this.router.navigate([''])
+}
 
 
 
