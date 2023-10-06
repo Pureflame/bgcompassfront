@@ -12,7 +12,7 @@ import { CurrentUserService } from 'src/app/Services/current-user.service';
 export class PartidaCrearComponent {
 
   public solicitud: any;
-
+  public juegoActual: string
   /*
   El boton de volver y crear debe variar segun el juego
 
@@ -28,14 +28,22 @@ export class PartidaCrearComponent {
     this.solicitud = {
       nombre: ''
     }
+    this.juegoActual = ""
+  }
+
+  ngOnInit(){
+    console.log("el juego actual es " + this.currentUserService.getJuegoActual())
+    this.juegoActual = this.currentUserService.getJuegoActual();
   }
 
   onSubmit(){
-
+    //url crear campaña aqui
+    
+    this.router.navigate([this.juegoActual+'/partidas'])
   }
 
   volver(){
-    this.router.navigate([''])
+    this.router.navigate([this.juegoActual+'/partidas'])
   }
 
 }

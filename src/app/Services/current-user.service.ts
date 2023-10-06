@@ -18,6 +18,7 @@ export class CurrentUserService {
     private currentUser: string = ""
     private typeUser: string = ""
     private emailUser: string = ""
+    private juegoActual: string;
 
     private administradoresDB :Array<Administrador> =[]
     private usuariosBD :Array<Usuario> =[]
@@ -30,6 +31,7 @@ export class CurrentUserService {
             //this.administradoresDB = []
             //this.usuariosBD = []
             //this.typeUser = ""
+            this.juegoActual = "";
         }
 
     public prepararHeader(token:string){
@@ -131,6 +133,14 @@ export class CurrentUserService {
         this.prepararHeader(token)
         let parametroGet = new HttpParams().set("correo", correo)
         return this.http.get(this.url + "usuario-actual/ver", {headers: this.headersAddWithToken, params: parametroGet});
+    }
+
+    public setJuegoActual(juego:string){
+        this.juegoActual = juego;
+    }
+
+    public getJuegoActual(){
+        return this.juegoActual;
     }
 
 }

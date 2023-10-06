@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { CurrentUserService } from 'src/app/Services/current-user.service';
 
 @Component({
   selector: 'app-perfil-partidas',
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./perfil-partidas.component.css']
 })
 export class PerfilPartidasComponent {
+  
 @Input() public nombre: any
 @Input() public rutaNombreJuego: any
 
@@ -18,17 +20,21 @@ Crear dos inputs para cuando:
  QUIZA NO HACE FALTA PORQUE ES SEGUN EL ARRAY QUE SE LE PASA
 */
 
-constructor(private router: Router){
+constructor(private router: Router, private currentUserService: CurrentUserService){
 
   
 }
 
   ngOnInit(){
-    this.rutaNombreJuego = "descent";
+    console.log("entro")
+    console.log(this.nombre)
+    //this.rutaNombreJuego = this.currentUserService.getJuegoActual();
   }
 
-  verDatos(){
-    this.router.navigate([this.rutaNombreJuego +'/partidas/datos'])
+  verDatos(nombre:string){
+    
+    this.currentUserService.setJuegoActual(nombre);
+    this.router.navigate([nombre.toLowerCase() +'/partidas/datos'])
   }
 
 }

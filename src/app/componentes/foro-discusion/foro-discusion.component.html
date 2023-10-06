@@ -1,14 +1,16 @@
+<div class="lista">
 
-<button (click)="crearMensaje()">Crear mensaje</button>
-
-<div class="lista" *ngFor = "let mensaje of mensajes">
-    <div class="discusionNombreTexto">
-        <label for="chk" aria-hidden="true">dddddd</label>
+    <div class="nombreUsuarioMensaje">
+        {{mensaje.nombreUsuario}}
     </div>
 
-    <div class="discusionNombreJuegoTexto">
+    <button *ngIf="adminActivo" (click)="borrarMensaje(mensaje.idMensaje)" class="botonBorrarMensaje">borrar mensaje</button>
+    
+    <div class="discusionTexto">
         <label for="chk" aria-hidden="true">{{mensaje.textoMensaje}}</label>
     </div>
+    
+
 </div>     
     
 

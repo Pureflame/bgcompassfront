@@ -28,17 +28,18 @@ export class DescentPartidasComponent {
     
     
     this.nombres = [
-      {nombreCampanha:"nombrecampaña1", nombreJuego: "NombreJuego1"},
-      {nombreCampanha:"nombrecampaña2", nombreJuego: "NombreJuego2"}
+      {nombreCampanha:"nombrecampaña1", nombreJuego: "Descent"},
+      {nombreCampanha:"nombrecampaña2", nombreJuego: "Descent"}
     ];
 
   }
 
   ngOnInit(){
-    
+    this.currentUserService.setJuegoActual("descent");
   }
 
   crear(){
+    this.currentUserService.setJuegoActual("descent");
     this.router.navigate(['descent/partidas/crear'])
   }
   

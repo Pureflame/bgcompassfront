@@ -15,7 +15,7 @@ export class PerfilDiscusionesComponent {
   }
 
   ngOnInit(){
-    this.rutaNombreJuego = "descent";
+    
   }
 
   /*
@@ -23,8 +23,11 @@ export class PerfilDiscusionesComponent {
     this.router.navigate(['foros/discusion'])
   }
   */
-  discusionIrChat(discusion:string){
-    this.discusionChat.emit(discusion)
+  discusionIrChat(discusionId:number , discusionNombre:string){
+
+    let datos = [ {discusionId: discusionId,discusionNombre: discusionNombre}]
+    
+    this.discusionChat.emit(datos)
   }
 
 

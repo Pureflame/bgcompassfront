@@ -12,10 +12,18 @@ export class DescentPartidaService {
     });
     public headersAddWithToken = new HttpHeaders();
 
+
+
 // {headers: this.headersAdd}
+    public misPartidas : boolean
+    public partidasJuego : boolean
+    public todasLasPartidas : boolean
 
-
-    constructor( private http: HttpClient ){}
+    constructor( private http: HttpClient ){
+        this.misPartidas = false;
+        this.partidasJuego = false;
+        this.todasLasPartidas = false;
+    }
 
     public prepararHeader(token:string){
         return this.headersAddWithToken = new HttpHeaders({
@@ -89,5 +97,25 @@ export class DescentPartidaService {
     public eliminarHeroePartidaDescent(idParty:number, token:string):Observable<any>{
         this.prepararHeader(token)
         return this.http.delete(this.url + "descent/" + idParty + "/heroes", {headers: this.headersAddWithToken});     
+    }
+
+    public getMisPartidas(){
+        return this.misPartidas
+    }
+    public getPartidasJuego(){
+        return this.partidasJuego
+    }
+    public getTodasLasPartidas(){
+        return this.todasLasPartidas
+    }
+
+    public partidasAPedir(){
+        if(this.todasLasPartidas == true){
+            // URL AQUI
+        } else if (this.partidasJuego == true){
+            // URL AQUI
+        } else if (this.misPartidas == true) {
+            // URL AQUI
+        }
     }
 }

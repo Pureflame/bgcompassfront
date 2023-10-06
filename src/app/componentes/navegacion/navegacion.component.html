@@ -1,33 +1,49 @@
 <ul *ngIf="sinSesion">
-    <li><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Campaña</a></li>
-    <li><a class="foroActiva"(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
-    <li><a routerLink="/about" routerLinkActive="active" href="#sobreNosotros">Sobre Nosotros</a></li>
+    <li class="navegador"><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Campaña</a></li>
+    <li class="navegador"><a class="foroActiva "(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
     
-    <li><img src="../../../assets/imagenes/LogoMenu.png"/></li>
+    
+    <li class="navegador moverImagen"><img  src="../../../assets/imagenes/LogoMenu.png"/></li>
 
     
-        <li class="pegarDerecha"><a (click)="borrarColores()" routerLink="login">Iniciar Sesión</a></li>
-        <li ><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/usuario">Crear Usuario</a></li>
-        <li><a href="#idioma">Idioma</a></li>
-    
-
+    <li class="navegador pegarDerecha"><a (click)="borrarColores()" routerLink="login">Iniciar Sesión</a></li>
+    <li class="navegador"><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/usuario">Crear Usuario</a></li>
+    <li class="navegador"><a href="#idioma">Idioma</a></li>
 </ul>
+
 
 <ul *ngIf="conSesionUsuario">
-    <li><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Camdfdfdfdfpaña</a></li>
-    <li><a class="foroActiva"(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
-    <li><a routerLink="/about" routerLinkActive="active" href="#sobreNosotros">Sobre Nosotros</a></li>
+    <li class="navegador"><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Campaña</a></li>
+    <li class="navegador"><a class="foroActiva"(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
     
-    <li><img src="../../../assets/imagenes/LogoMenu.png"/></li>
+    <li class="navegador moverImagen"><img src="../../../assets/imagenes/LogoMenu.png"/></li>
 
     
-        <li class="pegarDerecha"><a (click)="borrarColores()" routerLink="login">Iniciar Sesión</a></li>
-        <li ><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/usuario">Crear Usuario</a></li>
-        <li><a href="#idioma">Idioma</a></li>
-    
-
+        <li class="navegador pegarDerecha2"><a (click)="borrarColores()" routerLink="usuario-perfil/usuario/ver">Perfil</a></li>
+        <li class="navegador"><a href="#idioma">Idioma</a></li>
 </ul>
 
-<!--
-<li><img src="../../../assets/imagenes/Perfil.png"/></li>
--->
+<ul *ngIf="admin">
+
+    <!--
+    <li ><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Campaña</a></li>
+    <li ><a class="foroActiva"(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
+    
+    <li class=" moverImagen"><img src="../../../assets/imagenes/LogoMenu.png"/></li>
+
+        <li ><a class="pegarDerecha crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/administrador">Crear Admin</a></li>
+        <li class=""><a (click)="borrarColores()" routerLink="usuario-perfil/usuario/ver">Perfil</a></li>
+        <li ><a href="#idioma">Idioma</a></li>
+        -->
+
+        <li class="navegador"><a class="partidaActiva" (click)="irPartida()" routerLink=""  href="#campaña">Campaña</a></li>
+        <li class="navegador"><a class="foroActiva "(click)="irForo()" routerLink=""  href="#foros">Foros</a></li>
+        
+        
+        <li class="navegador moverImagen"><img  src="../../../assets/imagenes/LogoMenu.png"/></li>
+    
+        
+        <li class="navegador pegarDerecha"><a (click)="borrarColores()" routerLink="usuario-registro/administrador">Crear Admin</a></li>
+        <li class="navegador"><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-registro/usuario">Crear Usuario</a></li>
+        <li class="navegador"><a href="#idioma">Idioma</a></li>
+</ul>

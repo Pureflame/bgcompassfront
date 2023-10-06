@@ -15,13 +15,18 @@
         <!--  -->
         <div *ngIf="listaDiscusionesActiva">
             <div *ngFor = "let discusion of discusiones">
-                <app-perfil-discusiones (discusionChat)="entrarDiscusion($event)" [discusion]="discusiones" ></app-perfil-discusiones>
+                <app-perfil-discusiones (discusionChat)="entrarDiscusion($event)" [discusion]="discusion" ></app-perfil-discusiones>
             </div>
         </div>
 
 
         <div *ngIf="chatDiscusionActiva">
-                <app-foro-discusion [mensajes]="mensajes" ></app-foro-discusion>
+            <button class="crearMensaje" (click)="crearMensaje()">Crear mensaje</button>
+            <button class="crearMensaje" (click)="regresoAlListado()">Volver listado Discusiones</button>
+
+            <div *ngFor = "let mensaje of mensajesDiscusion">
+                <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>
+            </div>
         </div>
 
 

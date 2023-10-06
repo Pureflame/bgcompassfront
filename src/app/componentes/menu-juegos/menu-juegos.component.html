@@ -1,12 +1,39 @@
-<div class="contenedor">
+<div *ngIf="menuSinSesion" class="contenedor">
 
     <figure>
         <img src="../../../assets/imagenes/{{juego.nombreJuegoImagen}}.jpg"/>
     </figure>
 
+    <p class="tituloNombreJuego">{{juego.nombreJuegoTitulo}}</p>
+
+    <div class="botones">
+        <button class="botonCrear" (click)="crearPartida(juego.nombreJuegoImagen)">Crear Campaña</button>
+    </div>
+</div>
+
+<div *ngIf="menuConSesion" class="contenedor">
+
+    <figure>
+        <img src="../../../assets/imagenes/{{juego.nombreJuegoImagen}}.jpg"/>
+    </figure>
     
     <p class="tituloNombreJuego">{{juego.nombreJuegoTitulo}}</p>
-    
-    <button class="botonCrear" (click)="irADescentPartidas()">Crear Campaña</button>
 
+    <div class="botones">
+        <button class="botonCrear" (click)="crearPartida(juego.nombreJuegoImagen)">Crear Campaña</button>
+        <button class="botonCrear" (click)="irAPartidas(juego.nombreJuegoImagen)">Mis Campañas</button>
+    </div>
+</div>
+
+<div *ngIf="menuAdmin" class="contenedor">
+
+    <figure>
+        <img src="../../../assets/imagenes/{{juego.nombreJuegoImagen}}.jpg"/>
+    </figure>
+    
+    <p class="tituloNombreJuego">{{juego.nombreJuegoTitulo}}</p>
+    <div class="botones">
+        <button class="botonCrear" (click)="crearPartida(juego.nombreJuegoImagen)">Ver partidas</button>
+        <button class="botonCrear" (click)="irAPartidas(juego.nombreJuegoImagen)">Mis Campañas</button>
+    </div>
 </div>

@@ -12,8 +12,17 @@ export class DescentForoService {
     });
     public headersAddWithToken = new HttpHeaders();
 
+    public idDiscusionActual : any
 
-    constructor( private http: HttpClient ){}
+    public misDiscusiones : boolean
+    public discusionesJuego : boolean
+    public todasLasDiscusiones : boolean
+
+    constructor( private http: HttpClient ){
+        this.misDiscusiones = false;
+        this.discusionesJuego = false;
+        this.todasLasDiscusiones = false;
+    }
 
     public prepararHeader(token:string){
         return this.headersAddWithToken = new HttpHeaders({
@@ -81,5 +90,50 @@ export class DescentForoService {
 
 
 
+    public setDiscusionActual(discusionId:any){
+        this.idDiscusionActual = discusionId;
+    }
+
+    public getDiscusionActual(){
+        return this.idDiscusionActual;
+    }
+
+    public pedirMisDiscusiones(){
+        this.misDiscusiones = true;
+        this.discusionesJuego = false;
+        this.todasLasDiscusiones = false;
+    }
+
+    public pedirDiscusionesJuego(){
+        this.misDiscusiones = false;
+        this.discusionesJuego = true;
+        this.todasLasDiscusiones = false;
+    }
+
+    public pedirTodasLasDiscusiones(){
+        this.misDiscusiones = false;
+        this.discusionesJuego = false;
+        this.todasLasDiscusiones = true;
+    }
+
+    public getMisDiscusiones(){
+        return this.misDiscusiones
+    }
+    public getDiscusionesJuego(){
+        return this.discusionesJuego
+    }
+    public getTodasLasDiscusiones(){
+        return this.todasLasDiscusiones
+    }
+
+    public discusionesAPedir(){
+        if(this.todasLasDiscusiones == true){
+            // URL AQUI
+        } else if (this.discusionesJuego == true){
+            // URL AQUI
+        } else if (this.misDiscusiones == true) {
+            // URL AQUI
+        }
+    }
 
 }

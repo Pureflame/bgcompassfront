@@ -1,7 +1,7 @@
 body{
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: 200%;
 	background-color: #008fd0;
 
 }
@@ -80,4 +80,10 @@ body{
 			border: 1px solid black;
 			border-radius: 4px;
 			box-sizing: border-box;
+		}
+
+		.crearMensaje{
+			display: block;
+			padding: 10px 30px;
+			margin-top: 10px;
 		}

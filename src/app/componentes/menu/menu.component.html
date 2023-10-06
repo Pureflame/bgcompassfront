@@ -6,7 +6,10 @@
         <p class="campañasTitulo">CAMPAÑAS</p>
         <mat-grid-list  cols="2" rowHeight="3:1">
             <mat-grid-tile *ngFor = "let juego of listaJuegos">
-                    <app-menu-juegos (descentPartidas)="partidasDescent()" [juego]="juego" ></app-menu-juegos>
+                    <app-menu-juegos 
+                    (descentPartidas)="partidasDescent()" 
+                    (gloomhavenPartidas)="partidasGloomhaven()" 
+                    [juego]="juego" ></app-menu-juegos>
             </mat-grid-tile>
         </mat-grid-list>
     </div>
@@ -16,20 +19,13 @@
         <p class="campañasTitulo">FOROS</p>
         <mat-grid-list  cols="2" rowHeight="3:1">
             <mat-grid-tile *ngFor = "let juego of listaJuegos">
-                <app-menu-foros (descentForos)="forosDescent()" [juego]="juego" ></app-menu-foros>
+                <app-menu-foros 
+                (descentForos)="forosDescent()" 
+                (gloomhavenForos)="forosGloomhaven()" 
+                [juego]="juego" ></app-menu-foros>
             </mat-grid-tile>
         </mat-grid-list>
     </div>
-
-
-
-
-
-
-
-
-
-
 
 
 <!--

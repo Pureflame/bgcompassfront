@@ -8,6 +8,7 @@
             <button class="botonLateral" (click)="info()">Mi información</button>
             <button class="botonLateral" (click)="partidas()">Mis Campañas</button>
             <button class="botonLateral" (click)="discusiones()">Mis discusiones de foros</button>
+			<button class="botonLateral" (click)="logout()">Cerrar Sesion</button>
         </div>
 
 		<button class = "buttonVolver" (click)="volver()">Volver</button>
@@ -39,17 +40,30 @@
 
 			<!-- MIS CAMPAÑAS -->
 			<div *ngIf="partidaActiva">
-				<div *ngFor = "let nombre of nombres" class="test">
+				<div *ngFor = "let nombre of nombres">
 					<app-perfil-partidas [nombre]="nombre" ></app-perfil-partidas>
 				</div>
 			</div>
 
 			<!-- MIS DISCUSIONES -->
-			<div *ngIf="discusionesActiva">
-				<div *ngFor = "let nombre of nombres" class="test">
-					<app-perfil-discusiones [discusion]="nombre" ></app-perfil-discusiones>
+			<div *ngIf="listaDiscusionesActiva">
+				<div *ngFor = "let discusion of listadiscusiones">
+					<app-perfil-discusiones (discusionChat)="entrarDiscusion($event)" [discusion]="discusion" ></app-perfil-discusiones>
 				</div>
 			</div>
+
+			<div *ngIf="chatDiscusionActiva">
+				<button class="crearMensaje" (click)="crearMensaje()">Crear mensaje</button>
+				<button class="crearMensaje" (click)="regresoAlListado()">Volver listado Discusiones</button>
+	
+				<div *ngFor = "let mensaje of mensajesDiscusion">
+                <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>
+        		</div>
+			</div>
+
+
+
+
 
 			<!-- EDITAR USUARIO -->
 			<div *ngIf="editarUsuarioActiva">

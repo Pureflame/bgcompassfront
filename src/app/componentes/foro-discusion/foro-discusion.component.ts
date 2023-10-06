@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { CurrentUserService } from 'src/app/Services/current-user.service';
 
 @Component({
   selector: 'app-foro-discusion',
@@ -8,13 +9,30 @@ import { Router } from '@angular/router';
 })
 export class ForoDiscusionComponent {
   //@Input() public nombre: any
-  @Input() public mensajes: any
+  @Input() public mensaje: any
+  @Output() borrado = new EventEmitter();
 
-  constructor(private router: Router){
+  public adminActivo : boolean
+
+  constructor(private router: Router, private currentUserService: CurrentUserService){
+    this.adminActivo = false;
   }
 
+  ngOnInit(){
+    console.log("entramos al foro");
+    //this.currentUserService.setCurrentUser("dd","administrador","dd")
+    this.comprobarAdmin();
+  }
 
-  crearMensaje(){
-    this.router.navigate(['foros/mensaje/crear'])
+  comprobarAdmin(){
+    if(this.currentUserService.getCurrentUserType() === "administrador"){
+      this.adminActivo = true;
+    }
+  }
+
+  borrarMensaje(id : any){
+    
+    this.borrado.emit(id)
+    
   }
 }

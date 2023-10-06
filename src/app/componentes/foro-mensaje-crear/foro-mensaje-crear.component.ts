@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdministradorService } from 'src/app/Services/administrador.service';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
+import { DescentForoService } from 'src/app/Services/descentForo.service';
 
 @Component({
   selector: 'app-foro-mensaje-crear',
@@ -23,17 +24,25 @@ export class ForoMensajeCrearComponent {
     'Content-Type': 'application/json'
   });
 
-  constructor(private http:HttpClient, private router: Router, private currentUserService: CurrentUserService, private adminService: AdministradorService){
+  constructor(private http:HttpClient, 
+    private router: Router, 
+    private currentUserService: CurrentUserService, 
+    private adminService: AdministradorService,
+    private descentForoService : DescentForoService){
     this.solicitud = {
       nombre: ''
     }
   }
 
   onSubmit(){
-
+    let miDiscusion = this.descentForoService.getDiscusionActual()
+    // con esto tenemos ya el id de la discusion para meter en el http
+      
+    
   }
 
   volver(){
-    this.router.navigate([''])
+    let juego = this.currentUserService.getJuegoActual()
+    this.router.navigate([juego + '/foros'])
   }
 }

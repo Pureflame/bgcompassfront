@@ -34,7 +34,7 @@ export class MenuComponent {
     private router: Router,
     private _routeParams: ActivatedRoute){
 
-      this.juegosListaActiva = this.navegacionService.partida;
+      this.juegosListaActiva = true;
       this.forosListaActiva = this.navegacionService.foro;
 
       this.juegosListaActivaRuta = _routeParams.snapshot.params['partida'];
@@ -50,8 +50,15 @@ export class MenuComponent {
     
   }
   ngOnInit(){
-
-
+    console.log(this.juegosListaActiva)
+    console.log(this.forosListaActiva)
+    this.currentUserService.setCurrentUser("dd","usuario","dd")
+    this.navegacionService.navegadorUsuarioConSesion()
+/*
+    console.log(this.navegacionService.sinSesion)
+    console.log(this.navegacionService.conSesionUsuario)
+  console.log(this.navegacionService.admin)
+*/
     
  /*   this.comprobarNavegacion();
     console.log("funciono2")
@@ -122,21 +129,28 @@ listar(){
 
   partidasDescent(){
     this.router.navigate(['descent/partidas'])
+    this.currentUserService.setJuegoActual("descent");
   }
   forosDescent(){
     this.router.navigate(['descent/foros'])
+    this.currentUserService.setJuegoActual("descent");
+  }
+
+  partidasGloomhaven(){
+    this.router.navigate(['gloomhaven/partidas'])
+    this.currentUserService.setJuegoActual("gloomhaven");
+  }
+  forosGloomhaven(){
+    this.router.navigate(['gloomhaven/foros'])
+    this.currentUserService.setJuegoActual("gloomhaven");
   }
 
   comprobarNavegacion(){
-    console.log("funciono")
-
-    console.log(this.navegacionService.partida)
-    console.log(this.navegacionService.foro)
 
     if(this.navegacionService.partida == true && this.navegacionService.foro == false){
       this.juegosListaActiva = true;
       this.forosListaActiva = false;
-    } else {
+    } else if (this.navegacionService.partida == false && this.navegacionService.foro == true) {
       this.juegosListaActiva = false;
       this.forosListaActiva = true;
     }

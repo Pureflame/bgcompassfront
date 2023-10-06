@@ -13,12 +13,13 @@ export class NavegacionComponent {
   public admin : boolean
 
   constructor(private navegacionService: NavegacionService){
-    this.sinSesion = this.navegacionService.sinSesion;
-    this.conSesionUsuario = this.navegacionService.conSesionUsuario;
-    this.admin = this.navegacionService.admin;
+    this.sinSesion = false;
+    this.conSesionUsuario = false;
+    this.admin = false;
   }
 
   ngInit(){
+    
   }
 
   irPartida(){
@@ -40,6 +41,10 @@ export class NavegacionComponent {
   }
 
   ngDoCheck() { 
+    
+    console.log("miro")
+
+
     this.sinSesion = this.navegacionService.sinSesion;
     this.conSesionUsuario = this.navegacionService.conSesionUsuario;
     this.admin = this.navegacionService.admin;
