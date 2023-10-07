@@ -1,1 +1,48 @@
-<p>registro-administrador works!</p>
+<body>
+	<div class="container">
+		<button (click)="volver()" class = "buttonVolver">{{"Volver" | translate}}</button>
+
+		<div class="containerForm">
+			<div class="registroTitulo">
+				<span>{{"CREACIÓN DE ADMINISTRADOR" | translate}}</span>
+			</div>
+			<div class="registro">
+				<form (ngSubmit)="onSubmit()" #ngForm="ngForm">
+					
+
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
+					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="administrador.correo_admin">
+				</div>
+
+				<div class="inputs">
+					<label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
+					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" [(ngModel)]="administrador.contrasenha_admin">
+				</div>
+
+                <div class="inputs">
+					<label for="chk" aria-hidden="true">{{"Nombre" | translate}}</label>
+					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" [(ngModel)]="administrador.nombre_admin">
+				</div>
+
+                <div class="inputs">
+					<label for="chk" aria-hidden="true">{{"Apellidos" | translate}}</label>
+					<input type="text" name="nombre" placeholder="Apellido" required="" #nombre="ngModel" [(ngModel)]="administrador.apellidos_admin">
+				</div>
+
+                <div class="inputs">
+					<label for="chk" aria-hidden="true">{{"DNI" | translate}}</label>
+					<input type="text" name="nombre" placeholder="12345678A" required="" #nombre="ngModel" [(ngModel)]="administrador.dni_admin">
+				</div>
+
+                <div class="inputs">
+					<label for="chk" aria-hidden="true">{{"Telefono" | translate}}</label>
+					<input type="text" name="nombre" placeholder="+34698123456" required="" #nombre="ngModel" [(ngModel)]="administrador.telefono_admin">
+				</div>
+
+					<button class = "buttonRegistro">{{"Registro" | translate}}</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

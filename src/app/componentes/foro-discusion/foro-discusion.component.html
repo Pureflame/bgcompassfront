@@ -4,7 +4,7 @@
         {{mensaje.nombreUsuario}}
     </div>
 
-    <button *ngIf="adminActivo" (click)="borrarMensaje(mensaje.idMensaje)" class="botonBorrarMensaje">borrar mensaje</button>
+    <button *ngIf="adminActivo" (click)="borrarMensaje(mensaje.idMensaje)" class="botonBorrarMensaje">{{"Borrar mensaje" | translate}}</button>
     
     <div class="discusionTexto">
         <label for="chk" aria-hidden="true">{{mensaje.textoMensaje}}</label>

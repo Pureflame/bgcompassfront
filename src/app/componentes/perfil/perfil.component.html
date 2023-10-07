@@ -5,37 +5,37 @@
 	<div class="container">
 
         <div class="botonesLaterales">
-            <button class="botonLateral" (click)="info()">Mi información</button>
-            <button class="botonLateral" (click)="partidas()">Mis Campañas</button>
-            <button class="botonLateral" (click)="discusiones()">Mis discusiones de foros</button>
-			<button class="botonLateral" (click)="logout()">Cerrar Sesion</button>
+            <button class="botonLateral" (click)="info()">{{"Mi información" | translate}}</button>
+            <button class="botonLateral" (click)="partidas()">{{"Mis Campañas" | translate}}</button>
+            <button class="botonLateral" (click)="discusiones()">{{"Mis discusiones de foros" | translate}}</button>
+			<button class="botonLateral" (click)="logout()">{{"Cerrar Sesión" | translate}}</button>
         </div>
 
-		<button class = "buttonVolver" (click)="volver()">Volver</button>
+		<button class = "buttonVolver" (click)="volver()">{{"Volver" | translate}}</button>
 
 		<div class="containerForm">
 			<div class="perfilTitulo">
-				<span>MI PERFIL</span>
+				<span>{{"MI PERFIL" | translate}}</span>
 			</div>
 
 			<!-- MI INFORMACION -->
 			<div *ngIf="infoActiva" class="perfilInfo">
 				<div class="inputs">
-					<label for="chk" aria-hidden="true">Correo</label>
+					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
 					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitud.email">
 				</div>
 
 				<div class="inputs">
-					<label for="chk" aria-hidden="true">Contraseña</label>
+					<label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
 					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitud.password">
 				</div>
 
 				<div class="inputs">
-					<label for="chk" aria-hidden="true">Nombre de usuario</label>
+					<label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
 					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitud.nombre">
 				</div>
 
-				<button class = "buttonEditarUsuario" (click)="editar()">Editar</button>
+				<button class = "buttonEditarUsuario" (click)="editar()">{{"Editar" | translate}}</button>
 			</div>
 
 			<!-- MIS CAMPAÑAS -->
@@ -53,8 +53,8 @@
 			</div>
 
 			<div *ngIf="chatDiscusionActiva">
-				<button class="crearMensaje" (click)="crearMensaje()">Crear mensaje</button>
-				<button class="crearMensaje" (click)="regresoAlListado()">Volver listado Discusiones</button>
+				<button class="crearMensaje" (click)="crearMensaje()">{{"Crear mensaje" | translate}}</button>
+				<button class="crearMensaje" (click)="regresoAlListado()">{{"Volver listado Discusiones" | translate}}</button>
 	
 				<div *ngFor = "let mensaje of mensajesDiscusion">
                 <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>

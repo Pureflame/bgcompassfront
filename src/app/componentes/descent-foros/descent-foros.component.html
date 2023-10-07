@@ -1,13 +1,13 @@
 <body>
 
     <div class="partidasTitulo">
-        <span>Foro de Descent</span>
+        <span>{{"Foro de Descent" | translate}}</span>
     </div>
 
 	<div class="container">
 
-		<button class = "buttonVolver" (click)="volver()">Volver al menu</button>
-        <button class = "buttonVolver" (click)="crearDiscusion()">Crear nueva discusión</button>
+		<button class = "buttonVolver" (click)="volver()">{{"Volver al menu" | translate}}</button>
+        <button class = "buttonVolver" (click)="crearDiscusion()">{{"Crear nueva discusión" | translate}}</button>
 
 		<div class="containerForm">
 
@@ -21,8 +21,8 @@
 
 
         <div *ngIf="chatDiscusionActiva">
-            <button class="crearMensaje" (click)="crearMensaje()">Crear mensaje</button>
-            <button class="crearMensaje" (click)="regresoAlListado()">Volver listado Discusiones</button>
+            <button class="crearMensaje" (click)="crearMensaje()">{{"Crear mensaje" | translate}}</button>
+            <button class="crearMensaje" (click)="regresoAlListado()">{{"Volver listado Discusiones" | translate}}</button>
 
             <div *ngFor = "let mensaje of mensajesDiscusion">
                 <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>

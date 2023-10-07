@@ -53,7 +53,7 @@ export class MenuComponent {
     console.log(this.juegosListaActiva)
     console.log(this.forosListaActiva)
     this.currentUserService.setCurrentUser("dd","usuario","dd")
-    this.navegacionService.navegadorUsuarioConSesion()
+    this.navegacionService.navegadorUsuarioSinSesion()
 /*
     console.log(this.navegacionService.sinSesion)
     console.log(this.navegacionService.conSesionUsuario)

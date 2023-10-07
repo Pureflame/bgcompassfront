@@ -13,7 +13,7 @@ import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { RegistroUsuarioComponent } from './componentes/registro-usuario/registro-usuario.component';
 import { RegistroAdministradorComponent } from './componentes/registro-administrador/registro-administrador.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { PerfilPartidasComponent } from './componentes/perfil-partidas/perfil-partidas.component';
 import { PerfilDiscusionesComponent } from './componentes/perfil-discusiones/perfil-discusiones.component';
 import { PerfilEditarComponent } from './componentes/perfil-editar/perfil-editar.component';
@@ -26,7 +26,9 @@ import { PartidaCrearComponent } from './componentes/partida-crear/partida-crear
 import { ForoDiscusionComponent } from './componentes/foro-discusion/foro-discusion.component';
 import { ForoMensajeCrearComponent } from './componentes/foro-mensaje-crear/foro-mensaje-crear.component';
 import { ForoDiscusionCrearComponent } from './componentes/foro-discusion-crear/foro-discusion-crear.component';
-
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -57,9 +59,35 @@ import { ForoDiscusionCrearComponent } from './componentes/foro-discusion-crear/
     FormsModule,
     HttpClientModule,
     MatGridListModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
     routing
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule { 
+  constructor(public translate: TranslateService){
+    translate.addLangs(['es','en']);
+    this.translate.setDefaultLang('es');
+  }
+  cambiarIdioma(){
+    if(this.translate.currentLang === 'es'){
+      this.translate.use('en');
+    } else if (this.translate.currentLang === 'en'){
+      this.translate.use('es');
+    }
+  }
+}
+
+export function httpTranslateLoader(http: HttpClient) {
+
+  return new TranslateHttpLoader(http);
+ 
+ }

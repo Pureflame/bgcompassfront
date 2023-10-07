@@ -1,20 +1,20 @@
 <body>
 	<div class="container">
-		<button class = "buttonVolver" (click)="volver()">Volver</button>
+		<button class = "buttonVolver" (click)="volver()">{{"Volver" | translate}}</button>
 
 		<div class="containerForm">
 			<div class="registroTitulo">
-				<span>CREACIÓN DE MENSAJE</span>
+				<span>{{"CREACIÓN DE MENSAJE" | translate}}</span>
 			</div>
 			<div class="registro">
 				<form (ngSubmit)="onSubmit()" #ngForm="ngForm">
 			
                     <div class="inputs">
-                        <label for="chk" aria-hidden="true">Texto del Mensaje</label>
+                        <label for="chk" aria-hidden="true">{{"Texto del Mensaje" | translate}}</label>
                         <input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" [(ngModel)]="solicitud.nombre">
                     </div>
 
-					<button class = "buttonCreacion">Crear Mensaje</button>
+					<button class = "buttonCreacion">{{"Crear Mensaje" | translate}}</button>
 				</form>
 			</div>
 		</div>

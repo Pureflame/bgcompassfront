@@ -3,7 +3,7 @@
 
     <!-- LISTA DE JUEGOS -->
     <div *ngIf="juegosListaActiva" class="cont">
-        <p class="campañasTitulo">CAMPAÑAS</p>
+        <p class="campañasTitulo">{{'CAMPAÑAS' | translate}}</p>
         <mat-grid-list  cols="2" rowHeight="3:1">
             <mat-grid-tile *ngFor = "let juego of listaJuegos">
                     <app-menu-juegos 
@@ -16,7 +16,7 @@
 
     <!-- LISTA DE FOROS -->
     <div *ngIf="forosListaActiva">
-        <p class="campañasTitulo">FOROS</p>
+        <p class="campañasTitulo">{{"FOROS" | translate}}</p>
         <mat-grid-list  cols="2" rowHeight="3:1">
             <mat-grid-tile *ngFor = "let juego of listaJuegos">
                 <app-menu-foros 
