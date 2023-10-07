@@ -9,7 +9,7 @@ import { CurrentUserService } from 'src/app/Services/current-user.service';
 })
 export class PerfilPartidasComponent {
   
-@Input() public nombre: any
+@Input() public partida: any
 @Input() public rutaNombreJuego: any
 
 /*
@@ -27,7 +27,7 @@ constructor(private router: Router, private currentUserService: CurrentUserServi
 
   ngOnInit(){
     console.log("entro")
-    console.log(this.nombre)
+    console.log(this.partida)
     //this.rutaNombreJuego = this.currentUserService.getJuegoActual();
   }
 

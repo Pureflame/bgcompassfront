@@ -12,7 +12,7 @@ export class DescentPartidasComponent {
 
   
 
-  public nombres : any;
+  public partidas : any;
 
   public solicitud: any;
   errorMessage?: string;
@@ -27,7 +27,7 @@ export class DescentPartidasComponent {
 
     
     
-    this.nombres = [
+    this.partidas = [
       {nombreCampanha:"nombrecampaña1", nombreJuego: "Descent"},
       {nombreCampanha:"nombrecampaña2", nombreJuego: "Descent"}
     ];

@@ -1,4 +1,4 @@
-<div class="perfilInfo">
+<div *ngIf="soyUsuario" class="perfilInfo">
                         
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
@@ -7,4 +7,36 @@
 
     <button class = "buttonRetroceso" (click)="retroceder()">{{"Volver" | translate}}</button>
     <button class = "buttonEditarUsuario" (click)="editarUsuario()">{{"Confirmar Edición" | translate}}</button>
+</div>
+
+<div *ngIf="soyAdmin" class="perfilInfo">
+                        
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
+        <input type="email" #correo="ngModel" [(ngModel)]="administrador.correo_admin">
+    </div>
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
+        <input type="password" #password="ngModel" [(ngModel)]="administrador.contrasenha_admin">
+    </div>
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
+        <input type="text" #nombre="ngModel" [(ngModel)]="administrador.nombre_admin">
+    </div>
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">{{"Apellidos" | translate}}</label>
+        <input type="text" #apellidos="ngModel" [(ngModel)]="administrador.apellidos_admin">
+    </div>
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">{{"DNI" | translate}}</label>
+        <input type="text" #dni="ngModel" [(ngModel)]="administrador.dni_admin">
+    </div>
+
+    <div class="inputs">
+        <label for="chk" aria-hidden="true">{{"Telefono" | translate}}</label>
+        <input type="text" #telefono="ngModel" [(ngModel)]="administrador.telefono_admin">
+    </div>
+
+    <button class = "buttonRetroceso" (click)="retrocederAdmin()">{{"Volver" | translate}}</button>
+    <button class = "buttonEditarUsuario" (click)="editarAdmin()">{{"Confirmar Edición" | translate}}</button>
 </div>

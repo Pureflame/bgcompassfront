@@ -18,7 +18,8 @@
 				<span>{{"MI PERFIL" | translate}}</span>
 			</div>
 
-			<!-- MI INFORMACION -->
+			
+			<!-- MI INFORMACION USUARIO -->
 			<div *ngIf="infoActiva" class="perfilInfo">
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
@@ -38,10 +39,45 @@
 				<button class = "buttonEditarUsuario" (click)="editar()">{{"Editar" | translate}}</button>
 			</div>
 
+			<!-- MI INFORMACION ADMINISTRADOR -->
+			<div *ngIf="adminInfoActiva" class="perfilInfo">
+				<div class="inputsAdmin">
+					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
+					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="administrador.correo_admin">
+				</div>
+
+				<div class="inputsAdmin">
+					<label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
+					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" readonly="readonly" [(ngModel)]="administrador.contrasenha_admin">
+				</div>
+
+				<div class="inputsAdmin">
+					<label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
+					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="administrador.nombre_admin">
+				</div>
+
+				<div class="inputsAdmin">
+					<label for="chk" aria-hidden="true">{{"Apellidos" | translate}}</label>
+					<input type="text" name="apellido" placeholder="Apellido" required="" #apellidos="ngModel" readonly="readonly" [(ngModel)]="administrador.apellidos_admin">
+				</div>
+
+				<div class="inputsAdmin">
+					<label for="chk" aria-hidden="true">{{"DNI" | translate}}</label>
+					<input type="text" name="dni" placeholder="12345678A" required="" #dni="ngModel" readonly="readonly" [(ngModel)]="administrador.dni_admin">
+				</div>
+
+				<div class="inputsAdmin">
+					<label for="chk" aria-hidden="true">{{"Telefono" | translate}}</label>
+					<input type="text" name="telefono" placeholder="+34698123456" required="" #telefono="ngModel" readonly="readonly" [(ngModel)]="administrador.telefono_admin">
+				</div>
+
+				<button class = "buttonEditarUsuario" (click)="editar()">{{"Editar" | translate}}</button>
+			</div>
+
 			<!-- MIS CAMPAÑAS -->
 			<div *ngIf="partidaActiva">
-				<div *ngFor = "let nombre of nombres">
-					<app-perfil-partidas [nombre]="nombre" ></app-perfil-partidas>
+				<div *ngFor = "let partida of partidasUsuarioActual">
+					<app-perfil-partidas [partida]="partida" ></app-perfil-partidas>
 				</div>
 			</div>
 
@@ -69,6 +105,13 @@
 			<div *ngIf="editarUsuarioActiva">
 				<div>
 					<app-perfil-editar (retroceso)="retrocederEdicion()" [usuario]="usuario" ></app-perfil-editar>
+				</div>
+			</div>
+
+			<!-- EDITAR ADMINISTRADOR -->
+			<div *ngIf="editarAdminActiva">
+				<div>
+					<app-perfil-editar (retrocesoAdmin)="retrocederEdicionAdmin()" [administrador]="administrador" ></app-perfil-editar>
 				</div>
 			</div>
 

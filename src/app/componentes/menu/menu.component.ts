@@ -52,8 +52,8 @@ export class MenuComponent {
   ngOnInit(){
     console.log(this.juegosListaActiva)
     console.log(this.forosListaActiva)
-    this.currentUserService.setCurrentUser("dd","usuario","dd")
-    this.navegacionService.navegadorUsuarioSinSesion()
+    this.currentUserService.setCurrentUser("dd","administrador","dd")
+    this.navegacionService.navegadorAdmin()
 /*
     console.log(this.navegacionService.sinSesion)
     console.log(this.navegacionService.conSesionUsuario)
