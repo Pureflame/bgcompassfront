@@ -2,7 +2,7 @@
                         
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
-        <input type="text" #nombre="ngModel" [(ngModel)]="usuario">
+        <input type="text" #nombre="ngModel" [(ngModel)]="solicitud.nombre_usuario">
     </div>
 
     <button class = "buttonRetroceso" (click)="retroceder()">{{"Volver" | translate}}</button>
@@ -13,28 +13,28 @@
                         
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
-        <input type="email" #correo="ngModel" [(ngModel)]="administrador.correo_admin">
+        <input type="email" #correo="ngModel" [(ngModel)]="solicitudAdmin.correo_admin">
     </div>
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
-        <input type="password" #password="ngModel" [(ngModel)]="administrador.contrasenha_admin">
+        <input type="password" #password="ngModel" [(ngModel)]="solicitudAdmin.contrasenha_admin">
     </div>
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
-        <input type="text" #nombre="ngModel" [(ngModel)]="administrador.nombre_admin">
+        <input type="text" #nombre="ngModel" [(ngModel)]="solicitudAdmin.nombre_admin">
     </div>
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Apellidos" | translate}}</label>
-        <input type="text" #apellidos="ngModel" [(ngModel)]="administrador.apellidos_admin">
+        <input type="text" #apellidos="ngModel" [(ngModel)]="solicitudAdmin.apellidos_admin">
     </div>
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"DNI" | translate}}</label>
-        <input type="text" #dni="ngModel" [(ngModel)]="administrador.dni_admin">
+        <input type="text" #dni="ngModel" [(ngModel)]="solicitudAdmin.dni_admin">
     </div>
 
     <div class="inputs">
         <label for="chk" aria-hidden="true">{{"Telefono" | translate}}</label>
-        <input type="text" #telefono="ngModel" [(ngModel)]="administrador.telefono_admin">
+        <input type="text" #telefono="ngModel" [(ngModel)]="solicitudAdmin.telefono_admin">
     </div>
 
     <button class = "buttonRetroceso" (click)="retrocederAdmin()">{{"Volver" | translate}}</button>

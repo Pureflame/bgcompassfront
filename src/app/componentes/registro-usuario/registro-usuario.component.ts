@@ -26,9 +26,10 @@ export class RegistroUsuarioComponent {
 
   constructor(private http:HttpClient, private router: Router, private currentUserService: CurrentUserService, private adminService: AdministradorService){
     this.solicitud = {
-      email: '',
-      password: '',
-      nombre: ''
+      correo_usuario: '',
+      contrasenha_usuario: '',
+      nombre_usuario: '',
+      tipo_usuario: 'usuario'
     }
   }
 
@@ -36,7 +37,8 @@ export class RegistroUsuarioComponent {
   ngOnInit(){}
 
   onSubmit(){
-    return this.http.post('http://127.0.0.1:8000/api/login', this.solicitud, {headers: this.headersAdd}).subscribe({
+    console.log(this.solicitud)
+    return this.http.post('http://127.0.0.1:8000/api/usuario-registro/usuario', this.solicitud, {headers: this.headersAdd}).subscribe({
       next: (result)=>{
         this.datos = result;
 
@@ -47,6 +49,7 @@ export class RegistroUsuarioComponent {
       },
       error: (error)=>{console.log(error)}
     })
+    
 
   }
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { NavegacionService } from 'src/app/Services/navegacion.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class NavegacionComponent {
 
   constructor(
     private navegacionService: NavegacionService,
+    private currentUserService: CurrentUserService,
     private translate: TranslateService){
     this.sinSesion = false;
     this.conSesionUsuario = false;
@@ -25,7 +27,7 @@ export class NavegacionComponent {
   ngInit(){
   }
   cambiarIdioma(){
-    console.log(this.translate.currentLang)
+    //console.log(this.translate.currentLang)
     if(this.translate.currentLang === 'en' || this.translate.currentLang === undefined){
       this.translate.use('es');
     } else if (this.translate.currentLang === 'es'){
@@ -56,10 +58,25 @@ export class NavegacionComponent {
       this.translate.use('es');
     }
 
+    if(this.currentUserService.getCurrentUserType() === "usuario"){
+      this.conSesionUsuario = true;
+      this.sinSesion = false;
+      this.admin = false;
+    } else if (this.currentUserService.getCurrentUserType() === "administrador"){
+      this.admin = true;
+      this.sinSesion = false;
+      this.conSesionUsuario = false;
+    } else {
+      this.sinSesion = true;
+      this.conSesionUsuario = false;
+      this.admin = false;
+    }
 
+    /*
     this.sinSesion = this.navegacionService.sinSesion;
     this.conSesionUsuario = this.navegacionService.conSesionUsuario;
     this.admin = this.navegacionService.admin;
+    */
   }
 
 }

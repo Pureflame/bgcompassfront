@@ -1,12 +1,12 @@
 <div class="lista">
     <div class="campañaNombreTexto">
-        <label for="chk" aria-hidden="true">{{partida.nombreCampanha}}</label>
+        <label for="chk" aria-hidden="true">{{partida.nombre_partida}}</label>
     </div>
 
     <div class="campañaJuegoTexto">
-        <label for="chk" aria-hidden="true">{{partida.nombreJuego}}</label>
+        <label for="chk" aria-hidden="true">{{partida.nombre_imagen}}</label>
     </div>
 
-    <button class="buttonVer" (click)="verDatos(partida.nombreJuego)">{{"Ver" | translate}}</button>
+    <button class="buttonVer" (click)="verDatos(partida.nombre_imagen)">{{"Ver" | translate}}</button>
 </div>
 

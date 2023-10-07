@@ -12,17 +12,17 @@
 
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
-					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="solicitud.email">
+					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="solicitud.correo_usuario">
 				</div>
 
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
-					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" [(ngModel)]="solicitud.password">
+					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" [(ngModel)]="solicitud.contrasenha_usuario">
 				</div>
 
                 <div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
-					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" [(ngModel)]="solicitud.nombre">
+					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" [(ngModel)]="solicitud.nombre_usuario">
 				</div>
 
 					<button class = "buttonRegistro">{{"Registro" | translate}}</button>

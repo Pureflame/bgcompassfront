@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/Models/usuario';
 import { Administrador } from 'src/app/Models/administrador';
 import {Router} from "@angular/router"
 import { DescentForoService } from 'src/app/Services/descentForo.service';
+import { DescentPartidaService } from 'src/app/Services/descentPartida.service';
 
 
 @Component({
@@ -34,17 +35,17 @@ export class PerfilComponent {
 
   public chatDiscusionActiva : boolean
 
-  public usuario;
+  public usuarioNombre;
 
   // lista de campañas del usuario actual
-  public partidasUsuarioActual;
+  public partidasUsuarioActual: any[];
 
-  public listadiscusiones;
+  public listadiscusiones: any[];
   public mensajes;
   public mensajesDiscusion : any[]
 
   public administrador: any;
-  public solicitud: any;
+  public usuario: any;
 
   errorMessage?: string;
   
@@ -57,12 +58,17 @@ export class PerfilComponent {
     private router: Router, 
     private currentUserService: CurrentUserService, 
     private adminService: AdministradorService,
-    private descentForoService: DescentForoService){
+    private descentForoService: DescentForoService,
+    private descentPartidaService: DescentPartidaService,
+    private usuarioService: UsuarioService){
 
-    this.solicitud = {
-      email: '',
-      password: ''
+    this.usuario = {
+      id:"",
+      correo_usuario:"",
+      nombre_usuario:"",
+      contrasenha_usuario:""
     }
+
     this.infoActiva = false;
     this.adminInfoActiva = false;
     this.partidaActiva = false;
@@ -77,17 +83,21 @@ export class PerfilComponent {
     this.mensajesDiscusion = []
     
     // CAMPAÑAS DEL USUARIO ACTUAL
+    this.partidasUsuarioActual = []
+    /*
     this.partidasUsuarioActual = [
       {nombreCampanha:"nombrecampaña1", nombreJuego: "Descent"},
       {nombreCampanha:"nombrecampaña2", nombreJuego: "Descent"}
     ];
+    */
 
     // DISCUSIONES DEL USUARIO ACTUAL
-    this.listadiscusiones = [
+    this.listadiscusiones = []
+    /*this.listadiscusiones = [
       {idConversacion:"1", nombreUsuario:"titulo de la discusion", nombreDiscusion:"nombreUsuario1"},
       {idConversacion:"2", nombreUsuario:"titulo de la discusion2", nombreDiscusion:"nombreUsuario2"}
     ];
-
+*/
     // MENSAJES DEL USUARIO ACTUAL
     this.mensajes = [
       {idMensaje:"1", idConversacion:"1", nombreUsuario:"nombreUsuario1", textoMensaje: "mensaje1"},
@@ -105,7 +115,7 @@ export class PerfilComponent {
       tipo_usuario:"admin"
     }
 
-    this.usuario = "nombre usuario aqui";
+    this.usuarioNombre = "nombre usuario aqui";
   }
 
   ngOnInit(){
@@ -113,14 +123,78 @@ export class PerfilComponent {
       //this.adminInfoActiva = true;
       this.editarAdminActiva = true;
       this.infoActiva = false;
+
+
+// QUEDAN LAS URL DEL ADMIN
+
+
+
     } else {
       this.adminInfoActiva = false;
       this.infoActiva = true;
+
+      this.usuarioService.getUsuarioDatos(
+        this.currentUserService.getCurrentUserId()!, 
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              this.usuario['id'] = result["data"]["id"];
+              this.usuario['correo_usuario'] = result["data"]["correo_usuario"];
+              this.usuario['nombre_usuario'] = result["data"]["nombre_usuario"];
+              this.usuario['contrasenha_usuario'] = result["data"]["contrasenha_usuario"];
+            },
+            error: (error)=>{console.log(error)}
+          })
+
+
+      // LISTAR TODAS LAS PARTIDAS DEL USUARIO
+      this.descentPartidaService.listarPartidasDescent(
+        this.currentUserService.getCurrentUserId()!, 
+        this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+        next: (result)=>{
+
+          let counter = 0
+          while(result.data[counter] !== undefined){
+            this.partidasUsuarioActual[counter] = result.data[counter]; 
+            counter++;
+          }
+          //console.log(this.partidasUsuarioActual)
+          counter = 0;
+        },
+        error: (error)=>{console.log(error)}
+      })
+
+      // LISTAR TODAS LAS DISCUSIONES DEL USUARIO
+      this.descentForoService.listarDiscusionesUsuarioForoDescent(
+        this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+        next: (result)=>{
+
+          let counter = 0
+          while(result.data[counter] !== undefined){
+            this.listadiscusiones[counter] = result.data[counter]; 
+            counter++;
+          }
+          console.log(this.listadiscusiones)
+          counter = 0;
+        },
+        error: (error)=>{console.log(error)}
+      })
+
+
+
     }
 
-  }
-  
-  onSubmit(){
+    /*
+        this.listadiscusiones = [
+      {idConversacion:"1", nombreUsuario:"titulo de la discusion", nombreDiscusion:"nombreUsuario1"},
+      {idConversacion:"2", nombreUsuario:"titulo de la discusion2", nombreDiscusion:"nombreUsuario2"}
+    ];
+ */
+
+
+    
 
   }
 
@@ -193,6 +267,8 @@ export class PerfilComponent {
   
   logout(){
     console.log("cerramos sesion")
+    this.currentUserService.logoutCurrentUser()
+    this.router.navigate([''])
   }
 
   entrarDiscusion(discusion:any){

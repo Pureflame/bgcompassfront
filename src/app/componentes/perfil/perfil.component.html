@@ -23,17 +23,17 @@
 			<div *ngIf="infoActiva" class="perfilInfo">
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
-					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitud.email">
+					<input type="email" name="email" placeholder="Email" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="usuario.correo_usuario">
 				</div>
 
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
-					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitud.password">
+					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" readonly="readonly" [(ngModel)]="usuario.contrasenha_usuario">
 				</div>
 
 				<div class="inputs">
 					<label for="chk" aria-hidden="true">{{"Nombre de usuario" | translate}}</label>
-					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitud.nombre">
+					<input type="text" name="nombre" placeholder="Nombre" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="usuario.nombre_usuario">
 				</div>
 
 				<button class = "buttonEditarUsuario" (click)="editar()">{{"Editar" | translate}}</button>

@@ -44,9 +44,9 @@ export class DescentPartidaService {
 
 
     // Usuario - Listar Partidas de Descent
-    public listarPartidasDescent(id:number, token:string):Observable<any> {
+    public listarPartidasDescent(id:string, token:string):Observable<any> {
         this.prepararHeader(token)
-        console.log(this.headersAddWithToken)
+        //console.log(this.headersAddWithToken)
         return this.http.get(this.url + "descent/partidas/" + id, {headers: this.headersAddWithToken});
     }
 

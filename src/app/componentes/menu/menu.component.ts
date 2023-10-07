@@ -50,10 +50,23 @@ export class MenuComponent {
     
   }
   ngOnInit(){
+    console.log("comprobamos lista activa")
     console.log(this.juegosListaActiva)
-    console.log(this.forosListaActiva)
-    this.currentUserService.setCurrentUser("dd","administrador","dd")
-    this.navegacionService.navegadorAdmin()
+    //console.log(this.forosListaActiva)
+
+   /*
+    if(this.currentUserService.getCurrentUserType() === "usuario" ||
+    this.currentUserService.getCurrentUserType() === "administrador"){
+      console.log("hay un usuario!!!!!")
+      console.log(this.currentUserService.getCurrentUserEmail())
+      console.log(this.currentUserService.getCurrentUserToken())
+    } else{
+      console.log("no hay un usuario")
+    }
+    */
+   
+    //this.currentUserService.setCurrentUser("dd","usuario","dd")
+    //this.navegacionService.navegadorAdmin()
 /*
     console.log(this.navegacionService.sinSesion)
     console.log(this.navegacionService.conSesionUsuario)
@@ -110,16 +123,18 @@ listar(){
 //console.log(this.currentUserService.getCurrentUserToken())
 
   this.descentService.listarPartidasDescent(
-    this.id, 
+    this.currentUserService.getCurrentUserId()!, 
     this.currentUserService.getCurrentUserToken()!
     ).subscribe(
       {
         next: (result)=>{
           let aux = result
-          console.log(aux)
-          console.log(aux["data"]["0"]["nombre_partida"])
+          //console.log(aux)
+          //console.log(aux["data"]["0"]["nombre_partida"])
         },
-        error: (error)=>{console.log(error)}
+        error: (error)=>{
+          console.log("hay un error")
+          console.log(error)}
       }
       )
     

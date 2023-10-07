@@ -102,7 +102,7 @@
 
                         <button class="buttonDeleteHeroe" (click)="borrarHeroe(i)">{{"Borrar Heroe" | translate}}</button>
 
-                        <div  class="inputsCortos">
+                        <div  class="inputsCortosHeroe">
                             <label for="chk" aria-hidden="true">{{"Héroe" | translate}}</label>
                             <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i].nombreHeroe">
                                 <option *ngFor="let heroeIndividual of solicitudListaHeroes" [ngValue]="heroeIndividual">
@@ -111,14 +111,7 @@
                             </select>
                         </div>
         
-                        <div  class="inputsCortos">
-                            <label for="chk" aria-hidden="true">{{"Clase" | translate}}</label>
-                            <select class="selectHeroe" name="claseIndividual" [(ngModel)]="solicitudHeroes[i].claseHeroe">
-                                <option *ngFor="let claseIndividual of solicitudListaClases" [ngValue]="claseIndividual">
-                                    {{claseIndividual}}
-                                </option>
-                            </select>
-                        </div>
+
     
     
     

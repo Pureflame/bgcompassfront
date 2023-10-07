@@ -20,7 +20,6 @@ export class DescentPartidaDatosComponent {
   public solicitudListaHabilidades: any;
   public solicitudListaEquipamiento: any;
   public solicitudListaHeroes: any;
-  public solicitudListaClases: any;
 
   public cartaAdd: string
   public itemAdd: string
@@ -39,13 +38,11 @@ export class DescentPartidaDatosComponent {
     this.solicitudHeroes = [
       {
         nombreHeroe: "heroe1",
-        claseHeroe: "clase1",
         equipamientoHeroe: ['espada1','casco1'],
         habilidadesHeroe: ['habilidad1', 'habilidad2', 'habilidad3']
       },
       {
         nombreHeroe: "heroe2",
-        claseHeroe: "clase2",
         equipamientoHeroe: ['espada2','casco2'],
         habilidadesHeroe: ['habilidad4', 'habilidad5', 'habilidad6']
       },
@@ -54,7 +51,6 @@ export class DescentPartidaDatosComponent {
     this.solicitudListaEquipamiento = ['espada1','casco1', 'espada2','casco2']
     this.solicitudListaHabilidades = ['habilidad1', 'habilidad2', 'habilidad3', 'habilidad4', 'habilidad5', 'habilidad6']
     this.solicitudListaHeroes = ['heroe1','heroe2', 'heroe3','heroe4']
-    this.solicitudListaClases = ['clase1', 'clase2', 'clase3', 'clase4']
       
     this.datosGeneralesActiva = false;
     this.datosHeroeActiva = false;
@@ -143,7 +139,6 @@ export class DescentPartidaDatosComponent {
     if(this.solicitudHeroes.length < 4){
       let heroeDefault = {
         nombreHeroe: "heroe1",
-        claseHeroe: "clase1",
         equipamientoHeroe: ['espada1'],
         habilidadesHeroe: ['habilidad1']
       }

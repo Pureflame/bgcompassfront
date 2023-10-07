@@ -15,9 +15,10 @@ export class CurrentUserService {
     public url = "http://127.0.0.1:8000/api/";
     public headersAddWithToken = new HttpHeaders();
     
-    private currentUser: string = ""
-    private typeUser: string = ""
-    private emailUser: string = ""
+    private currentUser: string = "";
+    private typeUser: string = "";
+    private emailUser: string = "";
+    private userId: string = "";
     private juegoActual: string;
 
     private administradoresDB :Array<Administrador> =[]
@@ -103,10 +104,15 @@ export class CurrentUserService {
         return sessionStorage.getItem("userActivoEmail")
     }
 
-    public setCurrentUser(token:string, typeUser:string, email:string):void {
+    public getCurrentUserId(){
+        return sessionStorage.getItem("id")
+    }
+
+    public setCurrentUser(token:string, typeUser:string, email:string, id:string):void {
         this.currentUser = token;
         this.typeUser = typeUser;
         this.emailUser = email;
+        this.userId = id;
 
         //this.userTypeCurrentUser(id)
         sessionStorage.removeItem("userActivoToken")
@@ -117,16 +123,21 @@ export class CurrentUserService {
 
         sessionStorage.removeItem("userActivoEmail")
         sessionStorage.setItem("userActivoEmail", email)
+
+        sessionStorage.removeItem("id")
+        sessionStorage.setItem("id", id)
     }
 
     public logoutCurrentUser():void {
         this.currentUser = "";
         this.typeUser = "";
         this.emailUser = "";
+        this.userId = "";
 
         sessionStorage.removeItem("userActivoToken")
         sessionStorage.removeItem("userActivoTipo")
         sessionStorage.removeItem("userActivoEmail")
+        sessionStorage.removeItem("id")
     }
 
     public getActualUserData(correo:string, token:string):Observable<any>{
@@ -141,6 +152,16 @@ export class CurrentUserService {
 
     public getJuegoActual(){
         return this.juegoActual;
+    }
+
+    public actualizarDatosUsuario(nombre:any,id:string,token:string):Observable<any>{
+        this.prepararHeader(token)
+        return this.http.put(this.url + "usuario-perfil/usuario/actualizar/"+id, nombre ,{headers: this.headersAddWithToken});
+    }
+
+    public actualizarDatosAdmin(nombre:any,id:string,token:string):Observable<any>{
+        this.prepararHeader(token)
+        return this.http.put(this.url + "usuario-perfil/administrador/actualizar/"+id, nombre ,{headers: this.headersAddWithToken});
     }
 
 }

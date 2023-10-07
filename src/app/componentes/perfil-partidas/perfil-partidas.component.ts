@@ -26,8 +26,8 @@ constructor(private router: Router, private currentUserService: CurrentUserServi
 }
 
   ngOnInit(){
-    console.log("entro")
-    console.log(this.partida)
+    //console.log("entro")
+    //console.log(this.partida)
     //this.rutaNombreJuego = this.currentUserService.getJuegoActual();
   }
 

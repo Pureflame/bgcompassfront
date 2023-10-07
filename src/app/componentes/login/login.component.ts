@@ -9,6 +9,7 @@ import { UsuarioService } from 'src/app/Services/usuario.service';
 import { Usuario } from 'src/app/Models/usuario';
 import { Administrador } from 'src/app/Models/administrador';
 import {Router} from "@angular/router"
+import { NavegacionService } from 'src/app/Services/navegacion.service';
 
 
 @Component({
@@ -25,7 +26,12 @@ export class LoginComponent {
     'Content-Type': 'application/json'
   });
 
-  constructor(private http:HttpClient, private router: Router, private currentUserService: CurrentUserService, private adminService: AdministradorService){
+  constructor(
+    private http:HttpClient, 
+    private router: Router, 
+    private currentUserService: CurrentUserService,
+    private navegacionService: NavegacionService, 
+    private adminService: AdministradorService){
     this.solicitud = {
       email: '',
       password: ''
@@ -58,13 +64,15 @@ this.adminService.getAdminList().subscribe({
     return this.http.post('http://127.0.0.1:8000/api/login', this.solicitud, {headers: this.headersAdd}).subscribe({
       next: (result)=>{
         this.datos = result;
-        let token = this.datos["data"];
+        let token = this.datos["data"][0];
+        let id = this.datos["data"][1];
         let tipoUsuario = this.datos["mensaje"]
 
-        this.currentUserService.setCurrentUser(token, tipoUsuario, this.solicitud.email);
+        this.currentUserService.setCurrentUser(token, tipoUsuario, this.solicitud.email, id);
+        this.navegacionService.navegadorUsuarioConSesion();
 
-
-        console.log("LOGIN - USUARIO ACTUAL: ");
+        //console.log("LOGIN - USUARIO ACTUAL: ");
+        /*
         this.currentUserService.getActualUserData(
           this.currentUserService.getCurrentUserEmail()!, 
           this.currentUserService.getCurrentUserToken()!
@@ -72,7 +80,7 @@ this.adminService.getAdminList().subscribe({
           next: (result)=>{console.log(result["data"])},
           error: (error)=>{console.log(error)}
         })
-
+*/
 
         //let test:any = this.currentUserService.getCurrentUser()
         //console.log(test);

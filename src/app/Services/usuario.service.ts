@@ -37,7 +37,7 @@ export class UsuarioService {
 
 
 
-    public getUsuarioDatos(id:number, token:string):Observable<any> {
+    public getUsuarioDatos(id:string, token:string):Observable<any> {
         this.prepararHeader(token)
         return this.http.get(this.url + "usuario-perfil/usuario/ver/" + id, {headers: this.headersAddWithToken});
     }

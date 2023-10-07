@@ -139,6 +139,17 @@ body{
 				font-size: 30px;
 			}
 
+
+			.inputsCortosHeroe{
+				/*background-color: gray;*/
+                display: inline-block;
+                width: 55%;
+                
+                margin-top: 20px;
+                margin-left: 20px;
+				font-size: 30px;
+			}
+
             .overlord{
 				/*background-color: gray;*/
                 display: block;

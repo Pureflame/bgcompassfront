@@ -25,7 +25,7 @@ export class MenuJuegosComponent {
   }
 
   ngOnInit(){
-    console.log(this.currentUserService.getCurrentUserType())
+    //console.log(this.currentUserService.getCurrentUserType())
     this.comprobarUsuario()
   }
 
@@ -47,25 +47,21 @@ export class MenuJuegosComponent {
   }
 
   crearPartida(nombre:string){
-    if(this.currentUserService.getCurrentUserType()===""){
-      this.router.navigate(['login'])
-
-    } else {    
+    if(this.currentUserService.getCurrentUserType() === "usuario" ||
+    this.currentUserService.getCurrentUserType() === "administrador"){
+      
       this.currentUserService.setJuegoActual(nombre.toLowerCase());
       this.router.navigate([nombre.toLowerCase() + '/partidas/crear'])
+    } else {    
+      
+      this.router.navigate(['login'])
     }
 
   }
 
   comprobarUsuario(){
-    if(this.currentUserService.getCurrentUserType()===""){
-      console.log("sin sesion")
-      this.menuSinSesion = true;
-      this.menuConSesion = false;
-      this.menuAdmin = false;
-    }
-    else if(this.currentUserService.getCurrentUserType()==="usuario") {
-      console.log("con sesion")
+    if(this.currentUserService.getCurrentUserType()==="usuario") {
+      //console.log("con sesion")
       this.menuSinSesion = false;
       this.menuConSesion = true;
       this.menuAdmin = false;
@@ -73,6 +69,11 @@ export class MenuJuegosComponent {
       this.menuSinSesion = false;
       this.menuConSesion = false;
       this.menuAdmin = true;
+    } else{
+      //console.log("sin sesion")
+      this.menuSinSesion = true;
+      this.menuConSesion = false;
+      this.menuAdmin = false;
     }
   }
 }

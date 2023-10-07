@@ -1,11 +1,11 @@
 <div class="lista">
     <div class="nombreUsuarioMensaje">
-        <label for="chk" aria-hidden="true">{{discusion.nombreUsuario}}</label>
+        <label for="chk" aria-hidden="true">{{discusion[1]}}</label>
     </div>
 
     <div class="discusionTexto">
-        <label for="chk" aria-hidden="true">{{discusion.nombreDiscusion}}</label>
+        <label for="chk" aria-hidden="true">{{discusion[2]}}</label>
     </div>
         
-    <button (click)="discusionIrChat(discusion.idConversacion, discusion.nombreDiscusion)" class="buttonVer">{{"Ver" | translate}}</button>
+    <button (click)="discusionIrChat(discusion[0], discusion[1])" class="buttonVer">{{"Ver" | translate}}</button>
 </div>
