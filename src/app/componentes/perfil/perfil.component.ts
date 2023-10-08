@@ -35,14 +35,18 @@ export class PerfilComponent {
 
   public chatDiscusionActiva : boolean
 
+  public menuLateralUsuario : boolean
+  public menuLateralAdmin : boolean
+
   public usuarioNombre;
 
   // lista de campañas del usuario actual
   public partidasUsuarioActual: any[];
 
   public listadiscusiones: any[];
-  public mensajes;
+  public mensajes: any[];
   public mensajesDiscusion : any[]
+  
 
   public administrador: any;
   public usuario: any;
@@ -57,7 +61,7 @@ export class PerfilComponent {
   constructor(private http:HttpClient, 
     private router: Router, 
     private currentUserService: CurrentUserService, 
-    private adminService: AdministradorService,
+    private administradorService: AdministradorService,
     private descentForoService: DescentForoService,
     private descentPartidaService: DescentPartidaService,
     private usuarioService: UsuarioService){
@@ -80,6 +84,9 @@ export class PerfilComponent {
 
     this.chatDiscusionActiva = false;
 
+    this.menuLateralUsuario = false;
+    this.menuLateralAdmin = false;
+
     this.mensajesDiscusion = []
     
     // CAMPAÑAS DEL USUARIO ACTUAL
@@ -99,13 +106,10 @@ export class PerfilComponent {
     ];
 */
     // MENSAJES DEL USUARIO ACTUAL
-    this.mensajes = [
-      {idMensaje:"1", idConversacion:"1", nombreUsuario:"nombreUsuario1", textoMensaje: "mensaje1"},
-      {idMensaje:"2", idConversacion:"1", nombreUsuario:"nombreUsuario2", textoMensaje: "mensaje2"},
-      {idMensaje:"3", idConversacion:"2", nombreUsuario:"nombreUsuario3", textoMensaje: "mensaje3"}
-    ]
+    this.mensajes = []
 
     this.administrador = {
+      id:"",
       dni_admin:"",
       nombre_admin:"",
       apellidos_admin:"",
@@ -119,20 +123,67 @@ export class PerfilComponent {
   }
 
   ngOnInit(){
+    
+
     if(this.currentUserService.getCurrentUserType() === "administrador"){
-      //this.adminInfoActiva = true;
-      this.editarAdminActiva = true;
+      this.adminInfoActiva = true;
       this.infoActiva = false;
 
+      this.menuLateralUsuario = false;
+      this.menuLateralAdmin = true;
 
-// QUEDAN LAS URL DEL ADMIN
+      // OBTENER INFORMACION DEL ADMINISTRADOR ACTUAL
+      this.administradorService.getAdministradorDatos(
+        this.currentUserService.getCurrentUserId()!, 
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              this.administrador['id'] = result["data"]["id"];
+              this.administrador['dni_admin'] = result["data"]["dni_admin"];
+              this.administrador['nombre_admin'] = result["data"]["nombre_admin"];
+              this.administrador['apellidos_admin'] = result["data"]["apellidos_admin"];
+              this.administrador['contrasenha_admin'] = result["data"]["contrasenha_admin"];
+              this.administrador['correo_admin'] = result["data"]["correo_admin"];
+              this.administrador['telefono_admin'] = result["data"]["telefono_admin"];
+              console.log(this.administrador)
+            },
+            error: (error)=>{console.log(error)}
+          })
+
+        // LISTAR TODAS LAS PARTIDAS DE TODOS LOS JUEGOS
+        this.administradorService.adminListarTodasLasPartidas(
+          this.currentUserService.getCurrentUserToken()!
+          ).subscribe({
+              next: (result)=>{
+                console.log(result.data)
+                console.log(result.data[0])
+                console.log(result.data[0]['id'])
+
+                let counter = 0
+
+                while(result.data[counter] !== undefined){
+                  this.partidasUsuarioActual[counter] = result.data[counter]; 
+                  counter++;
+                }
+
+                console.log(this.partidasUsuarioActual)
+
+              },
+              error: (error)=>{console.log(error)}
+            })
+        // LISTAR TODAS LAS DISCUSIONES DE TODOS LOS JUEGOS
 
 
+          // QUEDAN LAS URL DEL ADMIN
 
     } else {
       this.adminInfoActiva = false;
       this.infoActiva = true;
 
+      this.menuLateralUsuario = true;
+      this.menuLateralAdmin = false;
+
+      // OBTENER INFORMACION DEL USUARIO ACTUAL
       this.usuarioService.getUsuarioDatos(
         this.currentUserService.getCurrentUserId()!, 
         this.currentUserService.getCurrentUserToken()!
@@ -273,6 +324,27 @@ export class PerfilComponent {
 
   entrarDiscusion(discusion:any){
     this.mensajesDiscusion = []
+    this.descentForoService.setDiscusionActual(discusion[0]["discusionId"]);
+
+  //console.log(discusion[0]["discusionId"])
+
+////
+this.descentForoService.listarMensajesDiscusionForoDescent(discusion[0]["discusionId"]).subscribe({
+  next: (result)=>{
+    //console.log("entramos en la discusion")
+    let counter = 0
+    while(result.data[counter] !== undefined){
+      this.mensajesDiscusion[counter] = result.data[counter]; 
+      counter++;
+    }
+    console.log(this.mensajesDiscusion)
+  },
+  error: (error)=>{console.log(error)}
+})
+
+/////
+
+/*
     
     this.mensajes.forEach( (mensaje) => {
       
@@ -283,10 +355,20 @@ export class PerfilComponent {
       
       
     })
-    this.descentForoService.setDiscusionActual(discusion[0].discusionId);
+    */
+    //this.descentForoService.setDiscusionActual(discusion[0].discusionId);
     this.listaDiscusionesActiva = false;
     this.chatDiscusionActiva = true;
+    
   }
+
+/*
+  this.mensajes = [
+    {idMensaje:"1", idConversacion:"1", nombreUsuario:"nombreUsuario1", textoMensaje: "mensaje1"},
+    {idMensaje:"2", idConversacion:"1", nombreUsuario:"nombreUsuario2", textoMensaje: "mensaje2"},
+    {idMensaje:"3", idConversacion:"2", nombreUsuario:"nombreUsuario3", textoMensaje: "mensaje3"}
+  ]
+*/
 
   regresoAlListado(){
     this.listaDiscusionesActiva = true;
@@ -305,6 +387,11 @@ export class PerfilComponent {
   }
 
   crearMensaje(){
+
+    // algo para recordar la discusion del mensaje a crear?
+    // esta puesto al entrar en el chat de la discusion
+    
+
     this.currentUserService.setJuegoActual("descent");
     this.router.navigate(['foros/mensaje/crear'])
   }

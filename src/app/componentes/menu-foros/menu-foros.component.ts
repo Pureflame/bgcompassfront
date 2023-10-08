@@ -26,6 +26,7 @@ export class MenuForosComponent {
   }
 
   ngOnInit(){
+    
     console.log(this.currentUserService.getCurrentUserType())
     this.comprobarUsuario()
   }
@@ -69,14 +70,8 @@ export class MenuForosComponent {
   }
 
   comprobarUsuario(){
-    if(this.currentUserService.getCurrentUserType()===""){
-      console.log("sin sesion")
-      this.menuSinSesion = true;
-      this.menuConSesion = false;
-      this.menuAdmin = false;
-    }
-    else if(this.currentUserService.getCurrentUserType()==="usuario") {
-      console.log("con sesion")
+    if(this.currentUserService.getCurrentUserType()==="usuario") {
+      //console.log("con sesion")
       this.menuSinSesion = false;
       this.menuConSesion = true;
       this.menuAdmin = false;
@@ -84,6 +79,11 @@ export class MenuForosComponent {
       this.menuSinSesion = false;
       this.menuConSesion = false;
       this.menuAdmin = true;
+    } else{
+      //console.log("sin sesion")
+      this.menuSinSesion = true;
+      this.menuConSesion = false;
+      this.menuAdmin = false;
     }
   }
 

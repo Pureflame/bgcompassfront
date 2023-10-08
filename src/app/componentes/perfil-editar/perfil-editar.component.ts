@@ -70,7 +70,6 @@ export class PerfilEditarComponent {
   }
 
   editarUsuario(){
-
     this.currentUserService.actualizarDatosUsuario(
       this.solicitud,
       this.currentUserService.getCurrentUserId()!,
@@ -86,7 +85,8 @@ export class PerfilEditarComponent {
   }
   
   editarAdmin(){
-    this.currentUserService.actualizarDatosUsuario(
+    
+    this.currentUserService.actualizarDatosAdmin(
       this.solicitudAdmin,
       this.currentUserService.getCurrentUserId()!,
       this.currentUserService.getCurrentUserToken()!
@@ -105,6 +105,7 @@ export class PerfilEditarComponent {
       },
       error: (error)=>{console.log(error)}
     })
+    
   }
 
 

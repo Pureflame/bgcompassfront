@@ -12,7 +12,7 @@ import { DescentForoService } from 'src/app/Services/descentForo.service';
 export class DescentForosComponent {
   
 
-  public discusiones;
+  public discusiones: any[];
 
   public mensajes;
   public mensajesDiscusion : any[]
@@ -36,10 +36,7 @@ export class DescentForosComponent {
 
    
     
-    this.discusiones = [
-      {idConversacion:"1", nombreUsuario:"titulo de la discusion", nombreDiscusion:"nombreUsuario1"},
-      {idConversacion:"2", nombreUsuario:"titulo de la discusion2", nombreDiscusion:"nombreUsuario2"}
-    ];
+    this.discusiones = [];
 
     this.mensajes = [
       {idMensaje:"1", idConversacion:"1", nombreUsuario:"nombreUsuario1", textoMensaje: "mensaje1"},
@@ -53,10 +50,49 @@ export class DescentForosComponent {
   }
 
   ngOnInit(){
-    this.prepararDiscusiones()
+    this.currentUserService.setJuegoActual("descent");
+
+    // Se mira si debemos pedir todas las discusiones o solo las del usuario como el perfil
+    if(this.descentForoService.getMisDiscusiones()){
+
+      this.descentForoService.listarDiscusionesUsuarioForoDescent(
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+          next: (result)=>{
+    
+            let counter = 0
+            while(result.data[counter] !== undefined){
+              this.discusiones[counter] = result.data[counter]; 
+              counter++;
+            }
+            console.log(this.discusiones)
+            counter = 0;
+          },
+          error: (error)=>{console.log(error)}
+        })
+
+    } else if (this.descentForoService.getDiscusionesJuego()) {
+      this.descentForoService.listarDiscusionesForoDescent(
+        ).subscribe({
+          next: (result)=>{
+    
+            let counter = 0
+            while(result.data[counter] !== undefined){
+              this.discusiones[counter] = result.data[counter]; 
+              counter++;
+            }
+            console.log(this.discusiones)
+            counter = 0;
+          },
+          error: (error)=>{console.log(error)}
+        })
+    }
+    
+
+    //this.prepararDiscusiones()
 
     console.log("entramos al foro")
-    this.currentUserService.setJuegoActual("descent");
+    
     this.listaDiscusionesActiva = true;
     
   }
@@ -71,7 +107,23 @@ export class DescentForosComponent {
 
   entrarDiscusion(discusion:any){
     this.mensajesDiscusion = []
-    
+    this.descentForoService.setDiscusionActual(discusion[0]["discusionId"]);
+
+    this.descentForoService.listarMensajesDiscusionForoDescent(discusion[0]["discusionId"]).subscribe({
+      next: (result)=>{
+        //console.log("entramos en la discusion")
+        let counter = 0
+        while(result.data[counter] !== undefined){
+          this.mensajesDiscusion[counter] = result.data[counter]; 
+          counter++;
+        }
+        console.log(this.mensajesDiscusion)
+      },
+      error: (error)=>{console.log(error)}
+    })
+
+
+    /*
     this.mensajes.forEach( (mensaje) => {
       
 
@@ -81,14 +133,23 @@ export class DescentForosComponent {
       
       
     })
+    */
     //console.log(this.mensajesDiscusion)
-    this.descentForoService.setDiscusionActual(discusion[0].discusionId);
+    
     this.listaDiscusionesActiva = false;
     this.chatDiscusionActiva = true;
   }
 
   crearDiscusion(){
-    this.router.navigate(['foros/discusion/crear'])
+    if(this.currentUserService.getCurrentUserType() === "usuario" ||
+    this.currentUserService.getCurrentUserType() === "administrador"){
+      
+      this.router.navigate(['foros/discusion/crear']);
+      
+    } else{
+      this.router.navigate(['login'])
+    }
+    
   }
 
   regresoAlListado(){
@@ -109,8 +170,16 @@ export class DescentForosComponent {
   }
 
   crearMensaje(){
-    this.currentUserService.setJuegoActual("descent");
-    this.router.navigate(['foros/mensaje/crear'])
+    if(this.currentUserService.getCurrentUserType() === "usuario" ||
+    this.currentUserService.getCurrentUserType() === "administrador"){
+      
+      this.currentUserService.setJuegoActual("descent");
+      this.router.navigate(['foros/mensaje/crear']);
+
+    } else{
+      this.router.navigate(['login'])
+    }
+    
   }
 
   prepararDiscusiones(){

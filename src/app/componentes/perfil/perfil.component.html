@@ -4,10 +4,17 @@
 
 	<div class="container">
 
-        <div class="botonesLaterales">
+        <div *ngIf="menuLateralUsuario" class="botonesLaterales">
             <button class="botonLateral" (click)="info()">{{"Mi información" | translate}}</button>
             <button class="botonLateral" (click)="partidas()">{{"Mis Campañas" | translate}}</button>
             <button class="botonLateral" (click)="discusiones()">{{"Mis discusiones de foros" | translate}}</button>
+			<button class="botonLateral" (click)="logout()">{{"Cerrar Sesión" | translate}}</button>
+        </div>
+
+        <div *ngIf="menuLateralAdmin" class="botonesLaterales">
+            <button class="botonLateral" (click)="info()">{{"Mi información" | translate}}</button>
+            <button class="botonLateral" (click)="partidas()">{{"Campañas" | translate}}</button>
+            <button class="botonLateral" (click)="discusiones()">{{"Discusiones de foros" | translate}}</button>
 			<button class="botonLateral" (click)="logout()">{{"Cerrar Sesión" | translate}}</button>
         </div>
 

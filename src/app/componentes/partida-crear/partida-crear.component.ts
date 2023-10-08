@@ -71,8 +71,6 @@ export class PartidaCrearComponent {
           error: (error)=>{console.log(error)}
         })
 
-
-        
         break;
       }
 

@@ -104,7 +104,7 @@
 
                         <div  class="inputsCortosHeroe">
                             <label for="chk" aria-hidden="true">{{"Héroe" | translate}}</label>
-                            <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i].nombreHeroe">
+                            <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][0]">
                                 <option *ngFor="let heroeIndividual of solicitudListaHeroes" [ngValue]="heroeIndividual">
                                     {{heroeIndividual}}
                                 </option>
@@ -134,10 +134,10 @@
                                     </option>
                                 </select>
             
-                                <div class="heroeListado" *ngFor="let item of solicitudHeroes[i].equipamientoHeroe">
+                                <div class="heroeListado" *ngFor="let item of solicitudHeroes[i][3]">
                                     <div *ngIf=item>
                                         <input type="text" name="itemHeroe" required="" value="{{item}}" readonly="readonly" >
-                                        <button class="buttonHeroe" (click)="quitarItem(solicitudHeroes[i].equipamientoHeroe.indexOf(item), i)">{{"Borrar" | translate}}</button>
+                                        <button class="buttonHeroe" (click)="quitarItem(solicitudHeroes[i][3].indexOf(item), i)">{{"Borrar" | translate}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -162,10 +162,10 @@
                                     </option>
                                 </select>
             
-                                <div class="heroeListado" *ngFor="let habilidad of solicitudHeroes[i].habilidadesHeroe">
+                                <div class="heroeListado" *ngFor="let habilidad of solicitudHeroes[i][2]">
                                     <div *ngIf=habilidad>
                                         <input type="text" name="habilidadHeroe" required="" value="{{habilidad}}" readonly="readonly" >
-                                        <button class="buttonHeroe" (click)="quitarHabilidad(solicitudHeroes[i].habilidadesHeroe.indexOf(habilidad), i)">{{"Borrar" | translate}}</button>
+                                        <button class="buttonHeroe" (click)="quitarHabilidad(solicitudHeroes[i][2].indexOf(habilidad), i)">{{"Borrar" | translate}}</button>
                                     </div>
                                 </div>
                             </div>

@@ -18,7 +18,6 @@ export class DescentPartidaService {
     public misPartidas : boolean
     public partidasJuego : boolean
     public todasLasPartidas : boolean
-
     public partidaActualDescent: number
 
     constructor( private http: HttpClient ){
@@ -55,9 +54,21 @@ export class DescentPartidaService {
         return this.http.get(this.url + "descent/cartas/lista", {headers: this.headersAddNoToken});
     }
 
+    public listarHeroesDescent():Observable<any> {
+        return this.http.get(this.url + "descent/heroes/lista", {headers: this.headersAddNoToken});
+    }
+
+    public listarEquipoDescent():Observable<any> {
+        return this.http.get(this.url + "descent/equipo/lista", {headers: this.headersAddNoToken});
+    }
+
+    public listarHabilidadesDescent():Observable<any> {
+        return this.http.get(this.url + "descent/habilidades/lista", {headers: this.headersAddNoToken});
+    }
+
     // Usuario - Crear Partida de Descent
     public crearPartidaDescent(solicitud:any,token:string):Observable<any> {
-        console.log(this.headersAddWithToken)
+        
         this.prepararHeader(token)
         return this.http.post(this.url + "descent/partida", solicitud, {headers: this.headersAddWithToken});
     }
@@ -93,19 +104,25 @@ export class DescentPartidaService {
 
 
     // Usuario - Crear Heroe Partida de Descent
-    public crearHeroePartidaDescent(solicitud:any, idPartida:number, token:string):Observable<any> {
+    public crearHeroePartidaDescent(idPartida:number, token:string):Observable<any> {
         this.prepararHeader(token)
 
         // le falta la solicitud al post?
-        return this.http.post(this.url + "descent/" + idPartida + "/heroes", solicitud, {headers: this.headersAddWithToken});
+        return this.http.post(this.url + "descent/" + idPartida + "/heroes", "", {headers: this.headersAddWithToken});
     }
 
+    // Usuario - Actualizar Heroe Partida de Descent
+    public actualizarTodosHeroePartidaDescent(solicitud:any,idPartida:number, token:string):Observable<any> {
+        this.prepararHeader(token)
+        return this.http.put(this.url + "descent/" + idPartida + "/heroes" , solicitud, {headers: this.headersAddWithToken});
+    }
+/*
     // Usuario - Actualizar Heroe Partida de Descent
     public actualizarHeroePartidaDescent(idPartida:number, idHeroe:number, token:string):Observable<any> {
         this.prepararHeader(token)
         return this.http.put(this.url + "descent/" + idPartida + "/heroes/" + idHeroe , {headers: this.headersAddWithToken});
     }
-    
+*/   
 
     //  - Heroes (todos se muestran juntos en una vista, maximo 4)
     public verHeroePartidaDescent(idPartida:number, token:string):Observable<any> {

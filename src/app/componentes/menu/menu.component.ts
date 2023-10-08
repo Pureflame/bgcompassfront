@@ -35,7 +35,7 @@ export class MenuComponent {
     private _routeParams: ActivatedRoute){
 
       this.juegosListaActiva = true;
-      this.forosListaActiva = this.navegacionService.foro;
+      this.forosListaActiva = false;
 
       this.juegosListaActivaRuta = _routeParams.snapshot.params['partida'];
       this.forosListaActivaRuta = _routeParams.snapshot.params['foro'];
@@ -52,6 +52,7 @@ export class MenuComponent {
   ngOnInit(){
     console.log("comprobamos lista activa")
     console.log(this.juegosListaActiva)
+    console.log(this.forosListaActiva)
     //console.log(this.forosListaActiva)
 
    /*
@@ -166,8 +167,9 @@ listar(){
       this.juegosListaActiva = true;
       this.forosListaActiva = false;
     } else if (this.navegacionService.partida == false && this.navegacionService.foro == true) {
-      this.juegosListaActiva = false;
       this.forosListaActiva = true;
+      this.juegosListaActiva = false;
+      
     }
     
   }

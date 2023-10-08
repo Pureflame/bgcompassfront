@@ -20,7 +20,7 @@
 
     
         <li class="navegador pegarDerecha2"><a (click)="borrarColores()" routerLink="usuario-perfil/usuario/ver">{{"Perfil" | translate}}</a></li>
-        <li class="navegador"><a>{{"Idioma" | translate}}</a></li>
+        <li class="navegador"><a (click)="cambiarIdioma()">{{"Idioma" | translate}}</a></li>
 </ul>
 
 <ul *ngIf="admin">
@@ -45,5 +45,5 @@
         
         <li class="navegador pegarDerecha"><a (click)="borrarColores()" routerLink="usuario-registro/administrador">{{"Crear Admin" | translate}}</a></li>
         <li class="navegador"><a class="crearUsuario" (click)="borrarColores()" routerLink="usuario-perfil/usuario/ver">{{"Perfil" | translate}}</a></li>
-        <li class="navegador"><a>{{"Idioma" | translate}}</a></li>
+        <li class="navegador"><a (click)="cambiarIdioma()">{{"Idioma" | translate}}</a></li>
 </ul>

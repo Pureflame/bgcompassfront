@@ -51,9 +51,9 @@ export class DescentPartidaDatosComponent {
       },
     ]
 */
-    this.solicitudListaEquipamiento = ['espada1','casco1', 'espada2','casco2']
-    this.solicitudListaHabilidades = ['habilidad1', 'habilidad2', 'habilidad3', 'habilidad4', 'habilidad5', 'habilidad6']
-    this.solicitudListaHeroes = ['heroe1','heroe2', 'heroe3','heroe4']
+    this.solicitudListaEquipamiento = []
+    this.solicitudListaHabilidades = []
+    this.solicitudListaHeroes = []
       
     this.datosGeneralesActiva = false;
     this.datosHeroeActiva = false;
@@ -68,7 +68,7 @@ export class DescentPartidaDatosComponent {
     //console.log(this.descentPartidaService.getPartidaActualDescent())
 
 
-
+    // LISTA DE MISIONES
     this.descentPartidaService.listarMisionesDescent().
     subscribe({
       next: (result)=>{
@@ -83,7 +83,8 @@ export class DescentPartidaDatosComponent {
       },
       error: (error)=>{console.log(error)}
     })
-  
+
+    // LISTA DE CARTAS
     this.descentPartidaService.listarCartasDescent().
     subscribe({
       next: (result)=>{
@@ -99,6 +100,7 @@ export class DescentPartidaDatosComponent {
       error: (error)=>{console.log(error)}
     })
 
+    // DATOS GENERALES DE LA PARTIDA
     this.descentPartidaService.verGeneralPartidaDescent(
       this.descentPartidaService.getPartidaActualDescent(),
       this.currentUserService.getCurrentUserToken()!
@@ -117,19 +119,68 @@ export class DescentPartidaDatosComponent {
       error: (error)=>{console.log(error)}
     })
 
+
+    // LISTA DE HEROES
+    this.descentPartidaService.listarHeroesDescent().
+    subscribe({
+      next: (result)=>{
+
+        let counter = 0
+        while(result.data[counter] !== undefined){
+          this.solicitudListaHeroes[counter] = result.data[counter]; 
+          counter++;
+        }
+        //console.log(this.solicitudListaHeroes)
+        counter = 0;
+      },
+      error: (error)=>{console.log(error)}
+    })
+
+    // LISTA DE EQUIPO
+    this.descentPartidaService.listarEquipoDescent().
+    subscribe({
+      next: (result)=>{
+
+        let counter = 0
+        while(result.data[counter] !== undefined){
+          this.solicitudListaEquipamiento[counter] = result.data[counter]; 
+          counter++;
+        }
+        //console.log(this.solicitudListaEquipamiento)
+        counter = 0;
+      },
+      error: (error)=>{console.log(error)}
+    })
+
+    // LISTA DE HABILIDADES
+    this.descentPartidaService.listarHabilidadesDescent().
+    subscribe({
+      next: (result)=>{
+
+        let counter = 0
+        while(result.data[counter] !== undefined){
+          this.solicitudListaHabilidades[counter] = result.data[counter]; 
+          counter++;
+        }
+        //console.log(this.solicitudListaHabilidades)
+        counter = 0;
+      },
+      error: (error)=>{console.log(error)}
+    })
+    
+    // LISTA DE HEROES DE LA PARTIDA
     this.descentPartidaService.verHeroePartidaDescent(
       this.descentPartidaService.getPartidaActualDescent(),
       this.currentUserService.getCurrentUserToken()!
     ).subscribe({
       next: (result)=>{
-        console.log(result.data[0])
-        console.log(result.data[1])
+
         let counter = 0
         while(result.data[counter] !== undefined){
           this.solicitudHeroes[counter] = result.data[counter]; 
           counter++;
         }
-        //console.log(this.solicitudHeroes)
+        console.log(this.solicitudHeroes)
         counter = 0;
         //console.log(this.solicitudHeroes[2])
       },
@@ -162,6 +213,7 @@ export class DescentPartidaDatosComponent {
     if(this.solicitudGeneral[3].indexOf(this.cartaAdd) === -1){
       this.solicitudGeneral[3].push(this.cartaAdd)
     }
+    console.log(this.solicitudGeneral[3])
   }
 
   editarGeneral(){
@@ -173,7 +225,7 @@ export class DescentPartidaDatosComponent {
     
     this.solicitudAux = {
       nombre_partida: this.solicitudGeneral[0],
-      oro: this.solicitudGeneral[1],
+      oro: this.solicitudGeneral[1].toString(),
       nombre_mision_dc: this.solicitudGeneral[2],
       cartasOverlord: this.solicitudGeneral[3],
     }
@@ -201,50 +253,196 @@ export class DescentPartidaDatosComponent {
   }
 
   addItem(i:number){
-    if(this.solicitudHeroes[i].equipamientoHeroe.indexOf(this.itemAdd) === -1){
-      this.solicitudHeroes[i].equipamientoHeroe.push(this.itemAdd)
+    if(this.solicitudHeroes[i][3].indexOf(this.itemAdd) === -1){
+      if(this.solicitudHeroes[i][3][0] == ""){
+        this.solicitudHeroes[i][3][0] = this.itemAdd
+      } else {
+        this.solicitudHeroes[i][3].push(this.itemAdd)
+      }
+      
     }
   }
 
   quitarItem(itemIndex:number, i:number){
     console.log(itemIndex)
     //delete this.solicitudHeroes[i].equipamientoHeroe[itemIndex];
-    this.solicitudHeroes[i].equipamientoHeroe.splice(itemIndex,1)
-    console.log(this.solicitudHeroes[i].equipamientoHeroe)
+    this.solicitudHeroes[i][3].splice(itemIndex,1)
+    console.log(this.solicitudHeroes[i][3])
   }
 
   addHabilidad(i:number){
-    if(this.solicitudHeroes[i].habilidadesHeroe.indexOf(this.habilidadAdd) === -1){
-      this.solicitudHeroes[i].habilidadesHeroe.push(this.habilidadAdd)
+    if(this.solicitudHeroes[i][2].indexOf(this.habilidadAdd) === -1){
+      if(this.solicitudHeroes[i][2][0] == ""){
+        this.solicitudHeroes[i][2][0] = this.habilidadAdd
+      } else {
+        this.solicitudHeroes[i][2].push(this.habilidadAdd)
+      }
     }
   }
 
   quitarHabilidad(habilidadIndex:number, i:number){
     console.log(habilidadIndex)
     //delete this.solicitudHeroes[i].habilidadesHeroe[habilidadIndex];
-    this.solicitudHeroes[i].habilidadesHeroe.splice(habilidadIndex,1)
-    console.log(this.solicitudHeroes[i].habilidadesHeroe)
+    this.solicitudHeroes[i][2].splice(habilidadIndex,1)
+    console.log(this.solicitudHeroes[i][2])
   }
 
   crearHeroe(){
     if(this.solicitudHeroes.length < 4){
-      let heroeDefault = {
-        nombreHeroe: "heroe1",
-        equipamientoHeroe: ['espada1'],
-        habilidadesHeroe: ['habilidad1']
-      }
+      let heroeDefault = []
+        heroeDefault[0] = this.solicitudListaHeroes[0]
+        heroeDefault[1] = "Caballero"
+        heroeDefault[2] = [this.solicitudListaHabilidades[0]]
+        heroeDefault[3] = [this.solicitudListaEquipamiento[0]]
+      //console.log(heroeDefault)
       this.solicitudHeroes.push(heroeDefault)
-      console.log(this.solicitudHeroes)
     }
+
+    this.descentPartidaService.crearHeroePartidaDescent(
+      this.descentPartidaService.getPartidaActualDescent(),
+      this.currentUserService.getCurrentUserToken()!
+    ).
+    subscribe({
+      next: (result)=>{
+
+        console.log("heroe creado")
+
+         // LISTA DE HEROES DE LA PARTIDA
+        this.descentPartidaService.verHeroePartidaDescent(
+          this.descentPartidaService.getPartidaActualDescent(),
+          this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+          next: (result)=>{
+    
+            let counter = 0
+            while(result.data[counter] !== undefined){
+              this.solicitudHeroes[counter] = result.data[counter]; 
+              counter++;
+            }
+            console.log(this.solicitudHeroes)
+            counter = 0;
+            //console.log(this.solicitudHeroes[2])
+          },
+          error: (error)=>{console.log(error)}
+        })
+        
+      },
+      error: (error)=>{console.log(error)}
+    })
+      
+      
   }
+  
 
   borrarHeroe(i:number){
     //delete this.solicitudHeroes[i];
-    this.solicitudHeroes.splice(i,1)
-    console.log(this.solicitudHeroes)
+    
+
+    this.descentPartidaService.eliminarHeroePartidaDescent(
+      this.descentPartidaService.getPartidaActualDescent(),
+      this.currentUserService.getCurrentUserToken()!
+    ).
+    subscribe({
+      next: (result)=>{
+        this.solicitudHeroes.splice(i,1)
+        console.log("heroe eliminado")
+
+         // LISTA DE HEROES DE LA PARTIDA
+        this.descentPartidaService.verHeroePartidaDescent(
+          i,
+          this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+          next: (result)=>{
+    
+            let counter = 0
+            while(result.data[counter] !== undefined){
+              this.solicitudHeroes[counter] = result.data[counter]; 
+              counter++;
+            }
+            console.log(this.solicitudHeroes)
+            counter = 0;
+            //console.log(this.solicitudHeroes[2])
+          },
+          error: (error)=>{console.log(error)}
+        })
+        
+      },
+      error: (error)=>{console.log(error)}
+    })
+
+    
+
   }
 
   confirmarEditHeroes(){
-    //http
+    let solicitudAuxEdit : any = {}
+    let solicitudAuxEdit2 : any = {}
+    let solicitudAuxEdit3 : any = {}
+    let counter : number = 0
+
+    let heroe = {
+      "id_heroe_dc":String,
+      "id":String,
+      "habilidades_clase":[],
+      "equipo_heroe":[]
+    }
+
+    //let heroes = heroe[]
+
+    solicitudAuxEdit2 = []
+
+
+
+
+
+    console.log(this.solicitudHeroes)
+
+    console.log(this.solicitudHeroes.length)
+    do{
+      heroe = {
+        "id_heroe_dc":String,
+        "id":String,
+        "habilidades_clase":[],
+        "equipo_heroe":[]
+      }
+      heroe["id_heroe_dc"] = this.solicitudHeroes[counter][4]
+      heroe["id"] = this.solicitudHeroes[counter][5]
+      heroe.habilidades_clase = this.solicitudHeroes[counter][2]
+      heroe.equipo_heroe = this.solicitudHeroes[counter][3]
+
+      console.log(heroe)
+
+      solicitudAuxEdit2[counter] = heroe
+      
+
+      counter++
+    }while (counter < this.solicitudHeroes.length)
+
+    console.log(solicitudAuxEdit2)
+
+
+
+    
+    /*
+    for (let index = 0; index < solicitudAuxEdit2["heroes"].length; index++) {
+      console.log(solicitudAuxEdit2["heroes"][index])
+      console.log(solicitudAuxEdit2["heroes"][index]["id_heroe"])
+      
+    }
+    */
+
+    this.descentPartidaService.actualizarTodosHeroePartidaDescent(
+      solicitudAuxEdit2,
+      this.descentPartidaService.getPartidaActualDescent(),
+      this.currentUserService.getCurrentUserToken()!
+    ).subscribe({
+      next: (result)=>{
+        console.log("Heroes actualizados exitosamente")
+      },
+      error: (error)=>{console.log(error)}
+})
+
   }
+  
+  
 }

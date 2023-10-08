@@ -14,7 +14,8 @@ export class RegistroAdministradorComponent {
   errorMessage?: string;
   public datos: any;
   public headersAdd = new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + this.currentUserService.getCurrentUserToken()
   });
 
   constructor(private http:HttpClient, private router: Router, private currentUserService: CurrentUserService, private adminService: AdministradorService){
@@ -31,7 +32,7 @@ export class RegistroAdministradorComponent {
 
 
   ngOnInit(){
-    
+   
   }
 
 
@@ -43,7 +44,7 @@ export class RegistroAdministradorComponent {
       next: (result)=>{
         this.datos = result;
 
-        console.log("REGISTRO DE ADMIN");
+        console.log("Admin registrado correctamente");
 
         this.router.navigate([''])
 

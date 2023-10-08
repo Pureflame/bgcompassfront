@@ -83,7 +83,7 @@ this.adminService.getAdminList().subscribe({
 */
 
         //let test:any = this.currentUserService.getCurrentUser()
-        //console.log(test);
+        console.log("Has iniciado sesión");
         this.router.navigate([''])
 /*
         if(test["correo_usuario"] == undefined){

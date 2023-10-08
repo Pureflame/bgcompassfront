@@ -31,13 +31,23 @@ export class AdministradorService {
         this.prepararHeader(token)
         return this.http.post(this.url + "usuario-registro/administrador", adminNuevo, {headers: this.headersAddWithToken});
     }
+    
+    public adminListarTodasLasPartidas(token:string):Observable<any>{
+        this.prepararHeader(token)
+        return this.http.get(this.url + "admin/partidas-juegos", {headers: this.headersAddWithToken});
+    }
 
+    public adminListarTodasLasDiscusiones(token:string):Observable<any>{
+        this.prepararHeader(token)
+        return this.http.get(this.url + "admin/discusiones-juegos", {headers: this.headersAddWithToken});
+    }
+/*
     public getAdminList(correo:string):Observable<any>{
         let parametroGet = new HttpParams().set("correo", correo)
         return this.http.get(this.url + "administrador/list", {headers: this.headersAddWithToken, params: parametroGet});
     }
-
-    public getAdministradorDatos(id:number, token:string):Observable<any>{
+*/
+    public getAdministradorDatos(id:string, token:string):Observable<any>{
         this.prepararHeader(token)
         return this.http.get(this.url + "usuario-perfil/administrador/ver/" + id, {headers: this.headersAddWithToken});
     }

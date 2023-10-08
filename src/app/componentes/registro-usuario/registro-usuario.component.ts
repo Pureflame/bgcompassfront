@@ -42,7 +42,7 @@ export class RegistroUsuarioComponent {
       next: (result)=>{
         this.datos = result;
 
-        console.log("REGISTRO DE USUARIO");
+        console.log("Usuario registrado correctamente");
 
         this.router.navigate([''])
 

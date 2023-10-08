@@ -1,13 +1,13 @@
 <div class="lista">
 
     <div class="nombreUsuarioMensaje">
-        {{mensaje.nombreUsuario}}
+        {{mensaje[2]}}
     </div>
 
-    <button *ngIf="adminActivo" (click)="borrarMensaje(mensaje.idMensaje)" class="botonBorrarMensaje">{{"Borrar mensaje" | translate}}</button>
+    <button *ngIf="adminActivo" (click)="borrarMensaje(mensaje[0])" class="botonBorrarMensaje">{{"Borrar mensaje" | translate}}</button>
     
     <div class="discusionTexto">
-        <label for="chk" aria-hidden="true">{{mensaje.textoMensaje}}</label>
+        <label for="chk" aria-hidden="true">{{mensaje[1]}}</label>
     </div>
     
 

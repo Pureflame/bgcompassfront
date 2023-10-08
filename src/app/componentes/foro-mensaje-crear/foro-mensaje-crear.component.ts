@@ -12,7 +12,9 @@ import { DescentForoService } from 'src/app/Services/descentForo.service';
 })
 export class ForoMensajeCrearComponent {
   public solicitud: any;
-
+  public solicitudAuxiliar: any;
+  
+  public juegoActual: string
   /*
   El boton de volver y crear debe variar segun el juego
 
@@ -32,17 +34,59 @@ export class ForoMensajeCrearComponent {
     this.solicitud = {
       nombre: ''
     }
+    this.solicitudAuxiliar = {}
+    this.juegoActual = ""
   }
 
   onSubmit(){
-    let miDiscusion = this.descentForoService.getDiscusionActual()
-    // con esto tenemos ya el id de la discusion para meter en el http
-      
-    
+
+    this.juegoActual = this.currentUserService.getJuegoActual()
+
+    switch(this.juegoActual){
+
+      case "descent": {
+        let miDiscusion = this.descentForoService.getDiscusionActual()
+        //console.log(this.solicitud.nombre)
+
+        this.solicitudAuxiliar = {
+          texto_mensaje_dc: this.solicitud.nombre,
+        }
+
+        this.descentForoService.crearMensajeForoDescent(
+          this.solicitudAuxiliar,
+          miDiscusion,
+          this.currentUserService.getCurrentUserToken()!)
+          .subscribe({
+            
+            next: (result)=>{
+              console.log("creamos el mensaje en la discusion")
+            },
+            error: (error)=>{console.log(error)}
+        })
+
+        break;
+      }
+
+      case "gloomhaven": {
+
+        this.solicitudAuxiliar = {
+          nombre_partida: this.solicitud.nombre,
+          xxxxxxxxxxxxxx: '0',
+          ddddddddddddddd: '1'
+        }
+        console.log(this.solicitudAuxiliar)
+        
+        // URL AQUI
+        break;
+      }
+    }
+    this.router.navigate([this.juegoActual+'/foros'])
   }
 
   volver(){
     let juego = this.currentUserService.getJuegoActual()
+    //console.log("volvemos de crear mensaje")
+    this.descentForoService.pedirDiscusionesJuego()
     this.router.navigate([juego + '/foros'])
   }
 }

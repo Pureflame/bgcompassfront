@@ -1,26 +1,26 @@
 <body>
 	<div class="container">
-		<button (click)="volver()" class = "buttonVolver">Volver</button>
+		<button (click)="volver()" class = "buttonVolver">{{"Volver" | translate}}</button>
 
 		<div class="containerForm">
 			<div class="loginTitulo">
-				<span>INICIAR SESIÓN</span>
+				<span>{{"INICIAR SESIÓN" | translate}}</span>
 			</div>
 			<div class="login">
 				<form (ngSubmit)="onSubmit()" #ngForm="ngForm">
 					
 
 				<div class="inputs">
-					<label for="chk" aria-hidden="true">Correo</label>
+					<label for="chk" aria-hidden="true">{{"Correo" | translate}}</label>
 					<input  type="email" name="email" placeholder="Email" required="" #correo="ngModel" [(ngModel)]="solicitud.email">
 				</div>
 
 				<div class="inputs">
-					<label for="chk" aria-hidden="true">Contraseña</label>
+					<label for="chk" aria-hidden="true">{{"Contraseña" | translate}}</label>
 					<input type="password" name="pswd" placeholder="Password" required="" #password="ngModel" [(ngModel)]="solicitud.password">
 				</div>
 
-					<button class = "buttonLogin">Iniciar Sesión</button>
+					<button class = "buttonLogin">{{"Iniciar Sesión" | translate}}</button>
 				</form>
 			</div>
 		</div>

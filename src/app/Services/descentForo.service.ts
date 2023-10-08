@@ -37,11 +37,11 @@ export class DescentForoService {
 
     ////////////// DISCUSIONES //////////////
     // Usuario - Crear Discusión en el foro
-    public crearDiscusionForoDescent(token:string):Observable<any> {
+    public crearDiscusionForoDescent(solicitud:any, token:string):Observable<any> {
         this.prepararHeader(token)
-        
+
         // le falta la solicitud al post?
-        return this.http.post(this.url + "descent/foro/discusion", {headers: this.headersAddWithToken});
+        return this.http.post(this.url + "descent/foro/discusion", solicitud, {headers: this.headersAddWithToken});
     }
 
     // Usuario - Ver sus discusiones del foro
@@ -66,9 +66,9 @@ export class DescentForoService {
 
     ////////////// MENSAJES //////////////
     // Usuario - Crear Mensaje de una discusión del foro
-    public crearMensajeForoDescent(idConversacion:number, token:string):Observable<any> {
+    public crearMensajeForoDescent(solicitud:any, idConversacion:number, token:string):Observable<any> {
         this.prepararHeader(token)
-        return this.http.post(this.url + "descent/foro/mensaje/" + idConversacion, {headers: this.headersAddWithToken});
+        return this.http.post(this.url + "descent/foro/mensaje/" + idConversacion, solicitud, {headers: this.headersAddWithToken});
     }
 
     // Listar Mensajes de un usuario del foro
@@ -78,7 +78,6 @@ export class DescentForoService {
     }
 
     // Listar Mensajes de una discusión del foro
-
     // SIN TOKEN?
     public listarMensajesDiscusionForoDescent(idConversacion:number):Observable<any> {
         return this.http.get(this.url + "descent/foro/" + idConversacion + "/mensaje", {headers: this.headersAddNoToken});
