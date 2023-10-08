@@ -19,10 +19,13 @@ export class DescentPartidaService {
     public partidasJuego : boolean
     public todasLasPartidas : boolean
 
+    public partidaActualDescent: number
+
     constructor( private http: HttpClient ){
         this.misPartidas = false;
         this.partidasJuego = false;
         this.todasLasPartidas = false;
+        this.partidaActualDescent = -1
     }
 
     public prepararHeader(token:string){
@@ -36,10 +39,27 @@ export class DescentPartidaService {
         return "funciona descent partida service";
     }
 
+    public getPartidaActualDescent(){
+        return this.partidaActualDescent
+    }
+
+    public setPartidaActualDescent(id:number){
+        this.partidaActualDescent = id
+    }
+
+    public listarMisionesDescent():Observable<any> {
+        return this.http.get(this.url + "descent/misiones/lista", {headers: this.headersAddNoToken});
+    }
+
+    public listarCartasDescent():Observable<any> {
+        return this.http.get(this.url + "descent/cartas/lista", {headers: this.headersAddNoToken});
+    }
+
     // Usuario - Crear Partida de Descent
-    public crearPartidaDescent(token:string):Observable<any> {
+    public crearPartidaDescent(solicitud:any,token:string):Observable<any> {
+        console.log(this.headersAddWithToken)
         this.prepararHeader(token)
-        return this.http.post(this.url + "descent/partida", {headers: this.headersAddWithToken});
+        return this.http.post(this.url + "descent/partida", solicitud, {headers: this.headersAddWithToken});
     }
 
 
@@ -66,16 +86,18 @@ export class DescentPartidaService {
 
 
     // Usuario - Añadir/Actualizar Dato a Partida de Descent (Mision actual, Mazo de Cartas de Overlord y Oro actual del grupo)
-    public actualizarGeneralPartidaDescent(idPartida:number, token:string):Observable<any> {
+    public actualizarGeneralPartidaDescent(solicitud:any, idPartida:number, token:string):Observable<any> {
         this.prepararHeader(token)
-        return this.http.put(this.url + "descent/" + idPartida + "/general" , {headers: this.headersAddWithToken});
+        return this.http.put(this.url + "descent/" + idPartida + "/general" , solicitud, {headers: this.headersAddWithToken});
     }
 
 
     // Usuario - Crear Heroe Partida de Descent
-    public crearHeroePartidaDescent(idPartida:number, token:string):Observable<any> {
+    public crearHeroePartidaDescent(solicitud:any, idPartida:number, token:string):Observable<any> {
         this.prepararHeader(token)
-        return this.http.post(this.url + "descent/" + idPartida + "/heroes", {headers: this.headersAddWithToken});
+
+        // le falta la solicitud al post?
+        return this.http.post(this.url + "descent/" + idPartida + "/heroes", solicitud, {headers: this.headersAddWithToken});
     }
 
     // Usuario - Actualizar Heroe Partida de Descent

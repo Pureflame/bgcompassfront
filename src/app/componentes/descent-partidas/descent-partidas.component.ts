@@ -26,14 +26,8 @@ export class DescentPartidasComponent {
     private currentUserService: CurrentUserService, 
     private descentPartidaService: DescentPartidaService,
     private adminService: AdministradorService){
-    this.partidasUsuarioActual = []
 
-    
-    
-    this.partidas = [
-      {nombre_partida:"urlnopuesta", nombre_imagen: "Descent"},
-      {nombre_partida:"nombrecampaña2", nombre_imagen: "Descent"}
-    ];
+    this.partidasUsuarioActual = []
 
   }
 
@@ -52,7 +46,7 @@ export class DescentPartidasComponent {
           this.partidasUsuarioActual[counter] = result.data[counter]; 
           counter++;
         }
-        //console.log(this.partidasUsuarioActual)
+        console.log(this.partidasUsuarioActual)
         counter = 0;
       },
       error: (error)=>{console.log(error)}

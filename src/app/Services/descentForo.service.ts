@@ -39,6 +39,8 @@ export class DescentForoService {
     // Usuario - Crear Discusión en el foro
     public crearDiscusionForoDescent(token:string):Observable<any> {
         this.prepararHeader(token)
+        
+        // le falta la solicitud al post?
         return this.http.post(this.url + "descent/foro/discusion", {headers: this.headersAddWithToken});
     }
 

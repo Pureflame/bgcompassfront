@@ -27,12 +27,12 @@
                 
                     <div class="inputs" class="inputsCortos">
                         <label for="chk" aria-hidden="true">{{"Nombre de la Campaña" | translate}}</label>
-                        <input type="text" name="nombre" required="" #correo="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.nombrePartida">
+                        <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudGeneral[0]">
                     </div>
 
                     <div class="inputs" class="inputsCortos">
                         <label for="chk" aria-hidden="true">{{"Oro de los héroes" | translate}}</label>
-                        <input type="text" name="oro" required="" #password="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.oro">
+                        <input type="text" name="oro" required="" #password="ngModel"  [(ngModel)]="solicitudGeneral[1]">
                     </div>
 
                     <div class="inputs" class="inputsCortos">
@@ -42,7 +42,7 @@
                                 <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
                             -->
                         
-                        <select name="mision" [(ngModel)]="solicitudGeneral.misionActual">
+                        <select name="mision" [(ngModel)]="solicitudGeneral[2]">
                             <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
                                 {{mision}}
                             </option>
@@ -67,10 +67,10 @@
                                     </option>
                                 </select>
 
-                                <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral.arrayCartasOverlord">
+                                <div class="cartasOverlordListado" *ngFor="let carta of solicitudGeneral[3]">
                                     <div *ngIf=carta>
                                         <input type="text" name="overlord" required="" value="{{carta}}" readonly="readonly" >
-                                        <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral.arrayCartasOverlord.indexOf(carta))">{{"Borrar" | translate}}</button>
+                                        <button class="buttonOverlord" (click)="quitarCarta(solicitudGeneral[3].indexOf(carta))">{{"Borrar" | translate}}</button>
                                     </div>
                                 </div>
                             </div>
