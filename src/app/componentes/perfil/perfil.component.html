@@ -91,12 +91,12 @@
 			<!-- MIS DISCUSIONES -->
 			<div *ngIf="listaDiscusionesActiva">
 				<div *ngFor = "let discusion of listadiscusiones">
-					<app-perfil-discusiones (discusionChat)="entrarDiscusion($event)" [discusion]="discusion" ></app-perfil-discusiones>
+					<app-perfil-discusiones (borradoDiscusion)="borrarDiscusion($event)" (discusionChat)="entrarDiscusion($event)" [discusion]="discusion" ></app-perfil-discusiones>
 				</div>
 			</div>
 
 			<div *ngIf="chatDiscusionActiva">
-				<button class="crearMensaje" (click)="crearMensaje()">{{"Crear mensaje" | translate}}</button>
+				<button *ngIf="soyUsuario" class="crearMensaje" (click)="crearMensaje()">{{"Crear mensaje" | translate}}</button>
 				<button class="crearMensaje" (click)="regresoAlListado()">{{"Volver listado Discusiones" | translate}}</button>
 	
 				<div *ngFor = "let mensaje of mensajesDiscusion">

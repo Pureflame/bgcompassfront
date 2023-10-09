@@ -27,6 +27,9 @@ export class DescentPartidaDatosComponent {
   public itemAdd: string
   public habilidadAdd: string
 
+  public soyAdmin: boolean;
+  public soyUsuario: boolean;
+
   constructor(
     private router: Router, 
     private currentUserService: CurrentUserService,
@@ -58,6 +61,9 @@ export class DescentPartidaDatosComponent {
     this.datosGeneralesActiva = false;
     this.datosHeroeActiva = false;
 
+    this.soyAdmin = false;
+    this.soyUsuario = false;
+
     this.cartaAdd = "";
     this.itemAdd = "";
     this.habilidadAdd = "";
@@ -65,6 +71,16 @@ export class DescentPartidaDatosComponent {
 
   ngOnInit(){
     this.datosGeneralesActiva = true;
+
+    if(this.currentUserService.getCurrentUserType() === "administrador"){
+      this.soyUsuario = false;
+      this.soyAdmin = true;
+    } else {
+      this.soyUsuario = true;
+      this.soyAdmin = false;
+    }
+
+
     //console.log(this.descentPartidaService.getPartidaActualDescent())
 
 

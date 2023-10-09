@@ -14,7 +14,7 @@ export class DescentForosComponent {
 
   public discusiones: any[];
 
-  public mensajes;
+  public mensajes : any;
   public mensajesDiscusion : any[]
 
   public solicitud: any;
@@ -23,6 +23,9 @@ export class DescentForosComponent {
 
   public listaDiscusionesActiva : boolean
   public chatDiscusionActiva : boolean
+
+  public soyAdmin: boolean;
+  public soyUsuario: boolean;
 
 
   constructor(private router: Router, 
@@ -34,15 +37,12 @@ export class DescentForosComponent {
       password: ''
     }
 
-   
+    this.soyAdmin = false;
+    this.soyUsuario = false;
     
     this.discusiones = [];
 
-    this.mensajes = [
-      {idMensaje:"1", idConversacion:"1", nombreUsuario:"nombreUsuario1", textoMensaje: "mensaje1"},
-      {idMensaje:"2", idConversacion:"1", nombreUsuario:"nombreUsuario2", textoMensaje: "mensaje2"},
-      {idMensaje:"3", idConversacion:"2", nombreUsuario:"nombreUsuario3", textoMensaje: "mensaje3"}
-    ]
+    this.mensajes = []
 
     this.listaDiscusionesActiva = false;
     this.chatDiscusionActiva = false;
@@ -50,6 +50,16 @@ export class DescentForosComponent {
   }
 
   ngOnInit(){
+
+    if(this.currentUserService.getCurrentUserType() === "administrador"){
+      this.soyAdmin = true;
+      this.soyUsuario = false;
+    } else {
+
+      this.soyAdmin = false;
+      this.soyUsuario = true;
+    }
+
     this.currentUserService.setJuegoActual("descent");
 
     // Se mira si debemos pedir todas las discusiones o solo las del usuario como el perfil
@@ -157,16 +167,76 @@ export class DescentForosComponent {
     this.chatDiscusionActiva = false;
   }
 
+  borrarDiscusion(discusion : any){
+    console.log(this.discusiones)
+    console.log(discusion)
+
+    this.currentUserService.setJuegoActual(discusion[0]["discusionNombreJuego"])
+
+    let posicion = this.discusiones.map( (mensaje) => mensaje[0]).indexOf(discusion[0]["discusionId"])
+
+
+    // comprobar a que juego pertecene la discusion para elegir la url de borrado
+    
+    console.log(this.currentUserService.getJuegoActual())
+
+    if(this.currentUserService.getJuegoActual() === "descent"){
+
+      this.descentForoService.eliminarDiscusionForoDescent(
+        discusion[0]["discusionId"],
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Discusión borrada correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
+
+    } else if(this.currentUserService.getJuegoActual() === "gloomhaven"){
+      // URL DE BORRAR MENSAJE GLOOMHAVEN
+    }
+
+    this.discusiones.splice(posicion,1)
+    /*
+        let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
+        this.mensajesDiscusion.splice(posicion2,1)
+    */
+   
+  }
+
   borrarMensaje(idMensaje : any){
 
+    console.log(this.mensajesDiscusion)
+    let posicion = this.mensajesDiscusion.map( (mensaje) => mensaje[0]).indexOf(idMensaje)
 
-    let posicion = this.mensajes.map( (mensaje) => mensaje.idMensaje).indexOf(idMensaje)
-    this.mensajes.splice(posicion,1)
 
-    let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
-    this.mensajesDiscusion.splice(posicion2,1)
+    // comprobar a que juego pertecene la discusion para elegir la url de borrado
+    console.log("hi")
+    console.log(this.currentUserService.getJuegoActual())
+    if(this.currentUserService.getJuegoActual() === "descent"){
 
-    // AQUI URL DE BORRADO por el idMensaje
+      this.descentForoService.eliminarMensajeForoDescent(
+        idMensaje,
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Mensaje borrado correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
+
+    } else if(this.currentUserService.getJuegoActual() === "gloomhaven"){
+      // URL DE BORRAR MENSAJE GLOOMHAVEN
+    }
+
+
+
+    this.mensajesDiscusion.splice(posicion,1)
+    /*
+        let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
+        this.mensajesDiscusion.splice(posicion2,1)
+    */
+   
   }
 
   crearMensaje(){

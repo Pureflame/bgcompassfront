@@ -30,8 +30,14 @@ export class ForoDiscusionComponent {
     }
   }
 
-  borrarMensaje(id : any){
-    
+  borrarMensaje(id : any, ){
+/*
+    let discusion = [ {
+      discusionId: discusionId,
+      discusionNombre: discusionNombre, 
+      discusionNombreJuego: discusionNombreJuego
+    }]
+*/
     this.borrado.emit(id)
     
   }

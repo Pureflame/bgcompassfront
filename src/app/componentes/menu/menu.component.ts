@@ -147,6 +147,12 @@ listar(){
     this.router.navigate(['descent/partidas'])
     this.currentUserService.setJuegoActual("descent");
   }
+/*
+  partidasDescentTotal(){
+    this.router.navigate(['descent/partidas'])
+    this.currentUserService.setJuegoActual("descent");
+  }
+*/
   forosDescent(){
     this.router.navigate(['descent/foros'])
     this.currentUserService.setJuegoActual("descent");
@@ -156,6 +162,12 @@ listar(){
     this.router.navigate(['gloomhaven/partidas'])
     this.currentUserService.setJuegoActual("gloomhaven");
   }
+/*
+  partidasGloomhavenTotal(){
+    this.router.navigate(['gloomhaven/partidas'])
+    this.currentUserService.setJuegoActual("gloomhaven");
+  }
+*/
   forosGloomhaven(){
     this.router.navigate(['gloomhaven/foros'])
     this.currentUserService.setJuegoActual("gloomhaven");

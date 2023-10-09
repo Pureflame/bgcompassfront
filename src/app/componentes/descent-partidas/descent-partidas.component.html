@@ -7,7 +7,7 @@
 	<div class="container">
 
 		<button class = "buttonVolver" (click)="volver()">{{"Volver al menu" | translate}}</button>
-        <button class = "buttonVolver" (click)="crear()">{{"Crear nueva campaña" | translate}}</button>
+        <button *ngIf="soyUsuario" class = "buttonVolver" (click)="crear()">{{"Crear nueva campaña" | translate}}</button>
 
 		<div class="containerForm">
 

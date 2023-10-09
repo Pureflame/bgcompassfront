@@ -21,6 +21,7 @@ export class DescentPartidasComponent {
   errorMessage?: string;
   public datos: any;
 
+  public soyUsuario: boolean;
 
   constructor(private router: Router, 
     private currentUserService: CurrentUserService, 
@@ -28,29 +29,58 @@ export class DescentPartidasComponent {
     private adminService: AdministradorService){
 
     this.partidasUsuarioActual = []
+    this.soyUsuario = false;
 
   }
 
   ngOnInit(){
     this.currentUserService.setJuegoActual("descent");
 
-    // LISTAR TODAS LAS PARTIDAS DEL USUARIO
-    this.descentPartidaService.listarPartidasDescent(
-      this.currentUserService.getCurrentUserId()!, 
-      this.currentUserService.getCurrentUserToken()!
-    ).subscribe({
-      next: (result)=>{
+    // LISTAR TODAS LAS PARTIDAS DEL USUARIO O EL TOTAL SI ES ADMINISTRADOR
 
-        let counter = 0
-        while(result.data[counter] !== undefined){
-          this.partidasUsuarioActual[counter] = result.data[counter]; 
-          counter++;
-        }
-        console.log(this.partidasUsuarioActual)
-        counter = 0;
-      },
-      error: (error)=>{console.log(error)}
-    })
+    if(this.currentUserService.getCurrentUserType() === "administrador"){
+
+      this.soyUsuario = false;
+
+      this.adminService.adminListarTodasLasPartidasDescent(
+        this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+        next: (result)=>{
+  
+          let counter = 0
+          while(result.data[counter] !== undefined){
+            this.partidasUsuarioActual[counter] = result.data[counter]; 
+            counter++;
+          }
+          console.log(this.partidasUsuarioActual)
+          counter = 0;
+        },
+        error: (error)=>{console.log(error)}
+      })
+    
+
+    } else{
+
+      this.soyUsuario = true;
+
+      this.descentPartidaService.listarPartidasDescent(
+        this.currentUserService.getCurrentUserId()!, 
+        this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+        next: (result)=>{
+  
+          let counter = 0
+          while(result.data[counter] !== undefined){
+            this.partidasUsuarioActual[counter] = result.data[counter]; 
+            counter++;
+          }
+          console.log(this.partidasUsuarioActual)
+          counter = 0;
+        },
+        error: (error)=>{console.log(error)}
+      })
+    }
+
   }
 
   crear(){

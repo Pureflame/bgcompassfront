@@ -29,6 +29,13 @@
     background-color: white;
 }
 
+.buttonBorrar{
+    position: relative;
+    left: 80%;
+    padding: 10px 20px;
+    background-color: gray;
+}
+
 .buttonEditar{
     position: relative;
     bottom: 15px;
@@ -40,11 +47,13 @@
     background-color: #f4fbff;
     height: 100%;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
 
     border: 1px solid black;
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+
     

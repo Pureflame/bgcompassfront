@@ -13,6 +13,9 @@ export class MenuJuegosComponent {
   @Output() descentPartidas = new EventEmitter();
   @Output() gloomhavenPartidas = new EventEmitter();
 
+  @Output() descentPartidasTotal = new EventEmitter();
+  @Output() gloomhavenPartidasTotal = new EventEmitter();
+
   public menuSinSesion : boolean
   public menuConSesion : boolean
   public menuAdmin : boolean
@@ -46,6 +49,24 @@ export class MenuJuegosComponent {
     }
   }
 
+/*
+  irATodasLasPartidas(nombre:string){
+    this.currentUserService.setJuegoActual(nombre);
+
+    switch(nombre){
+
+      case "Descent": {
+        this.descentPartidasTotal.emit();
+        break;
+      }
+
+      case "Gloomhaven": {
+        this.gloomhavenPartidasTotal.emit();
+        break;
+      }
+    }
+  }
+*/
   crearPartida(nombre:string){
     if(this.currentUserService.getCurrentUserType() === "usuario" ||
     this.currentUserService.getCurrentUserType() === "administrador"){

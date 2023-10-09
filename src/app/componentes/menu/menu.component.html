@@ -8,7 +8,7 @@
             <mat-grid-tile *ngFor = "let juego of listaJuegos">
                     <app-menu-juegos 
                     (descentPartidas)="partidasDescent()" 
-                    (gloomhavenPartidas)="partidasGloomhaven()" 
+                    (gloomhavenPartidas)="partidasGloomhaven()"  
                     [juego]="juego" ></app-menu-juegos>
             </mat-grid-tile>
         </mat-grid-list>

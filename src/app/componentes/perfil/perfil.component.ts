@@ -38,12 +38,17 @@ export class PerfilComponent {
   public menuLateralUsuario : boolean
   public menuLateralAdmin : boolean
 
+  public soyAdmin: boolean;
+  public soyUsuario: boolean;
+
   public usuarioNombre;
 
   // lista de campañas del usuario actual
   public partidasUsuarioActual: any[];
 
-  public listadiscusiones: any[];
+  public listadiscusiones : any[]
+
+  
   public mensajes: any[];
   public mensajesDiscusion : any[]
   
@@ -87,6 +92,9 @@ export class PerfilComponent {
     this.menuLateralUsuario = false;
     this.menuLateralAdmin = false;
 
+    this.soyAdmin = false;
+    this.soyUsuario = false;
+
     this.mensajesDiscusion = []
     
     // CAMPAÑAS DEL USUARIO ACTUAL
@@ -100,6 +108,7 @@ export class PerfilComponent {
 
     // DISCUSIONES DEL USUARIO ACTUAL
     this.listadiscusiones = []
+
     /*this.listadiscusiones = [
       {idConversacion:"1", nombreUsuario:"titulo de la discusion", nombreDiscusion:"nombreUsuario1"},
       {idConversacion:"2", nombreUsuario:"titulo de la discusion2", nombreDiscusion:"nombreUsuario2"}
@@ -131,6 +140,9 @@ export class PerfilComponent {
 
       this.menuLateralUsuario = false;
       this.menuLateralAdmin = true;
+
+      this.soyAdmin = true;
+      this.soyUsuario = false;
 
       // OBTENER INFORMACION DEL ADMINISTRADOR ACTUAL
       this.administradorService.getAdministradorDatos(
@@ -172,9 +184,28 @@ export class PerfilComponent {
               error: (error)=>{console.log(error)}
             })
         // LISTAR TODAS LAS DISCUSIONES DE TODOS LOS JUEGOS
+        this.administradorService.adminListarTodasLasDiscusiones(
+          this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+          next: (result)=>{
+            //console.log("discusiones")
+            console.log(result.data)
+  
+            let counter = 0
+            while(result.data[counter] !== undefined){
 
+              this.listadiscusiones[counter] = result.data[counter];
+              //this.listadiscusiones[counter] =  this.discusion 
+              counter++;
+            }
+            console.log(this.listadiscusiones)
+            counter = 0;
+            
+          },
+          error: (error)=>{console.log(error)}
+        })
 
-          // QUEDAN LAS URL DEL ADMIN
+          // QUEDAN LAS URL DEL ADMIN AQUI O ESTAN TODAS??
 
     } else {
       this.adminInfoActiva = false;
@@ -182,6 +213,9 @@ export class PerfilComponent {
 
       this.menuLateralUsuario = true;
       this.menuLateralAdmin = false;
+
+      this.soyAdmin = false;
+      this.soyUsuario = true;
 
       // OBTENER INFORMACION DEL USUARIO ACTUAL
       this.usuarioService.getUsuarioDatos(
@@ -257,6 +291,7 @@ export class PerfilComponent {
       this.listaDiscusionesActiva = false;
       this.editarUsuarioActiva = false;
       this.editarAdminActiva = false;
+      this.chatDiscusionActiva = false;
     } else {
       this.infoActiva = true;
       this.adminInfoActiva = false;
@@ -264,6 +299,7 @@ export class PerfilComponent {
       this.listaDiscusionesActiva = false;
       this.editarUsuarioActiva = false;
       this.editarAdminActiva = false;
+      this.chatDiscusionActiva = false;
     }
 
   }
@@ -275,6 +311,7 @@ export class PerfilComponent {
     this.listaDiscusionesActiva = false;
     this.editarUsuarioActiva = false;
     this.editarAdminActiva = false;
+    this.chatDiscusionActiva = false;
   }
 
   discusiones(){
@@ -284,6 +321,7 @@ export class PerfilComponent {
     this.listaDiscusionesActiva = true;
     this.editarUsuarioActiva = false;
     this.editarAdminActiva = false;
+    this.chatDiscusionActiva = false;
   }
  
   editar(){
@@ -292,12 +330,14 @@ export class PerfilComponent {
       this.partidaActiva = false;
       this.listaDiscusionesActiva = false;
       this.editarAdminActiva = true;
+      this.chatDiscusionActiva = false;
     } else{
       this.infoActiva = false;
       this.partidaActiva = false;
       this.listaDiscusionesActiva = false;
       this.editarUsuarioActiva = true;
       this.editarAdminActiva = false;
+      this.chatDiscusionActiva = false;
     }
 
   }
@@ -324,7 +364,9 @@ export class PerfilComponent {
 
   entrarDiscusion(discusion:any){
     this.mensajesDiscusion = []
+    //console.log(discusion[0]["discusionNombreJuego"])
     this.descentForoService.setDiscusionActual(discusion[0]["discusionId"]);
+    this.currentUserService.setJuegoActual(discusion[0]["discusionNombreJuego"])
 
   //console.log(discusion[0]["discusionId"])
 
@@ -375,15 +417,77 @@ this.descentForoService.listarMensajesDiscusionForoDescent(discusion[0]["discusi
     this.chatDiscusionActiva = false;
   }
 
+  borrarDiscusion(discusion : any){
+    console.log(this.listadiscusiones)
+
+    this.currentUserService.setJuegoActual(discusion[0]["discusionNombreJuego"])
+
+    let posicion = this.listadiscusiones.map( (mensaje) => mensaje[0]).indexOf(discusion[0]["discusionId"])
+
+
+    // comprobar a que juego pertecene la discusion para elegir la url de borrado
+    
+    console.log(this.currentUserService.getJuegoActual())
+
+    if(this.currentUserService.getJuegoActual() === "descent"){
+
+      this.descentForoService.eliminarDiscusionForoDescent(
+        discusion[0]["discusionId"],
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Discusión borrada correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
+
+    } else if(this.currentUserService.getJuegoActual() === "gloomhaven"){
+      // URL DE BORRAR MENSAJE GLOOMHAVEN
+    }
+
+
+
+    this.listadiscusiones.splice(posicion,1)
+    /*
+        let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
+        this.mensajesDiscusion.splice(posicion2,1)
+    */
+   
+  }
+
   borrarMensaje(idMensaje : any){
 
-    let posicion = this.mensajes.map( (mensaje) => mensaje.idMensaje).indexOf(idMensaje)
-    this.mensajes.splice(posicion,1)
+    console.log(this.mensajesDiscusion)
+    let posicion = this.mensajesDiscusion.map( (mensaje) => mensaje[0]).indexOf(idMensaje)
 
-    let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
-    this.mensajesDiscusion.splice(posicion2,1)
 
-    // AQUI URL DE BORRADO por el idMensaje
+    // comprobar a que juego pertecene la discusion para elegir la url de borrado
+    
+    console.log(this.currentUserService.getJuegoActual())
+    if(this.currentUserService.getJuegoActual() === "descent"){
+
+    this.descentForoService.eliminarMensajeForoDescent(
+      idMensaje,
+      this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+          next: (result)=>{
+            console.log("Mensaje borrado correctamente")
+          },
+          error: (error)=>{console.log(error)}
+        })
+
+    } else if(this.currentUserService.getJuegoActual() === "gloomhaven"){
+      // URL DE BORRAR MENSAJE GLOOMHAVEN
+    }
+
+
+
+    this.mensajesDiscusion.splice(posicion,1)
+    /*
+        let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
+        this.mensajesDiscusion.splice(posicion2,1)
+    */
+   
   }
 
   crearMensaje(){
