@@ -1,0 +1,83 @@
+body{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #008fd0;
+
+}
+
+.partidasTitulo{
+    position: relative;
+
+    text-align: center;
+
+    font-size: 40px;
+
+    margin-top: 50px;
+   
+}
+
+.container {
+	position: relative;
+	
+	top: 35%;
+	left: 50%;
+
+	width: 40%;
+	height: 60%;
+	transform: translate(-50%,-50%);
+
+	/*background-color: yellow;*/
+}
+
+	.buttonVolver {
+		position: relative;
+		display: block;
+		padding: 10px 20px;
+
+		transform: translate(-50%,0%);
+	}
+
+    .buttonVolver:first-child {
+        margin-bottom: 10px;
+	}
+
+    .buttonCrear {
+		position: relative;
+		left: 70%;
+		padding: 10px 20px;
+		
+		transform: translate(-50%,0%);
+	}
+
+	.containerForm {
+		position: relative;
+		padding-left: 30px;
+		padding-right: 30px;
+		
+		top: 55%;
+		left: 50%;
+	
+		height: 90%;
+	
+		transform: translate(-50%,-50%);
+	
+		/*background-color: red;*/
+	}
+
+
+
+		.perfilInfo{
+			/*background-color: gray;*/
+			
+			width: 100%;
+			height: 105%;
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+
+			background-color: #f4fbff;
+
+			border: 1px solid black;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}

@@ -36,12 +36,13 @@ export class AdministradorService {
         this.prepararHeader(token)
         return this.http.get(this.url + "descent/partidas", {headers: this.headersAddWithToken});
     }
-/* GLOOMHAVEN LISTADO DE TODAS LAS PARTIDAS PARA ADMIN
-    public adminListarTodasLasPartidasDescent(token:string):Observable<any>{
+
+    // GLOOMHAVEN LISTADO DE TODAS LAS PARTIDAS PARA ADMIN
+    public adminListarTodasLasPartidasGloomhaven(token:string):Observable<any>{
         this.prepararHeader(token)
-        return this.http.get(this.url + "descent/partidas", {headers: this.headersAddWithToken});
+        return this.http.get(this.url + "gloomhaven/partidas", {headers: this.headersAddWithToken});
     }
-*/    
+    
     public adminListarTodasLasPartidas(token:string):Observable<any>{
         this.prepararHeader(token)
         return this.http.get(this.url + "admin/partidas-juegos", {headers: this.headersAddWithToken});

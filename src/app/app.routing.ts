@@ -17,6 +17,9 @@ import { DescentPartidaDatosComponent } from "./componentes/descent-partida-dato
 import { ForoDiscusionComponent } from "./componentes/foro-discusion/foro-discusion.component";
 import { ForoDiscusionCrearComponent } from "./componentes/foro-discusion-crear/foro-discusion-crear.component";
 import { ForoMensajeCrearComponent } from "./componentes/foro-mensaje-crear/foro-mensaje-crear.component";
+import { GloomhavenPartidasComponent } from "./componentes/gloomhaven-partidas/gloomhaven-partidas.component";
+import { GloomhavenPartidaDatosComponent } from "./componentes/gloomhaven-partida-datos/gloomhaven-partida-datos.component";
+import { GloomhavenForosComponent } from "./componentes/gloomhaven-foros/gloomhaven-foros.component";
 
 const appRoutes: Routes = [
 
@@ -42,9 +45,6 @@ const appRoutes: Routes = [
     {path: 'usuario-perfil/usuario/partidas', component: PerfilComponent},
     {path: 'usuario-perfil/usuario/discusiones', component: PerfilComponent},
 
-
-
-
     {path: 'usuario-perfil/administrador/ver/:id', component: PerfilComponent},
     {path: 'usuario-perfil/administrador/partidas/:id', component: PerfilComponent},
     {path: 'usuario-perfil/administrador/discusiones/:id', component: PerfilComponent},
@@ -56,13 +56,20 @@ const appRoutes: Routes = [
 
     // DESCENT-FOROS
     {path: 'descent/foros', component: DescentForosComponent},
+
+
+    // GLOOMHAVEN-PARTIDAS
+    {path: 'gloomhaven/partidas', component: GloomhavenPartidasComponent},
+    {path: 'gloomhaven/partidas/datos', component: GloomhavenPartidaDatosComponent},
+    {path: 'gloomhaven/partidas/crear', component: PartidaCrearComponent},
+    
+    // GLOOMHAVEN-FOROS
+    {path: 'gloomhaven/foros', component: GloomhavenForosComponent},
+
+    // FOROS GENERAL
     {path: 'foros/discusion', component: ForoDiscusionComponent},
     {path: 'foros/discusion/crear', component: ForoDiscusionCrearComponent},
     {path: 'foros/mensaje/crear', component: ForoMensajeCrearComponent},
-
-    // GLOOMHAVEN-PARTIDAS
-    
-    // GLOOMHAVEN-FOROS
 
     {path: '**', component: ErrorComponent},
 ];

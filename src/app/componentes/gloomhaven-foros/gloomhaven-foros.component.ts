@@ -6,12 +6,12 @@ import { DescentForoService } from 'src/app/Services/descentForo.service';
 import { GloomhavenForoService } from 'src/app/Services/gloomhavenForo.service';
 
 @Component({
-  selector: 'app-descent-foros',
-  templateUrl: './descent-foros.component.html',
-  styleUrls: ['./descent-foros.component.css']
+  selector: 'app-gloomhaven-foros',
+  templateUrl: './gloomhaven-foros.component.html',
+  styleUrls: ['./gloomhaven-foros.component.css']
 })
-export class DescentForosComponent {
-  
+export class GloomhavenForosComponent {
+ 
 
   public discusiones: any[];
 
@@ -62,12 +62,12 @@ export class DescentForosComponent {
       this.soyUsuario = true;
     }
 
-    this.currentUserService.setJuegoActual("descent");
+    this.currentUserService.setJuegoActual("gloomhaven");
 
     // Se mira si debemos pedir todas las discusiones o solo las del usuario como el perfil
-    if(this.descentForoService.getMisDiscusiones()){
+    if(this.gloomhavenForoService.getMisDiscusiones()){
 
-      this.descentForoService.listarDiscusionesUsuarioForoDescent(
+      this.gloomhavenForoService.listarDiscusionesUsuarioForoGloomhaven(
         this.currentUserService.getCurrentUserToken()!
         ).subscribe({
           next: (result)=>{
@@ -83,8 +83,8 @@ export class DescentForosComponent {
           error: (error)=>{console.log(error)}
         })
 
-    } else if (this.descentForoService.getDiscusionesJuego()) {
-      this.descentForoService.listarDiscusionesForoDescent(
+    } else if (this.gloomhavenForoService.getDiscusionesJuego()) {
+      this.gloomhavenForoService.listarDiscusionesForoGloomhaven(
         ).subscribe({
           next: (result)=>{
     
@@ -110,7 +110,7 @@ export class DescentForosComponent {
   }
 
   crear(){
-   /* this.router.navigate(['descent/partidas/crear'])*/
+   /* this.router.navigate(['gloomhaven/partidas/crear'])*/
   }
   
   volver(){
@@ -119,9 +119,9 @@ export class DescentForosComponent {
 
   entrarDiscusion(discusion:any){
     this.mensajesDiscusion = []
-    this.descentForoService.setDiscusionActual(discusion[0]["discusionId"]);
+    this.gloomhavenForoService.setDiscusionActual(discusion[0]["discusionId"]);
 
-    this.descentForoService.listarMensajesDiscusionForoDescent(discusion[0]["discusionId"]).subscribe({
+    this.gloomhavenForoService.listarMensajesDiscusionForoGloomhaven(discusion[0]["discusionId"]).subscribe({
       next: (result)=>{
         //console.log("entramos en la discusion")
         let counter = 0
@@ -215,9 +215,9 @@ export class DescentForosComponent {
     // comprobar a que juego pertecene la discusion para elegir la url de borrado
     console.log("hi")
     console.log(this.currentUserService.getJuegoActual())
-    if(this.currentUserService.getJuegoActual() === "descent"){
+    if(this.currentUserService.getJuegoActual() === "gloomhaven"){
 
-      this.descentForoService.eliminarMensajeForoDescent(
+      this.gloomhavenForoService.eliminarMensajeForoGloomhaven(
         idMensaje,
         this.currentUserService.getCurrentUserToken()!
         ).subscribe({
@@ -245,7 +245,7 @@ export class DescentForosComponent {
     if(this.currentUserService.getCurrentUserType() === "usuario" ||
     this.currentUserService.getCurrentUserType() === "administrador"){
       
-      this.currentUserService.setJuegoActual("descent");
+      this.currentUserService.setJuegoActual("gloomhaven");
       this.router.navigate(['foros/mensaje/crear']);
 
     } else{
@@ -255,11 +255,13 @@ export class DescentForosComponent {
   }
 
   prepararDiscusiones(){
-    this.descentForoService.getDiscusionesJuego()
+    this.gloomhavenForoService.getDiscusionesJuego()
     
-    this.descentForoService.getTodasLasDiscusiones()
-    if(this.descentForoService.getMisDiscusiones()){
+    this.gloomhavenForoService.getTodasLasDiscusiones()
+    if(this.gloomhavenForoService.getMisDiscusiones()){
 
     }
   }
+
+
 }

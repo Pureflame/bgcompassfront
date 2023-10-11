@@ -1,0 +1,24 @@
+<body>
+
+    <div class="partidasTitulo">
+        <span>{{"Campañas de Gloomhaven" | translate}}</span>
+    </div>
+
+	<div class="container">
+
+		<button class = "buttonVolver" (click)="volver()">{{"Volver al menu" | translate}}</button>
+        <button *ngIf="soyUsuario" class = "buttonVolver" (click)="crear()">{{"Crear nueva campaña" | translate}}</button>
+
+		<div class="containerForm">
+
+
+			<!-- MIS CAMPAÑAS -->
+			
+			<div *ngFor = "let partida of partidasUsuarioActual">
+				<app-perfil-partidas [partida]="partida" ></app-perfil-partidas>
+			</div>
+			
+
+		</div>
+	</div>
+</body>

@@ -29,6 +29,9 @@ import { ForoDiscusionCrearComponent } from './componentes/foro-discusion-crear/
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateService } from '@ngx-translate/core';
+import { GloomhavenForosComponent } from './componentes/gloomhaven-foros/gloomhaven-foros.component';
+import { GloomhavenPartidasComponent } from './componentes/gloomhaven-partidas/gloomhaven-partidas.component';
+import { GloomhavenPartidaDatosComponent } from './componentes/gloomhaven-partida-datos/gloomhaven-partida-datos.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { TranslateService } from '@ngx-translate/core';
     PartidaCrearComponent,
     ForoDiscusionComponent,
     ForoMensajeCrearComponent,
-    ForoDiscusionCrearComponent
+    ForoDiscusionCrearComponent,
+    GloomhavenForosComponent,
+    GloomhavenPartidasComponent,
+    GloomhavenPartidaDatosComponent
 
   ],
   imports: [
