@@ -96,6 +96,7 @@ body{
 			padding: 10px;
 
 			background-color: #f4fbff;
+			font-size: 32px;
 
 			border: 1px solid black;
 			border-radius: 4px;
@@ -328,4 +329,10 @@ body{
 			height: 25%;
 			margin-left: 50%;
 			transform: translate(-50%,0%);
+		}
+
+		.scroll{
+			height: 100%;
+			overflow-y: scroll;
+			padding: 0px 10px;
 		}

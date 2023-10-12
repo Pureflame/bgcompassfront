@@ -2,7 +2,7 @@ body{
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background-color: #008fd0;
+	background-color: #ad4038;
 
 }
 
@@ -61,7 +61,7 @@ body{
 		height: 90%;
 	
 		transform: translate(-50%,-50%);
-	
+		overflow-y:scroll
 		/*background-color: red;*/
 	}
 
@@ -74,6 +74,22 @@ body{
 			height: 105%;
 			margin-left: 50%;
 			transform: translate(-50%,0%);
+
+			background-color: #f4fbff;
+
+			border: 1px solid black;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		.partidasTitulo{
+			/*background-color: gray;*/
+			display: inline-block;
+
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+
+			padding: 20px 30px;
 
 			background-color: #f4fbff;
 

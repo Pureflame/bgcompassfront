@@ -355,7 +355,7 @@ export class DescentPartidaDatosComponent {
     
 
     this.descentPartidaService.eliminarHeroePartidaDescent(
-      this.descentPartidaService.getPartidaActualDescent(),
+      i,
       this.currentUserService.getCurrentUserToken()!
     ).
     subscribe({

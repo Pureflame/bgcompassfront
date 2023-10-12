@@ -91,4 +91,42 @@ export class DescentPartidasComponent {
   volver(){
     this.router.navigate([''])
   }
+
+
+  borrarPartida(partida : any){
+    console.log(this.partidasUsuarioActual)
+
+    this.currentUserService.setJuegoActual(partida[0]["partidaNombreJuego"])
+
+    let posicion = this.partidasUsuarioActual.map( (mensaje) => mensaje["id"]).indexOf(partida[0]["partidaId"])
+    console.log(partida)
+    console.log(this.partidasUsuarioActual.map( (mensaje) => mensaje["id"]))
+    console.log(posicion)
+
+    // comprobar a que juego pertecene la discusion para elegir la url de borrado
+    
+    console.log(this.currentUserService.getJuegoActual())
+
+    if(this.currentUserService.getJuegoActual() === "Descent"){
+
+      this.descentPartidaService.eliminarPartidaDescent(
+        partida[0]["partidaId"],
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Partida borrada correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
+          this.partidasUsuarioActual.splice(posicion,1)
+    } 
+
+    
+    /*
+        let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
+        this.mensajesDiscusion.splice(posicion2,1)
+    */
+   
+  }
+
 }

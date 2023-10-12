@@ -53,7 +53,7 @@ export class GloomhavenPartidaService {
         return this.http.get(this.url + "gloomhaven/pericias/lista", {headers: this.headersAddNoToken});
     }
 
-    public listarHeroesGloomhaven():Observable<any> {
+    public listarClasesGloomhaven():Observable<any> {
         return this.http.get(this.url + "gloomhaven/heroes/lista", {headers: this.headersAddNoToken});
     }
 
@@ -134,15 +134,15 @@ export class GloomhavenPartidaService {
 
 
 
-
+    public getPartidaActualGloomhaven(){
+        return this.partidaActualGloomhaven
+    }
 
     public setPartidaActualGloomhaven(id:number){
         this.partidaActualGloomhaven = id
     }
 
-    public getPartidaActualGloomhaven(){
-        return this.partidaActualGloomhaven
-    }
+
 
     public getMisPartidas(){
         return this.misPartidas

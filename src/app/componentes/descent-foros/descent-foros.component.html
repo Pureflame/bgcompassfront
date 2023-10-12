@@ -13,7 +13,7 @@
 
 
         <!--  -->
-        <div *ngIf="listaDiscusionesActiva">
+        <div class="scroll" *ngIf="listaDiscusionesActiva">
             <div *ngFor = "let discusion of discusiones">
                 <app-perfil-discusiones (borradoDiscusion)="borrarDiscusion($event)" (discusionChat)="entrarDiscusion($event)" [discusion]="discusion" ></app-perfil-discusiones>
             </div>
@@ -23,9 +23,10 @@
         <div *ngIf="chatDiscusionActiva">
             <button *ngIf="soyUsuario" class="crearMensaje" (click)="crearMensaje()">{{"Crear mensaje" | translate}}</button>
             <button class="crearMensaje" (click)="regresoAlListado()">{{"Volver listado Discusiones" | translate}}</button>
-
-            <div *ngFor = "let mensaje of mensajesDiscusion">
-                <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>
+            <div class="scroll">
+                <div *ngFor = "let mensaje of mensajesDiscusion">
+                    <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>
+                </div>
             </div>
         </div>
 

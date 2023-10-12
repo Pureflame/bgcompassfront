@@ -12,7 +12,7 @@
     "Volver listado Discusiones": "Return discussion list",
     "Foro de Descent": "Descent Forum",
     "Volver al listado": "Return to list",
-    "Mis datos de la campaña de Descent": "My Descent campaign's data",
+    "Mis datos de la campaña de Descent": "My Descent campaign data",
     "Confirmar Edición": "Confirm Edition",
     "Ver Héroes": "See Heroes",
     "Nombre de la Campaña": "Campaign's Name",
@@ -66,6 +66,9 @@
     "FOROS": "FOROS",
     "Campañas": "Campaigns",
     "Discusiones de foros": "Forum's discussions",
-    "Campañas de Gloomhaven": "Gloomhaven's Campaigns"
-    
+    "Campañas de Gloomhaven": "Gloomhaven's Campaigns",
+    "Logros Globales": "Global Achievements",
+    "Prosperidad de la ciudad": "City Prosperity",
+    "Mis datos de la campaña de Gloomhaven": "My Gloomhaven campaign data",
+    "Pericias": "Perks"
 }

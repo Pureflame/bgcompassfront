@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from 'src/app/Services/administrador.service';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { DescentForoService } from 'src/app/Services/descentForo.service';
+import { GloomhavenForoService } from 'src/app/Services/gloomhavenForo.service';
 
 @Component({
   selector: 'app-foro-mensaje-crear',
@@ -30,7 +31,8 @@ export class ForoMensajeCrearComponent {
     private router: Router, 
     private currentUserService: CurrentUserService, 
     private adminService: AdministradorService,
-    private descentForoService : DescentForoService){
+    private descentForoService : DescentForoService,
+    private gloomhavenForoservice: GloomhavenForoService){
     this.solicitud = {
       nombre: ''
     }
@@ -68,15 +70,24 @@ export class ForoMensajeCrearComponent {
       }
 
       case "gloomhaven": {
+        let miDiscusion = this.gloomhavenForoservice.getDiscusionActual()
 
         this.solicitudAuxiliar = {
-          nombre_partida: this.solicitud.nombre,
-          xxxxxxxxxxxxxx: '0',
-          ddddddddddddddd: '1'
+          texto_mensaje_gh: this.solicitud.nombre,
         }
         console.log(this.solicitudAuxiliar)
         
-        // URL AQUI
+        this.gloomhavenForoservice.crearMensajeForoGloomhaven(
+          this.solicitudAuxiliar,
+          miDiscusion,
+          this.currentUserService.getCurrentUserToken()!)
+          .subscribe({
+            
+            next: (result)=>{
+              console.log("creamos el mensaje en la discusion")
+            },
+            error: (error)=>{console.log(error)}
+        })
         break;
       }
     }

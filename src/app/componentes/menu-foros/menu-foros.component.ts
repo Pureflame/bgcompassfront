@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { DescentForoService } from 'src/app/Services/descentForo.service';
+import { GloomhavenForoService } from 'src/app/Services/gloomhavenForo.service';
 
 @Component({
   selector: 'app-menu-foros',
@@ -18,7 +19,10 @@ export class MenuForosComponent {
   public menuConSesion : boolean
   public menuAdmin : boolean
 
-  constructor(private router: Router, private currentUserService: CurrentUserService, private descentForoService: DescentForoService){
+  constructor(private router: Router, 
+    private currentUserService: CurrentUserService, 
+    private descentForoService: DescentForoService,
+    private gloomhavenForoService: GloomhavenForoService){
 
     this.menuSinSesion = false;
     this.menuConSesion = false;
@@ -43,7 +47,7 @@ export class MenuForosComponent {
       }
 
       case "Gloomhaven": {
-        //this.gloomhavenForoService.pedirDiscusionesJuego()
+        this.gloomhavenForoService.pedirDiscusionesJuego()
         this.gloomhavenForos.emit();
         break;
       }
@@ -62,7 +66,7 @@ export class MenuForosComponent {
       }
 
       case "Gloomhaven": {
-        //this.gloomhavenForoService.pedirMisDiscusiones()
+        this.gloomhavenForoService.pedirMisDiscusiones()
         this.gloomhavenForos.emit();
         break;
       }

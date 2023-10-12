@@ -63,7 +63,8 @@ export class GloomhavenForosComponent {
     }
 
     this.currentUserService.setJuegoActual("gloomhaven");
-
+    console.log(this.gloomhavenForoService.getMisDiscusiones())
+    console.log(this.gloomhavenForoService.getDiscusionesJuego())
     // Se mira si debemos pedir todas las discusiones o solo las del usuario como el perfil
     if(this.gloomhavenForoService.getMisDiscusiones()){
 
@@ -195,7 +196,15 @@ export class GloomhavenForosComponent {
           })
 
     } else if(this.currentUserService.getJuegoActual() === "gloomhaven"){
-      // URL DE BORRAR MENSAJE GLOOMHAVEN
+      this.gloomhavenForoService.eliminarDiscusionForoGloomhaven(
+        discusion[0]["discusionId"],
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Discusión borrada correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
     }
 
     this.discusiones.splice(posicion,1)

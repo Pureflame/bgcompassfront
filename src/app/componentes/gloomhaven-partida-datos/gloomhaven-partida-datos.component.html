@@ -1,1 +1,325 @@
-<p>gloomhaven-partida-datos works!</p>
+<body>
+
+
+
+	<div class="containerHeroe">
+
+
+
+
+       
+		<button class = "buttonVolver" (click)="volver()">{{"Volver al listado" | translate}}</button>
+
+		<div class="containerForm">
+			<div class="datosTitulo">
+				<span>{{"Mis datos de la campaña de Gloomhaven" | translate}}</span>
+			</div>
+
+			<!-- DATOS GENERALES -->
+			<div *ngIf="datosGeneralesActiva" class="datosInfoGeneral">
+
+                <div class="centrarBoton3">
+
+                    <button *ngIf="soyUsuario" class="buttonHeroeTop" (click)="confirmarEdicion()">{{"Confirmar Edición" | translate}}</button>
+                    <button class="buttonHeroeTop" (click)="verHeroes()">{{"Ver Héroes" | translate}}</button>
+                </div>
+
+                <div class="backgroundInfoGeneral">
+
+                
+                    <div class="inputs" class="inputsCortos">
+                        <label for="chk" aria-hidden="true">{{"Nombre de la Campaña" | translate}}</label>
+                        <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudGeneral[0]">
+                    </div>
+
+                    <div class="inputs" class="inputsCortos">
+                        <label for="chk" aria-hidden="true">{{"Prosperidad de la ciudad" | translate}}</label>
+                        <input type="text" name="oro" required="" #password="ngModel"  [(ngModel)]="solicitudGeneral[1]">
+                    </div>
+
+                    <div class="inputs" class="inputsCortos">
+                        <label for="chk" aria-hidden="true">{{"Misión Actual" | translate}}</label>
+                        
+                            <!--
+                                <input type="text" name="mision" required=""  readonly="readonly" value={{actual}}>
+                            -->
+                        
+                        <select name="mision" [(ngModel)]="solicitudGeneral[2]">
+                            <option *ngFor="let mision of solicitudListaMisiones" [ngValue]="mision">
+                                {{mision}}
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <div class="inputs" class="overlord">
+
+                        <label for="chk" aria-hidden="true">{{"Logros Globales" | translate}}</label>
+                        
+                            <div >
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addLogroGlobal()">{{"Comprar" | translate}}</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollOverlord">
+                                <select class="selectOverlord" name="logroGlobalIndividual" [(ngModel)]="logrosGlobalAdd">
+                                    <option *ngFor="let logroGlobalIndividual of solicitudListaLogrosGlobales" [ngValue]="logroGlobalIndividual">
+                                        {{logroGlobalIndividual}}
+                                    </option>
+                                </select>
+
+                                <div class="cartasOverlordListado" *ngFor="let logroGlobal of solicitudGeneral[3]">
+                                    <div *ngIf=logroGlobal>
+                                        <input type="text" name="logroGlobal" required="" value="{{logroGlobal}}" readonly="readonly" >
+                                        <button *ngIf="soyUsuario" class="buttonOverlord" (click)="quitarLogroGlobal(solicitudGeneral[3].indexOf(logroGlobal))">{{"Borrar" | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+
+			</div>
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- DATOS DE HEROES -->
+            
+			<div *ngIf="datosHeroeActiva"  class="datosInfoHeroes">
+                
+                <div class="centrarBoton3">
+                    <button *ngIf="soyUsuario" class="buttonHeroeTop" (click)="crearHeroe()">{{"Crear Heroe" | translate}}</button>
+                    <button *ngIf="soyUsuario" class="buttonHeroeTop" (click)="confirmarEditHeroes()">{{"Confirmar Edicion Heroes" | translate}}</button>
+                    <button class="buttonHeroeTop" (click)="volverADatosGenerales()">{{"Volver atrás" | translate}}</button>
+                </div>
+
+
+
+                <div class = "scroll2 gruposContenedor">
+                    <div *ngFor="let grupo of solicitudGruposHeroes; let i = index">
+                        <!--Grupo-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Grupo" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudGruposHeroes[i]['id_grupo']">
+                        </div>
+
+                        <!--Reputacion-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Reputacion" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudGruposHeroes[i]['reputacion_grupo']">
+                        </div>
+
+                        <!--Logros Grupo-->
+                        <div class="heroelist2">
+    
+                            <label for="chk" aria-hidden="true">{{"Logros Grupo" | translate}}</label>
+        
+                            <div >
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addlogroGrupo(i)">{{"Comprar" | translate}}</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollHeroe2">
+                                <select class="selectHeroe" name="periciaIndividual" [(ngModel)]="itemAdd">
+                                    <option *ngFor="let logroGrupoIndividual of solicitudListaLogrosGrupo" [ngValue]="logroGrupoIndividual">
+                                        {{logroGrupoIndividual}}
+                                    </option>
+                                </select>
+            
+                                <div class="heroeListado" *ngFor="let logroGrupo of solicitudGruposHeroes[i]['logros_grupo']">
+                                    <div *ngIf=logroGrupo>
+                                        <input type="text" name="logroGrupoHeroe" required="" value="{{logroGrupo}}" readonly="readonly" >
+                                        <button *ngIf="soyUsuario" class="buttonHeroe" (click)="quitarlogroGrupo(solicitudHeroes[i][12].indexOf(logroGrupo), i)">{{"Borrar" | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </div>
+                </div>
+
+            <div class="scroll">           
+                <div  *ngFor="let heroe of solicitudHeroes; let i = index">
+                    <div class="heroeContainer" *ngIf="heroe">
+
+                        <button *ngIf="soyUsuario" class="buttonDeleteHeroe" (click)="borrarHeroe(i)">{{"Borrar Heroe" | translate}}</button>
+
+                        <!--Nombre-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Nombre" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudHeroes[i][3]">
+                        </div>
+
+                        <!--Clase-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Clase" | translate}}</label>
+                            <select class="selectHeroeClass" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][4]">
+                                <option *ngFor="let heroeIndividual of solicitudListaClases" [ngValue]="heroeIndividual">
+                                    {{heroeIndividual}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <!--Grupo-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Grupo" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudHeroes[i][1]">
+                        </div>
+        
+                        <!--Experiencia-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Experiencia" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudHeroes[i][5]">
+                        </div>
+
+                        <!--Oro-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Oro" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudHeroes[i][7]">
+                        </div>
+
+                        <!--Marcas-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Marcas" | translate}}</label>
+                            <input type="text" name="nombre" required="" #correo="ngModel"  [(ngModel)]="solicitudHeroes[i][8]">
+                        </div>
+
+
+
+                        <!--PERICIAS-->
+                        <div class="heroelist">
+    
+                            <label for="chk" aria-hidden="true">{{"Pericias" | translate}}</label>
+        
+                            <div >
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addPericia(i)">{{"Comprar" | translate}}</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollHeroe">
+                                <select class="selectHeroe" name="periciaIndividual" [(ngModel)]="itemAdd">
+                                    <option *ngFor="let periciaIndividual of solicitudListaPericias" [ngValue]="periciaIndividual">
+                                        {{periciaIndividual}}
+                                    </option>
+                                </select>
+            
+                                <div class="heroeListado" *ngFor="let pericia of solicitudHeroes[i][12]">
+                                    <div *ngIf=pericia>
+                                        <input type="text" name="periciaHeroe" required="" value="{{pericia}}" readonly="readonly" >
+                                        <button *ngIf="soyUsuario" class="buttonHeroe" (click)="quitarPericia(solicitudHeroes[i][12].indexOf(pericia), i)">{{"Borrar" | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+    
+    
+    
+                        <!--ITEMS-->
+                        <div class="heroelist">
+    
+                            <label for="chk" aria-hidden="true">{{"Equipamiento" | translate}}</label>
+        
+                            <div >
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addItem(i)">{{"Comprar" | translate}}</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollHeroe">
+                                <select class="selectHeroe" name="equipoIndividual" [(ngModel)]="itemAdd">
+                                    <option *ngFor="let equipoIndividual of solicitudListaEquipamiento" [ngValue]="equipoIndividual">
+                                        {{equipoIndividual}}
+                                    </option>
+                                </select>
+            
+                                <div class="heroeListado" *ngFor="let item of solicitudHeroes[i][11]">
+                                    <div *ngIf=item>
+                                        <input type="text" name="itemHeroe" required="" value="{{item}}" readonly="readonly" >
+                                        <button *ngIf="soyUsuario" class="buttonHeroe" (click)="quitarItem(solicitudHeroes[i][11].indexOf(item), i)">{{"Borrar" | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+    
+                        <!--HABILIDADES-->
+                        <div class="heroelist">
+    
+                            <label for="chk" aria-hidden="true">{{"Habilidades" | translate}}</label>
+        
+                            <div >
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addHabilidad(i)">{{"Comprar" | translate}}</button>
+                            </div>
+                            <!--
+                            <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
+                            -->
+                            <div class="scrollHeroe">
+                                <select class="selectHeroe" name="habilidadIndividual" [(ngModel)]="habilidadAdd">
+                                    <option *ngFor="let habilidadIndividual of solicitudListaHabilidades" [ngValue]="habilidadIndividual">
+                                        {{habilidadIndividual}}
+                                    </option>
+                                </select>
+            
+                                <div class="heroeListado" *ngFor="let habilidad of solicitudHeroes[i][10]">
+                                    <div *ngIf=habilidad>
+                                        <input type="text" name="habilidadHeroe" required="" value="{{habilidad}}" readonly="readonly" >
+                                        <button *ngIf="soyUsuario" class="buttonHeroe" (click)="quitarHabilidad(solicitudHeroes[i][10].indexOf(habilidad), i)">{{"Borrar" | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Mision Personal-->
+                        <div  class="inputsCortosHeroe">
+                            <label for="chk" aria-hidden="true">{{"Mision Personal" | translate}}</label>
+                            <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][9]">
+                                <option *ngFor="let heroeIndividual of solicitudListaMisionesPersonales" [ngValue]="heroeIndividual">
+                                    {{heroeIndividual}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+     
+
+
+			</div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+</body>

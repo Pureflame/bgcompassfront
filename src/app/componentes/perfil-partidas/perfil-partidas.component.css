@@ -41,3 +41,12 @@
 
     margin-bottom: 20px;
 }
+
+.buttonBorrar{
+    position: relative;
+    left: 80%;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    background-color: gray;
+}

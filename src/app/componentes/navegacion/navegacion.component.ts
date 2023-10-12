@@ -25,6 +25,11 @@ export class NavegacionComponent {
   }
 
   ngInit(){
+
+    this.navegacionService.botonPartidaNavegador()
+    document.documentElement.style.setProperty('--colorPartida', 'gray' )
+    document.documentElement.style.setProperty('--colorForo', 'none' )
+
   }
   cambiarIdioma(){
     //console.log(this.translate.currentLang)
@@ -36,14 +41,14 @@ export class NavegacionComponent {
   }
   irPartida(){
     this.navegacionService.botonPartidaNavegador()
-    document.documentElement.style.setProperty('--colorPartida', 'red' )
+    document.documentElement.style.setProperty('--colorPartida', 'gray' )
     document.documentElement.style.setProperty('--colorForo', 'none' )
   }
 
   irForo(){
     this.navegacionService.botonForoNavegador()
     document.documentElement.style.setProperty('--colorPartida', 'none' )
-    document.documentElement.style.setProperty('--colorForo', 'red' )
+    document.documentElement.style.setProperty('--colorForo', 'gray' )
   }
 
   borrarColores(){

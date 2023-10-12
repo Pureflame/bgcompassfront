@@ -11,6 +11,8 @@ import { Administrador } from 'src/app/Models/administrador';
 import {Router} from "@angular/router"
 import { DescentForoService } from 'src/app/Services/descentForo.service';
 import { DescentPartidaService } from 'src/app/Services/descentPartida.service';
+import { GloomhavenPartidaService } from 'src/app/Services/gloomhavenPartida.service';
+import { GloomhavenForoService } from 'src/app/Services/gloomhavenForo.service';
 
 
 @Component({
@@ -69,7 +71,9 @@ export class PerfilComponent {
     private administradorService: AdministradorService,
     private descentForoService: DescentForoService,
     private descentPartidaService: DescentPartidaService,
-    private usuarioService: UsuarioService){
+    private usuarioService: UsuarioService,
+    private gloomhavenForoService : GloomhavenForoService,
+    private gloomhavenPartidaService : GloomhavenPartidaService){
 
     this.usuario = {
       id:"",
@@ -233,36 +237,80 @@ export class PerfilComponent {
 
 
       // LISTAR TODAS LAS PARTIDAS DEL USUARIO
+      let counter = 0
+
       this.descentPartidaService.listarPartidasDescent(
         this.currentUserService.getCurrentUserId()!, 
         this.currentUserService.getCurrentUserToken()!
       ).subscribe({
         next: (result)=>{
 
-          let counter = 0
-          while(result.data[counter] !== undefined){
-            this.partidasUsuarioActual[counter] = result.data[counter]; 
+          let counter2 = 0
+          while(result.data[counter2] !== undefined){
+            this.partidasUsuarioActual[counter] = result.data[counter2]; 
+            counter2++;
             counter++;
           }
           //console.log(this.partidasUsuarioActual)
-          counter = 0;
+          
         },
         error: (error)=>{console.log(error)}
       })
 
+      this.gloomhavenPartidaService.listarPartidasGloomhaven(
+        this.currentUserService.getCurrentUserId()!, 
+        this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+        next: (result)=>{
+
+          let counter2 = 0
+          while(result.data[counter2] !== undefined){
+            this.partidasUsuarioActual[counter] = result.data[counter2]; 
+            counter2++;
+            counter++;
+          }
+          //console.log(this.partidasUsuarioActual)
+          
+        },
+        error: (error)=>{console.log(error)}
+      })
+
+
+
+
       // LISTAR TODAS LAS DISCUSIONES DEL USUARIO
+      let counter3 = 0
+
       this.descentForoService.listarDiscusionesUsuarioForoDescent(
         this.currentUserService.getCurrentUserToken()!
       ).subscribe({
         next: (result)=>{
 
-          let counter = 0
-          while(result.data[counter] !== undefined){
-            this.listadiscusiones[counter] = result.data[counter]; 
-            counter++;
+          let counter2 = 0
+          while(result.data[counter2] !== undefined){
+            this.listadiscusiones[counter3] = result.data[counter2]; 
+            counter2++;
+            counter3++;
           }
           console.log(this.listadiscusiones)
-          counter = 0;
+          
+        },
+        error: (error)=>{console.log(error)}
+      })
+
+      this.gloomhavenForoService.listarDiscusionesUsuarioForoGloomhaven(
+        this.currentUserService.getCurrentUserToken()!
+      ).subscribe({
+        next: (result)=>{
+
+          let counter2 = 0
+          while(result.data[counter2] !== undefined){
+            this.listadiscusiones[counter3] = result.data[counter2]; 
+            counter2++;
+            counter3++;
+          }
+          console.log(this.listadiscusiones)
+          
         },
         error: (error)=>{console.log(error)}
       })
@@ -416,6 +464,65 @@ this.descentForoService.listarMensajesDiscusionForoDescent(discusion[0]["discusi
     this.listaDiscusionesActiva = true;
     this.chatDiscusionActiva = false;
   }
+
+
+
+  borrarPartida(partida : any){
+    console.log(this.partidasUsuarioActual)
+
+    this.currentUserService.setJuegoActual(partida[0]["partidaNombreJuego"])
+
+    let posicion = this.partidasUsuarioActual.map( (mensaje) => mensaje["id"]).indexOf(partida[0]["partidaId"])
+    console.log(partida)
+    console.log(this.partidasUsuarioActual.map( (mensaje) => mensaje["id"]))
+    console.log(posicion)
+
+    // comprobar a que juego pertecene la discusion para elegir la url de borrado
+    
+    console.log(this.currentUserService.getJuegoActual())
+
+    if(this.currentUserService.getJuegoActual() === "Descent"){
+
+      this.descentPartidaService.eliminarPartidaDescent(
+        partida[0]["partidaId"],
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Partida borrada correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
+
+    } else if(this.currentUserService.getJuegoActual() === "Gloomhaven"){
+      this.gloomhavenPartidaService.eliminarPartidaGloomhaven(
+        partida[0]["partidaId"],
+        this.currentUserService.getCurrentUserToken()!
+        ).subscribe({
+            next: (result)=>{
+              console.log("Partida borrada correctamente")
+            },
+            error: (error)=>{console.log(error)}
+          })
+    }
+
+
+
+    this.partidasUsuarioActual.splice(posicion,1)
+    /*
+        let posicion2 = this.mensajesDiscusion.map( (e) => e.idMensaje).indexOf(idMensaje)
+        this.mensajesDiscusion.splice(posicion2,1)
+    */
+   
+  }
+
+
+
+
+
+
+
+
+
 
   borrarDiscusion(discusion : any){
     console.log(this.listadiscusiones)

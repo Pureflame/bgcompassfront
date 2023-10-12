@@ -1,0 +1,388 @@
+body{
+	position: absolute;
+	width: 100%;
+	height: 300%;
+	background-color: #ad4038;
+
+}
+
+.botonesLaterales{
+    position: relative;
+	
+	top: 60%;
+	right: 30%;
+    
+}
+
+    .botonLateral{
+        display: block;
+
+        margin-top: 20px;
+        padding: 10px;
+
+		background-color: white;
+    }
+
+.container {
+	position: relative;
+	
+	top: 45%;
+	left: 50%;
+
+	width: 100%;
+	height: 100%;
+	transform: translate(-50%,-50%);
+
+	/*background-color: yellow;*/
+}
+
+.containerHeroe {
+	position: relative;
+	
+	top: 20%;
+	left: 50%;
+
+	width: 100%;
+	height: 40%;
+	transform: translate(-50%,-50%);
+
+	
+
+	/*background-color: yellow;*/
+}
+
+.gruposContenedor{
+	position: relative;
+	background-color: #f4fbff;
+
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.heroeContainer{
+	position: relative;
+	background-color: #f4fbff;
+
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.scroll{
+	
+	height: 1200px;
+	overflow-y: scroll;
+}
+
+.scroll2{
+	
+	height: 500px;
+	overflow-y: scroll;
+	margin-bottom: 20px;
+}
+
+	.buttonVolver {
+		position: relative;
+		top: 80px;
+		left: 20%;
+		padding: 10px 20px;
+		
+		transform: translate(-50%,0%);
+
+		
+	}
+
+	.containerForm {
+		position: relative;
+		padding-left: 30px;
+		padding-right: 30px;
+		
+		top: 55%;
+		left: 50%;
+	
+		height: 90%;
+	
+		transform: translate(-50%,-50%);
+	
+		/*background-color: red;*/
+	}
+
+		.datosTitulo{
+			width: 50%;
+			text-align: center;
+
+			margin-left: 50%;
+			transform: translate(-50%,-50%);
+            
+			padding: 10px;
+			font-size: 32px;
+			
+			background-color: #f4fbff;
+
+			border: 1px solid black;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		.datosInfoGeneral{
+			width: 1200px;
+			height: 80%;
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+
+
+		}
+
+		.backgroundInfoGeneral{
+			background-color: #f4fbff;
+			border: 1px solid black;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		.datosInfoHeroes{
+			width: 1200px;
+			height: 80%;
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+
+
+		}
+
+
+
+			.inputsCortos{
+				/*background-color: gray;*/
+                display: inline-block;
+                width: 45%;
+                
+                margin-top: 20px;
+                margin-left: 20px;
+				font-size: 30px;
+			}
+
+
+			.inputsCortosHeroe{
+				/*background-color: gray;*/
+                display: inline-block;
+                width: 30%;
+                
+                margin-top: 20px;
+                margin-left: 20px;
+				font-size: 30px;
+			}
+
+            .overlord{
+				/*background-color: gray;*/
+                display: block;
+                width: 600px;
+                height: 400px;
+                
+                margin-top: 60px;
+                margin-left: 20px;
+				font-size: 30px;
+                
+			}
+
+			.heroelist{
+				/*background-color: gray;*/
+                display: inline-block;
+                width: 30%;
+                height: 300px;
+                
+                margin-top: 60px;
+                margin-left: 20px;
+
+				padding-bottom: 10px;
+
+				font-size: 30px;
+			}
+
+			.heroelist2{
+				/*background-color: gray;*/
+                display: inline-block;
+                width: 30%;
+                height: 100px;
+                
+                margin-top: 60px;
+                margin-left: 20px;
+
+				padding-bottom: 10px;
+
+				font-size: 30px;
+			}
+
+            .scrollOverlord{
+                width: 600px;
+                height: 300px;
+                overflow-y: scroll;
+            }
+
+			.scrollHeroe{
+                width: 300px;
+                height: 300px;
+                overflow-y: scroll;
+            }
+
+			.scrollHeroe2{
+                width: 300px;
+                height: 100px;
+                overflow-y: scroll;
+            }
+
+            label{
+                margin-left: 20px;
+            }
+
+			.buttonAdd{
+                margin-top: 10px;
+                margin-left: 20px;
+				padding: 5px 10px;
+
+			}
+
+			input, select{
+				
+				width: 80%;
+
+                margin-left: 20px;
+                margin-top: 10px;
+
+				padding: 10px;
+                
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+                
+			}
+
+            .selectOverlord{
+				width: 60%;
+
+                margin-left: 20px;
+                margin-top: 10px;
+
+				padding: 10px;
+                
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+                
+            }
+
+            .cartasOverlordListado input{
+                width: 50%;
+            }
+
+			.buttonOverlord{
+				position: relative;
+                margin-top: auto;
+                margin-left: auto;
+				
+
+				transform: translate(0%,0%);
+
+				padding: 5px 10px;
+                margin-left: 5px;
+			}
+
+            .selectHeroe{
+				width: 60%;
+
+                margin-left: 20px;
+                margin-top: 10px;
+
+				padding: 10px;
+                
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+                
+            }
+
+			.selectHeroeClass{
+				width: 80%;
+
+                margin-left: 20px;
+                margin-top: 10px;
+
+				padding: 10px;
+                
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-sizing: border-box;
+                
+            }
+
+            .heroeListado input{
+                width: 50%;
+            }
+
+			.buttonHeroe{
+				position: relative;
+                margin-top: auto;
+                margin-left: auto;
+				
+
+				transform: translate(0%,0%);
+
+				padding: 5px 10px;
+                margin-left: 5px;
+			}
+
+			.buttonDeleteHeroe{
+				display: block;
+				
+				padding: 5px 10px;
+				margin-top: 20px;
+                margin-left: 50px;
+			}
+
+
+
+            .centrarBoton1 {
+                margin: 0;
+                position: absolute;
+                
+                top: 95%;
+                left: 70%;
+
+                padding: 10px 20px;
+
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+            .centrarBoton2 {
+                margin: 0;
+                position: absolute;
+
+                top: 95%;
+                left: 90%;
+
+                padding: 10px 20px;
+
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+
+			.centrarBoton3 {
+				text-align:center;
+            }
+
+			.buttonHeroeTop {
+                margin: 10px 20px;
+
+
+                padding: 10px 20px;
+
+            }
+
+
+		.datosCampaña{
+			
+			width: 105%;
+			height: 25%;
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+		}

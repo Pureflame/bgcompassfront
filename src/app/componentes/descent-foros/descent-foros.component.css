@@ -87,3 +87,25 @@ body{
 			padding: 10px 30px;
 			margin-top: 10px;
 		}
+
+		.partidasTitulo{
+			/*background-color: gray;*/
+			display: inline-block;
+
+			margin-left: 50%;
+			transform: translate(-50%,0%);
+
+			padding: 20px 30px;
+
+			background-color: #f4fbff;
+
+			border: 1px solid black;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		.scroll{
+			height: 100%;
+			overflow-y: scroll;
+			padding: 0px 10px;
+		}

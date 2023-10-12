@@ -82,14 +82,14 @@
 			</div>
 
 			<!-- MIS CAMPAÑAS -->
-			<div *ngIf="partidaActiva">
+			<div class="scroll"  *ngIf="partidaActiva">
 				<div *ngFor = "let partida of partidasUsuarioActual">
-					<app-perfil-partidas [partida]="partida" ></app-perfil-partidas>
+					<app-perfil-partidas (borradoPartida)="borrarPartida($event)" [partida]="partida" ></app-perfil-partidas>
 				</div>
 			</div>
 
 			<!-- MIS DISCUSIONES -->
-			<div *ngIf="listaDiscusionesActiva">
+			<div class="scroll" *ngIf="listaDiscusionesActiva">
 				<div *ngFor = "let discusion of listadiscusiones">
 					<app-perfil-discusiones (borradoDiscusion)="borrarDiscusion($event)" (discusionChat)="entrarDiscusion($event)" [discusion]="discusion" ></app-perfil-discusiones>
 				</div>
@@ -98,10 +98,11 @@
 			<div *ngIf="chatDiscusionActiva">
 				<button *ngIf="soyUsuario" class="crearMensaje" (click)="crearMensaje()">{{"Crear mensaje" | translate}}</button>
 				<button class="crearMensaje" (click)="regresoAlListado()">{{"Volver listado Discusiones" | translate}}</button>
-	
-				<div *ngFor = "let mensaje of mensajesDiscusion">
-                <app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>
-        		</div>
+				<div class="scroll">
+					<div *ngFor = "let mensaje of mensajesDiscusion">
+						<app-foro-discusion (borrado)="borrarMensaje($event)" [mensaje]="mensaje" ></app-foro-discusion>
+					</div>
+				</div>
 			</div>
 
 

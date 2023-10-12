@@ -15,7 +15,7 @@
 			<!-- MIS CAMPAÑAS -->
 			
 			<div *ngFor = "let partida of partidasUsuarioActual">
-				<app-perfil-partidas [partida]="partida" ></app-perfil-partidas>
+				<app-perfil-partidas (borradoPartida)="borrarPartida($event)" [partida]="partida" ></app-perfil-partidas>
 			</div>
 			
 

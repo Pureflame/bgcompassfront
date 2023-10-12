@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AdministradorService } from 'src/app/Services/administrador.service';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { DescentForoService } from 'src/app/Services/descentForo.service';
+import { GloomhavenForoService } from 'src/app/Services/gloomhavenForo.service';
 
 @Component({
   selector: 'app-foro-discusion-crear',
@@ -25,7 +26,8 @@ export class ForoDiscusionCrearComponent {
     private router: Router, 
     private currentUserService: CurrentUserService, 
     private adminService: AdministradorService,
-    private descentForoService: DescentForoService){
+    private descentForoService: DescentForoService,
+    private gloomhavenForoservice: GloomhavenForoService){
 
     this.solicitud = {
       nombre: ''
@@ -68,13 +70,18 @@ export class ForoDiscusionCrearComponent {
       case "gloomhaven": {
 
         this.solicitudAuxiliar = {
-          nombre_partida: this.solicitud.nombre,
-          xxxxxxxxxxxxxx: '0',
-          ddddddddddddddd: '1'
+          titulo_conversacion_gh: this.solicitud.nombre,
         }
-        console.log(this.solicitudAuxiliar)
-        
-        // URL AQUI
+        //console.log(this.solicitudAuxiliar)
+        this.gloomhavenForoservice.crearDiscusionForoGloomhaven(
+          this.solicitudAuxiliar,
+          this.currentUserService.getCurrentUserToken()!)
+        .subscribe({
+          next: (result)=>{
+            console.log("Discusion creada correctamente");
+          },
+          error: (error)=>{console.log(error)}
+        })
         break;
       }
     }

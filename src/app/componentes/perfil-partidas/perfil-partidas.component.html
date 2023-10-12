@@ -1,3 +1,6 @@
+
+<button *ngIf="soyUsuario" (click)="borrarPartida(partida.id,partida.nombre_imagen)" class="buttonBorrar">{{"Borrar" | translate}}</button>
+  
 <div class="lista">
     <div class="campañaNombreTexto">
         <label for="chk" aria-hidden="true">{{partida.nombre_partida}}</label>
