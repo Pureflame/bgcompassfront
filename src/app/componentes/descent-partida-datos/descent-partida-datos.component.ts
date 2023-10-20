@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { DescentPartidaService } from 'src/app/Services/descentPartida.service';
@@ -146,7 +147,7 @@ export class DescentPartidaDatosComponent {
           this.solicitudListaHeroes[counter] = result.data[counter]; 
           counter++;
         }
-        //console.log(this.solicitudListaHeroes)
+        console.log(this.solicitudListaHeroes)
         counter = 0;
       },
       error: (error)=>{console.log(error)}
@@ -185,23 +186,7 @@ export class DescentPartidaDatosComponent {
     })
     
     // LISTA DE HEROES DE LA PARTIDA
-    this.descentPartidaService.verHeroePartidaDescent(
-      this.descentPartidaService.getPartidaActualDescent(),
-      this.currentUserService.getCurrentUserToken()!
-    ).subscribe({
-      next: (result)=>{
-
-        let counter = 0
-        while(result.data[counter] !== undefined){
-          this.solicitudHeroes[counter] = result.data[counter]; 
-          counter++;
-        }
-        console.log(this.solicitudHeroes)
-        counter = 0;
-        //console.log(this.solicitudHeroes[2])
-      },
-      error: (error)=>{console.log(error)}
-    })
+    this.actualizarListaHeroes()
   }
 
   general(){
@@ -350,41 +335,30 @@ export class DescentPartidaDatosComponent {
   }
   
 
-  borrarHeroe(i:number){
-    //delete this.solicitudHeroes[i];
+  borrarHeroe(posicionHeroe:number, idHeroe:number){
+    console.log("el heroe a eliminar esta en:" + posicionHeroe)
+    console.log("el heroe a eliminar es:" + idHeroe)
     
 
     this.descentPartidaService.eliminarHeroePartidaDescent(
-      i,
+      idHeroe,
       this.currentUserService.getCurrentUserToken()!
     ).
     subscribe({
       next: (result)=>{
-        this.solicitudHeroes.splice(i,1)
+        this.solicitudHeroes.splice(posicionHeroe,1)
         console.log("heroe eliminado")
 
          // LISTA DE HEROES DE LA PARTIDA
-        this.descentPartidaService.verHeroePartidaDescent(
-          i,
-          this.currentUserService.getCurrentUserToken()!
-        ).subscribe({
-          next: (result)=>{
-    
-            let counter = 0
-            while(result.data[counter] !== undefined){
-              this.solicitudHeroes[counter] = result.data[counter]; 
-              counter++;
-            }
-            console.log(this.solicitudHeroes)
-            counter = 0;
-            //console.log(this.solicitudHeroes[2])
-          },
-          error: (error)=>{console.log(error)}
-        })
+         this.actualizarListaHeroes()
         
       },
       error: (error)=>{console.log(error)}
     })
+
+
+
+
 
     
 
@@ -411,9 +385,9 @@ export class DescentPartidaDatosComponent {
 
 
 
-    console.log(this.solicitudHeroes)
+    //console.log(this.solicitudHeroes)
 
-    console.log(this.solicitudHeroes.length)
+    //console.log(this.solicitudHeroes.length)
     do{
       heroe = {
         "id_heroe_dc":String,
@@ -426,7 +400,7 @@ export class DescentPartidaDatosComponent {
       heroe.habilidades_clase = this.solicitudHeroes[counter][2]
       heroe.equipo_heroe = this.solicitudHeroes[counter][3]
 
-      console.log(heroe)
+      //console.log(heroe)
 
       solicitudAuxEdit2[counter] = heroe
       
@@ -458,6 +432,40 @@ export class DescentPartidaDatosComponent {
       error: (error)=>{console.log(error)}
 })
 
+  }
+
+
+  actualizarListaHeroes(){
+    this.descentPartidaService.verHeroePartidaDescent(
+      this.descentPartidaService.getPartidaActualDescent(),
+      this.currentUserService.getCurrentUserToken()!
+    ).subscribe({
+      next: (result)=>{
+
+        let counter = 0
+        while(result.data[counter] !== undefined){
+          this.solicitudHeroes[counter] = result.data[counter]; 
+          counter++;
+        }
+        console.log(this.solicitudHeroes)
+        counter = 0;
+        //console.log(this.solicitudHeroes[2])
+      },
+      error: (error)=>{console.log(error)}
+    })
+  }
+
+  onChange(seleccionado:NgModel, heroeActual:any){
+    let sel = seleccionado.viewModel.toString()
+    //console.log("eyt")
+    //console.log(sel)
+    //console.log(this.solicitudListaHeroes[0])
+    //console.log(this.solicitudListaHeroes[0][1])
+
+    let busca = this.solicitudListaHeroes.filter( (element:any) => element[1] == sel )
+
+    heroeActual[0] = busca[0][1]
+    heroeActual[4] = busca[0][0]
   }
   
   

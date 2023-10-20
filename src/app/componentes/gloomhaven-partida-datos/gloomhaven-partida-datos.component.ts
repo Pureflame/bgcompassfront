@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import { empty } from 'rxjs';
+import { GrupoHeroes } from 'src/app/Models/Gloomhaven/grupoHeroes';
+import { GruposHeroes } from 'src/app/Models/Gloomhaven/gruposHeroes';
 import { CurrentUserService } from 'src/app/Services/current-user.service';
 import { GloomhavenPartidaService } from 'src/app/Services/gloomhavenPartida.service';
 
@@ -20,7 +23,9 @@ export class GloomhavenPartidaDatosComponent {
   public solicitudListaLogrosGlobales: any;
 
   public solicitudHeroes: any;
+  
   public solicitudGruposHeroes: any;
+  public solicitudGruposHeroesAux: Array<any>;
   public solicitudListaMisionesPersonales: any;
   public solicitudListaLogrosGrupo: any;
   public solicitudListaPericias: any;
@@ -56,6 +61,13 @@ export class GloomhavenPartidaDatosComponent {
 
     this.solicitudHeroes = []
     this.solicitudGruposHeroes = []
+    this.solicitudGruposHeroesAux = [
+      {
+      "id_grupo":String,
+      "reputacion_grupo":String,
+      "logros_grupo":[]
+    }
+  ]
     this.solicitudListaMisionesPersonales = []
     this.solicitudListaLogrosGrupo = []
     this.solicitudListaPericias = []
@@ -244,94 +256,7 @@ export class GloomhavenPartidaDatosComponent {
     })
 
     // LISTA DE HEROES DE LA PARTIDA
-    this.gloomhavenPartidaService.verHeroePartidaGloomhaven(
-      this.gloomhavenPartidaService.getPartidaActualGloomhaven(),
-      this.currentUserService.getCurrentUserToken()!
-    ).subscribe({
-      next: (result)=>{
-        //console.log(this.solicitudGruposHeroes)
-
-        let solicitudGruposHeroesAux = {
-          "id_grupo":Number,
-          "reputacion_grupo":Number,
-          "logros_grupo":[]
-        }
-        
-
-        let counter = 0
-        let grupo = 1
-        while(result.data[counter] !== undefined){
-          this.solicitudHeroes[counter] = result.data[counter]; 
-          
-
-          // Id de grupos, reputacion y logros de cada uno
-          // Recorremos a todos los heroes por cada grupo
-          // Si el heroe actual pertenece al grupo, el grupo obtiene los valores
-            let counter2 = 0
-          while(result.data[counter2] !== undefined){
-            console.log(grupo)
-            //console.log(result.data[counter][1])
-
-            //if(grupo == result.data[counter2][1]){
-              
-                solicitudGruposHeroesAux["id_grupo"] = result.data[counter2][1]
-                solicitudGruposHeroesAux["reputacion_grupo"] = result.data[counter2][6]
-                solicitudGruposHeroesAux["logros_grupo"] = result.data[counter2][13]
-                //console.log(solicitudGruposHeroesAux)
-
-
-                this.solicitudGruposHeroes[grupo-1] = solicitudGruposHeroesAux
-                console.log("grupo hecho")
-
-                
-                //console.log(this.solicitudGruposHeroes)
-                grupo++
-              
-            //}
-              counter2++;
-          }
-  
-          counter++;
-        }
-
-        console.log(this.solicitudHeroes)
-
-        //var aux = this.solicitudHeroes.map(function (el:any) { return el[1] });
-        //let solicitudGruposHeroes = this.solicitudGruposHeroes.filter((e:any) => Object.keys(e).length);
-        //console.log(aux)
-        console.log(this.solicitudGruposHeroes)
-
-        
-        //console.log(solicitudGruposHeroes[0]["id_grupo"])
-      },
-      error: (error)=>{console.log(error)}
-    })
-/*
-    // LISTA DE GRUPO DE LA PARTIDA
-    this.gloomhavenPartidaService.verHeroePartidaGloomhaven(
-      this.gloomhavenPartidaService.getPartidaActualGloomhaven(),
-      this.currentUserService.getCurrentUserToken()!
-    ).subscribe({
-      next: (result)=>{
-
-        let counter = 0
-        while(result.data[counter] !== undefined){
-          this.solicitudHeroes[counter] = result.data[counter]; 
-          counter++;
-        }
-        console.log(this.solicitudHeroes)
-        counter = 0;
-        //console.log(this.solicitudHeroes[2])
-      },
-      error: (error)=>{console.log(error)}
-    })
-
-
-*/
-
-
-
-
+    this.listaHeroesPartida()
 
   }
 
@@ -362,14 +287,14 @@ export class GloomhavenPartidaDatosComponent {
   }
 
   confirmarEdicion(){
-    console.log("gi")
+    
     this.solicitudAux = {
       nombre_partida: this.solicitudGeneral[0],
-      prosperidad_ciudad_partida_gh: this.solicitudGeneral[1],
+      prosperidad_ciudad_partida_gh: this.solicitudGeneral[1].toString(),
       nombre_mision_gh: this.solicitudGeneral[2],
       logros_globales: this.solicitudGeneral[3],
     }
-
+    console.log( this.solicitudAux)
     
     this.gloomhavenPartidaService.actualizarGeneralPartidaGloomhaven(this.solicitudAux,
       this.gloomhavenPartidaService.partidaActualGloomhaven,
@@ -432,11 +357,11 @@ export class GloomhavenPartidaDatosComponent {
   }
 
   addPericia(i:number){
-    if(this.solicitudHeroes[i][3].indexOf(this.itemAdd) === -1){
-      if(this.solicitudHeroes[i][3][0] == ""){
-        this.solicitudHeroes[i][3][0] = this.itemAdd
+    if(this.solicitudHeroes[i][12].indexOf(this.itemAdd) === -1){
+      if(this.solicitudHeroes[i][12][0] == ""){
+        this.solicitudHeroes[i][12][0] = this.itemAdd
       } else {
-        this.solicitudHeroes[i][3].push(this.itemAdd)
+        this.solicitudHeroes[i][12].push(this.itemAdd)
       }
       
     }
@@ -445,16 +370,16 @@ export class GloomhavenPartidaDatosComponent {
   quitarPericia(itemIndex:number, i:number){
     console.log(itemIndex)
     //delete this.solicitudHeroes[i].equipamientoHeroe[itemIndex];
-    this.solicitudHeroes[i][3].splice(itemIndex,1)
-    console.log(this.solicitudHeroes[i][3])
+    this.solicitudHeroes[i][12].splice(itemIndex,1)
+    console.log(this.solicitudHeroes[i][12])
   }
 
   addItem(i:number){
-    if(this.solicitudHeroes[i][3].indexOf(this.itemAdd) === -1){
-      if(this.solicitudHeroes[i][3][0] == ""){
-        this.solicitudHeroes[i][3][0] = this.itemAdd
+    if(this.solicitudHeroes[i][11].indexOf(this.itemAdd) === -1){
+      if(this.solicitudHeroes[i][11][0] == ""){
+        this.solicitudHeroes[i][11][0] = this.itemAdd
       } else {
-        this.solicitudHeroes[i][3].push(this.itemAdd)
+        this.solicitudHeroes[i][11].push(this.itemAdd)
       }
       
     }
@@ -463,16 +388,16 @@ export class GloomhavenPartidaDatosComponent {
   quitarItem(itemIndex:number, i:number){
     console.log(itemIndex)
     //delete this.solicitudHeroes[i].equipamientoHeroe[itemIndex];
-    this.solicitudHeroes[i][3].splice(itemIndex,1)
-    console.log(this.solicitudHeroes[i][3])
+    this.solicitudHeroes[i][11].splice(itemIndex,1)
+    console.log(this.solicitudHeroes[i][11])
   }
 
   addHabilidad(i:number){
-    if(this.solicitudHeroes[i][2].indexOf(this.habilidadAdd) === -1){
-      if(this.solicitudHeroes[i][2][0] == ""){
-        this.solicitudHeroes[i][2][0] = this.habilidadAdd
+    if(this.solicitudHeroes[i][10].indexOf(this.habilidadAdd) === -1){
+      if(this.solicitudHeroes[i][10][0] == ""){
+        this.solicitudHeroes[i][10][0] = this.habilidadAdd
       } else {
-        this.solicitudHeroes[i][2].push(this.habilidadAdd)
+        this.solicitudHeroes[i][10].push(this.habilidadAdd)
       }
     }
   }
@@ -480,123 +405,81 @@ export class GloomhavenPartidaDatosComponent {
   quitarHabilidad(habilidadIndex:number, i:number){
     console.log(habilidadIndex)
     //delete this.solicitudHeroes[i].habilidadesHeroe[habilidadIndex];
-    this.solicitudHeroes[i][2].splice(habilidadIndex,1)
-    console.log(this.solicitudHeroes[i][2])
+    this.solicitudHeroes[i][10].splice(habilidadIndex,1)
+    console.log(this.solicitudHeroes[i][10])
   }
 
   crearHeroe(){
-    if(this.solicitudHeroes.length < 4){
-      let heroeDefault = []
-        heroeDefault[0] = this.solicitudListaClases[0]
-        heroeDefault[1] = "Caballero"
-        heroeDefault[2] = [this.solicitudListaHabilidades[0]]
-        heroeDefault[3] = [this.solicitudListaEquipamiento[0]]
-      //console.log(heroeDefault)
-      this.solicitudHeroes.push(heroeDefault)
-    }
-
-    // LISTA DE HEROES DE LA PARTIDA
-    this.gloomhavenPartidaService.verHeroePartidaGloomhaven(
-      this.gloomhavenPartidaService.getPartidaActualGloomhaven(),
-      this.currentUserService.getCurrentUserToken()!
-    ).subscribe({
-      next: (result)=>{
-        //console.log(this.solicitudGruposHeroes)
-
-        let solicitudGruposHeroesAux = {
-          "id_grupo":Number,
-          "reputacion_grupo":Number,
-          "logros_grupo":[]
-        }
-        
-
-        let counter = 0
-        let grupo = 1
-        while(result.data[counter] !== undefined){
-          this.solicitudHeroes[counter] = result.data[counter]; 
-          
-
-          // Id de grupos, reputacion y logros de cada uno
-          // Recorremos a todos los heroes por cada grupo
-          // Si el heroe actual pertenece al grupo, el grupo obtiene los valores
-          
-            let counter2 = 0
-          while(result.data[counter2] !== undefined){
-            //console.log(grupo)
-            //console.log(result.data[counter][1])
-
-            if(grupo == result.data[counter2][1]){
-              
-                solicitudGruposHeroesAux["id_grupo"] = result.data[counter2][1]
-                solicitudGruposHeroesAux["reputacion_grupo"] = result.data[counter2][6]
-                solicitudGruposHeroesAux["logros_grupo"] = result.data[counter2][13]
-                //console.log(solicitudGruposHeroesAux)
-                this.solicitudGruposHeroes[grupo-1] = solicitudGruposHeroesAux
-                //console.log(grupo)
-                //console.log(this.solicitudGruposHeroes)
-                grupo++
-                //}
-              //}
-              
-            }
-              counter2++;
-          }
-          counter++;
-        }
-
-        console.log(this.solicitudHeroes)
-
-        //var aux = this.solicitudHeroes.map(function (el:any) { return el[1] });
-        //let solicitudGruposHeroes = this.solicitudGruposHeroes.filter((e:any) => Object.keys(e).length);
-        //console.log(aux)
-        console.log(this.solicitudGruposHeroes)
-
-        
-        //console.log(solicitudGruposHeroes[0]["id_grupo"])
-      },
-      error: (error)=>{console.log(error)}
-    })     
-      
-  }
-  
-
-  borrarHeroe(i:number){
-    //delete this.solicitudHeroes[i];
-    console.log(i)
+    
+    let heroeDefault = []
+      //heroeDefault[0] = this.solicitudListaClases[0]
+      heroeDefault[1] = "Caballero"
+      heroeDefault[2] = [this.solicitudListaHabilidades[0]]
+      heroeDefault[3] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[4] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[5] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[6] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[7] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[8] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[9] = [this.solicitudListaEquipamiento[0]]
+      heroeDefault[10] = []
+      heroeDefault[11] = []
+      heroeDefault[12] = [this.solicitudListaEquipamiento[0]]
+    //console.log(heroeDefault)
+    //this.solicitudHeroes.push(heroeDefault)
     console.log(this.gloomhavenPartidaService.getPartidaActualGloomhaven())
-    /*
-    this.gloomhavenPartidaService.eliminarHeroePartidaGloomhaven(
-      i,
+
+    this.gloomhavenPartidaService.crearHeroePartidaGloomhaven(
+      this.gloomhavenPartidaService.getPartidaActualGloomhaven(),
       this.currentUserService.getCurrentUserToken()!
     ).
     subscribe({
       next: (result)=>{
-        this.solicitudHeroes.splice(i,1)
-        console.log("heroe eliminado")
+
+        console.log("heroe creado")
 
          // LISTA DE HEROES DE LA PARTIDA
-        this.gloomhavenPartidaService.verHeroePartidaGloomhaven(
-          i,
-          this.currentUserService.getCurrentUserToken()!
-        ).subscribe({
-          next: (result)=>{
-    
-            let counter = 0
-            while(result.data[counter] !== undefined){
-              this.solicitudHeroes[counter] = result.data[counter]; 
-              counter++;
-            }
-            console.log(this.solicitudHeroes)
-            counter = 0;
-            //console.log(this.solicitudHeroes[2])
-          },
-          error: (error)=>{console.log(error)}
-        })
+         this.listaHeroesPartida()
         
       },
       error: (error)=>{console.log(error)}
     })
-*/
+
+
+
+
+
+
+
+
+
+    // LISTA DE HEROES DE LA PARTIDA
+    this.listaHeroesPartida()
+      
+  }
+  
+
+  borrarHeroe(posicionHeroe:number, idHeroe:number){
+    console.log("el heroe a eliminar esta en:" + posicionHeroe)
+    console.log("el heroe a eliminar es:" + idHeroe)
+    //delete this.solicitudHeroes[i];
+    
+    this.gloomhavenPartidaService.eliminarHeroePartidaGloomhaven(
+      idHeroe,
+      this.currentUserService.getCurrentUserToken()!
+    ).
+    subscribe({
+      next: (result)=>{
+        this.solicitudHeroes.splice(posicionHeroe,1)
+        console.log("heroe eliminado")
+
+        // LISTA DE HEROES DE LA PARTIDA
+        this.listaHeroesPartida()
+        
+      },
+      error: (error)=>{console.log(error)}
+    })
+
     
 
   }
@@ -605,47 +488,66 @@ export class GloomhavenPartidaDatosComponent {
     let solicitudAuxEdit : any = {}
     let solicitudAuxEdit2 : any = {}
     let solicitudAuxEdit3 : any = {}
-    let counter : number = 0
+    
 
-    let heroe = {
-      "id_heroe_dc":String,
-      "id":String,
-      "habilidades_clase":[],
-      "equipo_heroe":[]
-    }
 
     //let heroes = heroe[]
 
     solicitudAuxEdit2 = []
 
-
+    let solicitud = {
+      "grupos":[],
+      "heroes":[],
+    }
 
 
 
     console.log(this.solicitudHeroes)
-
     console.log(this.solicitudHeroes.length)
+    let counter = 0
     do{
-      heroe = {
-        "id_heroe_dc":String,
+
+      let heroe = {
         "id":String,
-        "habilidades_clase":[],
-        "equipo_heroe":[]
+        "grupo_party_gh":String,
+        "id_heroe_gh":String,
+        "nombre_party_gh":String,
+        "experiencia_party_gh":String,
+        "oro_party_gh":String,
+        "marcas_party_gh":String,
+        "mision_personal_gh":String,
+        "habilidades_nuevas":[],
+        "equipo_nuevo":[],
+        "pericias_nuevas":[]
       }
-      heroe["id_heroe_dc"] = this.solicitudHeroes[counter][4]
-      heroe["id"] = this.solicitudHeroes[counter][5]
-      heroe.habilidades_clase = this.solicitudHeroes[counter][2]
-      heroe.equipo_heroe = this.solicitudHeroes[counter][3]
 
-      console.log(heroe)
+      heroe.id = this.solicitudHeroes[counter][0],
+      heroe.grupo_party_gh = this.solicitudHeroes[counter][1],
+      heroe.id_heroe_gh = this.solicitudHeroes[counter][2],
+      heroe.nombre_party_gh = this.solicitudHeroes[counter][3],
+      heroe.experiencia_party_gh = this.solicitudHeroes[counter][5],
+      heroe.oro_party_gh = this.solicitudHeroes[counter][7],
+      heroe.marcas_party_gh = this.solicitudHeroes[counter][8],
+      heroe.mision_personal_gh = this.solicitudHeroes[counter][9],
+      heroe.habilidades_nuevas = this.solicitudHeroes[counter][10],
+      heroe.equipo_nuevo = this.solicitudHeroes[counter][11],
+      heroe.pericias_nuevas = this.solicitudHeroes[counter][12]
 
+      //console.log(heroe)
       solicitudAuxEdit2[counter] = heroe
       
-
       counter++
-    }while (counter < this.solicitudHeroes.length)
 
-    console.log(solicitudAuxEdit2)
+      if(counter >= this.solicitudHeroes.length){
+        solicitud.grupos = this.solicitudGruposHeroes
+        solicitud.heroes = solicitudAuxEdit2
+
+        console.log(solicitudAuxEdit2)
+        console.log(this.solicitudGruposHeroes)
+        console.log(solicitud)
+      }
+      
+    }while (counter < this.solicitudHeroes.length)
 
 
 
@@ -659,7 +561,7 @@ export class GloomhavenPartidaDatosComponent {
     */
 
     this.gloomhavenPartidaService.actualizarTodosHeroePartidaGloomhaven(
-      solicitudAuxEdit2,
+      solicitud,
       this.gloomhavenPartidaService.getPartidaActualGloomhaven(),
       this.currentUserService.getCurrentUserToken()!
     ).subscribe({
@@ -673,7 +575,65 @@ export class GloomhavenPartidaDatosComponent {
   
 
 
+  listaHeroesPartida(){
+  this.gloomhavenPartidaService.verHeroePartidaGloomhaven(
+    this.gloomhavenPartidaService.getPartidaActualGloomhaven(),
+    this.currentUserService.getCurrentUserToken()!
+  ).subscribe({
+    next: (result)=>{
 
+      let counter = 0
+      while(result.data[counter] !== undefined){
+        this.solicitudHeroes[counter] = result.data[counter]; 
+
+        this.solicitudGruposHeroesAux[counter] =
+          {
+            "id_grupo":result.data[counter][1],
+            "reputacion_grupo":result.data[counter][6],
+            "logros_grupo":result.data[counter][13]
+          }
+
+        counter++;
+
+        if(result.data[counter] === undefined){
+          let counter2 = 0
+          let grupo = 0
+          while(this.solicitudGruposHeroesAux[counter2]!== undefined){
+
+            this.solicitudGruposHeroes[grupo] = this.solicitudGruposHeroesAux[counter2]
+            grupo++
+            counter2++
+            if(this.solicitudGruposHeroesAux[counter2] === undefined){
+
+              // Filtramos grupos repetidos
+              this.solicitudGruposHeroes = this.solicitudGruposHeroes.filter((value:any, index:any, self:any) =>
+              index === self.findIndex((t:any) => (
+                t.id_grupo === value.id_grupo
+              ))
+              )
+              console.log(this.solicitudHeroes)
+              console.log(this.solicitudGruposHeroes)
+            }
+          }
+        }
+      }
+    },
+    error: (error)=>{console.log(error)}
+  })
+}
+
+onChange(seleccionado:NgModel, heroeActual:any){
+  let sel = seleccionado.viewModel.toString()
+  //console.log("eyt")
+  //console.log(sel)
+  //console.log(this.solicitudListaHeroes[0])
+  //console.log(this.solicitudListaHeroes[0][1])
+
+  let busca = this.solicitudListaClases.filter( (element:any) => element[1] == sel )
+
+  heroeActual[2] = busca[0][0]
+  heroeActual[4] = busca[0][1]
+}
 
 
 }

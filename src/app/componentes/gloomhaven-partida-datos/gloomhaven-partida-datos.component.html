@@ -57,7 +57,7 @@
                         <label for="chk" aria-hidden="true">{{"Logros Globales" | translate}}</label>
                         
                             <div >
-                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addLogroGlobal()">{{"Comprar" | translate}}</button>
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addLogroGlobal()">{{"Agregar" | translate}}</button>
                             </div>
                             <!--
                             <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
@@ -128,7 +128,7 @@
                             <label for="chk" aria-hidden="true">{{"Logros Grupo" | translate}}</label>
         
                             <div >
-                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addlogroGrupo(i)">{{"Comprar" | translate}}</button>
+                                <button *ngIf="soyUsuario" class = "buttonAdd" (click)="addlogroGrupo(i)">{{"Agregar" | translate}}</button>
                             </div>
                             <!--
                             <input type="text" name="overlord" required="" #nombre="ngModel" readonly="readonly" [(ngModel)]="solicitudGeneral.arrayCartasOverlord">
@@ -156,7 +156,7 @@
                 <div  *ngFor="let heroe of solicitudHeroes; let i = index">
                     <div class="heroeContainer" *ngIf="heroe">
 
-                        <button *ngIf="soyUsuario" class="buttonDeleteHeroe" (click)="borrarHeroe(i)">{{"Borrar Heroe" | translate}}</button>
+                        <button *ngIf="soyUsuario" class="buttonDeleteHeroe" (click)="borrarHeroe(i, solicitudHeroes[i][0])">{{"Borrar Heroe" | translate}}</button>
 
                         <!--Nombre-->
                         <div  class="inputsCortosHeroe">
@@ -167,9 +167,9 @@
                         <!--Clase-->
                         <div  class="inputsCortosHeroe">
                             <label for="chk" aria-hidden="true">{{"Clase" | translate}}</label>
-                            <select class="selectHeroeClass" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][4]">
-                                <option *ngFor="let heroeIndividual of solicitudListaClases" [ngValue]="heroeIndividual">
-                                    {{heroeIndividual}}
+                            <select class="selectHeroeClass" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][4]" (ngModelChange)="onChange(seleccionado, solicitudHeroes[i])" #seleccionado="ngModel">
+                                <option *ngFor="let heroeIndividual of solicitudListaClases" [ngValue]="heroeIndividual[1]">
+                                    {{heroeIndividual[1]}}
                                 </option>
                             </select>
                         </div>

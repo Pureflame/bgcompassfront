@@ -100,13 +100,13 @@
                 <div *ngFor="let heroe of solicitudHeroes; let i = index">
                     <div class="heroeContainer" *ngIf="heroe">
 
-                        <button *ngIf="soyUsuario" class="buttonDeleteHeroe" (click)="borrarHeroe(i)">{{"Borrar Heroe" | translate}}</button>
+                        <button *ngIf="soyUsuario" class="buttonDeleteHeroe" (click)="borrarHeroe(i, solicitudHeroes[i][5])">{{"Borrar Heroe" | translate}}</button>
 
                         <div  class="inputsCortosHeroe">
                             <label for="chk" aria-hidden="true">{{"Héroe" | translate}}</label>
-                            <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][0]">
-                                <option *ngFor="let heroeIndividual of solicitudListaHeroes" [ngValue]="heroeIndividual">
-                                    {{heroeIndividual}}
+                            <select class="selectHeroe" name="heroeIndividual" [(ngModel)]="solicitudHeroes[i][0]" (ngModelChange)="onChange(seleccionado, solicitudHeroes[i])" #seleccionado="ngModel">
+                                <option *ngFor="let heroeIndividual of solicitudListaHeroes" [ngValue]="heroeIndividual[1]">
+                                    {{heroeIndividual[1]}}
                                 </option>
                             </select>
                         </div>
